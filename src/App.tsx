@@ -4,7 +4,6 @@ import type { Slide } from './types';
 import { SlideCanvas } from './components/SlideCanvas';
 import { SlideThumbnailList } from './components/SlideThumbnailList';
 import { TeacherNotesDrawer } from './components/TeacherNotesDrawer';
-import { PeriodFilterBar } from './components/PeriodFilterBar';
 import { PresentationModeModal } from './components/PresentationModeModal';
 import { InteractiveGamesHub } from './components/InteractiveGamesHub';
 import { InteractiveActivitiesHub } from './components/InteractiveActivitiesHub';
@@ -26,7 +25,6 @@ const FONT_SIZE_OPTIONS: FontSizeOption[] = ['20pt', '22pt', '24pt', '28pt', '32
 export default function App() {
   const [activeTab, setActiveTab] = useState<'slides' | 'games' | 'activities'>('slides');
   const [activeSlideId, setActiveSlideId] = useState<number>(1);
-  const [selectedPeriod, setSelectedPeriod] = useState<number | 'all'>('all');
   const [isPresentationOpen, setIsPresentationOpen] = useState<boolean>(false);
   const [fontSize, setFontSize] = useState<FontSizeOption>('24pt');
 
@@ -45,11 +43,6 @@ export default function App() {
   const handleAddScore = (points: number) => {
     setTotalScore((prev) => prev + points);
   };
-
-  // Filter slides by period
-  const filteredSlides = useMemo(() => {
-    return ALL_SLIDES.filter((s) => selectedPeriod === 'all' || s.period === selectedPeriod);
-  }, [selectedPeriod]);
 
   // Current active slide object
   const currentSlide = useMemo(() => {
@@ -224,19 +217,12 @@ export default function App() {
         {/* TAB 1: 110 SLIDES PRESENTATION DECK */}
         {activeTab === 'slides' && (
           <div className="space-y-4">
-            {/* Period Filter Bar */}
-            <PeriodFilterBar
-              selectedPeriod={selectedPeriod}
-              onSelectPeriod={setSelectedPeriod}
-              totalSlidesCount={filteredSlides.length}
-            />
-
             {/* Central Workspace: Thumbnails List + Interactive Slide Canvas + Teacher Notes */}
             <div className="flex flex-col lg:flex-row gap-4 items-start">
-              {/* Left Column: Thumbnails List (narrow fixed sidebar) */}
+              {/* Left Column: Thumbnails List (narrow fixed sidebar, grouped by Chuyên đề giống Khối 11) */}
               <div className="w-full lg:w-[280px] shrink-0 h-full">
                 <SlideThumbnailList
-                  slides={filteredSlides}
+                  slides={ALL_SLIDES}
                   activeSlideId={activeSlideId}
                   onSelectSlide={(s) => setActiveSlideId(s.id)}
                   onOpenGame={() => setActiveTab('games')}
