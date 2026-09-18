@@ -19,7 +19,7 @@ export const module1: Lesson[] = [
         id: 'l1_s1', title: 'Chuyên Đề Giáo Dục AI - Lớp 12', visualType: 'title',
         content: [
           '📘 Tiết 1-2: Con người trong hệ thống AI - Quyền kiểm soát của con người trong dự án AI',
-          '🎯 Yêu cầu cần đạt: 12.A1.1 • 12.A1.MR1 • 12.A1.2 • 12.A1.3',
+          '🎯 Học xong buổi này, các em sẽ: phân tích được quyền kiểm soát và trách nhiệm của con người trong vòng đời một hệ thống AI; xác định được vai trò của con người và AI trong quá trình ra quyết định; kiểm tra được trách nhiệm giải trình khi đối chiếu với quy định hiện hành.',
           '🏫 Trường THPT Tân Lược - Tổ Toán - Tin',
           '📅 Tuần thực hiện: 21/9 - 26/9/2026'
         ],
@@ -98,7 +98,7 @@ export const module1: Lesson[] = [
         content: [
           '📝 Tình huống mới: hệ thống AI chấm điểm bài thi tự động.',
           '👥 Làm việc theo cặp đôi trong 8 phút, áp dụng mẫu vòng đời AI vừa học.',
-          '🎯 Mục tiêu: củng cố yêu cầu cần đạt 12.A1.1; 12.A1.2.'
+          '🎯 Mục tiêu: củng cố kĩ năng phân tích quyền kiểm soát của con người và vai trò của con người - AI trong quá trình ra quyết định.'
         ],
         interactiveQuiz: {
           question: 'Ở bước nào trong vòng đời AI, con người BẮT BUỘC phải trực tiếp kiểm tra lại kết quả chấm điểm tự động trước khi công bố cho học sinh?',
@@ -168,7 +168,7 @@ export const module1: Lesson[] = [
           '📣 2-3 cặp trình bày, GV nhận xét và chốt lại các điểm cần lưu ý.'
         ],
         visualUrl: svgVisual('Phân Tích Tình Huống Mới', 'Hệ thống AI chấm điểm bài thi tự động', '#0369a1', '#0891b2', '📋'),
-        speakerNotes: 'Đây là hoạt động Luyện tập trong KHBD - củng cố yêu cầu cần đạt 12.A1.1; 12.A1.2 qua một tình huống mới khác với ví dụ vay vốn đã học.'
+        speakerNotes: 'Đây là hoạt động Luyện tập trong KHBD - củng cố kĩ năng phân tích quyền kiểm soát và vai trò con người - AI trong ra quyết định, qua một tình huống mới khác với ví dụ vay vốn đã học.'
       },
       {
         id: 'l2_s3', title: 'Trách Nhiệm Giải Trình Theo Pháp Luật', visualType: 'concepts',
@@ -176,7 +176,7 @@ export const module1: Lesson[] = [
           '⚖️ Khi hệ thống AI gây ra sai sót, cần đối chiếu với quy định pháp luật hiện hành trong nước và quốc tế.',
           '📚 Ví dụ: Luật Trí tuệ nhân tạo, Luật Bảo vệ dữ liệu cá nhân.',
           '🧑‍⚖️ Trách nhiệm giải trình KHÔNG thuộc về bản thân hệ thống AI, mà thuộc về con người/tổ chức triển khai, giám sát hệ thống đó.',
-          '✅ Đây là nội hàm cốt lõi của yêu cầu cần đạt 12.A1.3.'
+          '✅ Đây chính là kĩ năng kiểm tra trách nhiệm giải trình của con người, đối chiếu với quy định hiện hành.'
         ],
         visualUrl: svgVisual('Trách Nhiệm Giải Trình', 'Đối chiếu quy định pháp luật hiện hành', '#7c2d12', '#c2410c', '⚖️'),
         speakerNotes: 'Nhấn mạnh học sinh cần phân biệt: AI là công cụ hỗ trợ, trách nhiệm pháp lý luôn thuộc về con người/tổ chức vận hành hệ thống.'
@@ -226,7 +226,7 @@ export const module1: Lesson[] = [
       {
         id: 'l2_s6', title: 'Tổng Kết Buổi 1', visualType: 'summary',
         content: [
-          '✅ Đã đạt yêu cầu cần đạt: 12.A1.1; 12.A1.MR1; 12.A1.2; 12.A1.3.',
+          '✅ Các em đã đạt được: phân tích quyền kiểm soát và trách nhiệm của con người trong vòng đời AI; vận dụng phân tích đó vào một dự án AI cụ thể; phân tích vai trò con người - AI trong ra quyết định; kiểm tra trách nhiệm giải trình theo quy định hiện hành.',
           '🧠 Ghi nhớ: con người luôn giữ quyền kiểm soát và chịu trách nhiệm giải trình trong vòng đời hệ thống AI.',
           '➡️ Buổi tiếp theo (Tiết 3-4): Nguyên tắc đạo đức khi thiết kế AI - Trách nhiệm công dân trong xã hội có AI.'
         ],

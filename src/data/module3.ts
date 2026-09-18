@@ -19,7 +19,7 @@ export const module3: Lesson[] = [
         id: 'l5_s1', title: 'Vấn Đề Đạo Đức Và Rủi Ro Của AI', visualType: 'title',
         content: [
           '📘 Tiết 5-6: Vấn đề đạo đức của AI - Mức độ rủi ro - Trách nhiệm trong hệ sinh thái AI',
-          '🎯 Yêu cầu cần đạt: 12.B1.MR1 • 12.B2.1 • 12.B3.1',
+          '🎯 Học xong buổi này, các em sẽ: phân tích được nguyên nhân gây ra vấn đề đạo đức hoặc sai lệch của hệ thống AI; xác định được mức độ rủi ro khi dùng AI có thể vi phạm quy định; trình bày được quyền và trách nhiệm của người phát triển, người sử dụng AI.',
           '📅 Tuần thực hiện: 5/10 - 10/10/2026'
         ],
         visualUrl: svgVisual('Rủi Ro & Đạo Đức Của Hệ Thống AI', 'Nguyên nhân sai lệch - Phân loại rủi ro - Hệ sinh thái AI', '#b91c1c', '#ea580c', '⚠️'),
@@ -56,7 +56,7 @@ export const module3: Lesson[] = [
             { source: 'd3', target: 'd4' }
           ]
         },
-        speakerNotes: 'Giải thích 3 nhóm nguyên nhân chính dẫn đến vấn đề đạo đức/sai lệch của hệ thống AI theo yêu cầu cần đạt 12.B1.MR1.'
+        speakerNotes: 'Giải thích 3 nhóm nguyên nhân chính dẫn đến vấn đề đạo đức/sai lệch của hệ thống AI.'
       },
       {
         id: 'l5_s4', title: 'Phân Loại Rủi Ro Và Hệ Sinh Thái AI', visualType: 'concepts',
@@ -67,7 +67,7 @@ export const module3: Lesson[] = [
           '📋 Sản phẩm: Phiếu học tập số 3 - sơ đồ nguyên nhân, bảng phân loại rủi ro, sơ đồ quyền - trách nhiệm.'
         ],
         visualUrl: svgVisual('Hệ Sinh Thái AI', 'Người phát triển - Nhà cung cấp - Người sử dụng - Cơ quan quản lí', '#9a3412', '#c2410c', '🧩'),
-        speakerNotes: 'Hướng dẫn học sinh hoàn thành Phiếu học tập số 3, giải thích rõ 3 nhóm rủi ro và vai trò từng bên trong hệ sinh thái AI theo yêu cầu cần đạt 12.B2.1; 12.B3.1.'
+        speakerNotes: 'Hướng dẫn học sinh hoàn thành Phiếu học tập số 3, giải thích rõ 3 nhóm rủi ro và vai trò từng bên trong hệ sinh thái AI.'
       },
       {
         id: 'l5_s5', title: 'Luyện Tập: Xếp Loại Mức Độ Rủi Ro', visualType: 'interactive',
@@ -88,7 +88,7 @@ export const module3: Lesson[] = [
           hint: 'So sánh với hành vi sao chép nguyên văn sản phẩm AI - đó mới là rủi ro cao.',
           suggestedAnswer: 'Rủi ro thấp vì học sinh chỉ dùng AI hỗ trợ, không thay thế hoàn toàn quá trình tư duy của mình.'
         },
-        speakerNotes: 'Củng cố yêu cầu cần đạt 12.B2.1 - giúp học sinh phân biệt rõ ràng giữa sử dụng AI hỗ trợ hợp lý và lạm dụng AI có rủi ro cao.'
+        speakerNotes: 'Củng cố kĩ năng xác định mức độ rủi ro AI - giúp học sinh phân biệt rõ ràng giữa sử dụng AI hỗ trợ hợp lý và lạm dụng AI có rủi ro cao.'
       },
       {
         id: 'l5_s6', title: 'Vận Dụng: Góp Ý Quy Tắc Sử Dụng AI', visualType: 'activity',
@@ -156,7 +156,7 @@ export const module3: Lesson[] = [
             'Giám sát, ban hành quy định pháp luật phù hợp'
           ]
         },
-        speakerNotes: 'Trình bày đầy đủ quyền và trách nhiệm của từng bên trong hệ sinh thái AI theo yêu cầu cần đạt 12.B3.1.'
+        speakerNotes: 'Trình bày đầy đủ quyền và trách nhiệm của từng bên trong hệ sinh thái AI.'
       },
       {
         id: 'l6_s3', title: 'Case Study: Ứng Dụng Điểm Danh Bằng Khuôn Mặt', visualType: 'concepts',
@@ -211,7 +211,7 @@ export const module3: Lesson[] = [
       {
         id: 'l6_s6', title: 'Tổng Kết Buổi 3', visualType: 'summary',
         content: [
-          '✅ Đã đạt yêu cầu cần đạt: 12.B1.MR1; 12.B2.1; 12.B3.1.',
+          '✅ Các em đã đạt được: phân tích nguyên nhân gây sai lệch, vấn đề đạo đức của hệ thống AI; xác định mức độ rủi ro khi dùng AI; trình bày quyền và trách nhiệm của người phát triển, người sử dụng AI.',
           '🧠 Ghi nhớ: nguyên nhân sai lệch AI, phân loại rủi ro, quyền - trách nhiệm trong hệ sinh thái AI.',
           '➡️ Buổi tiếp theo (Tiết 7-8): thực hành với công cụ thiết kế AI mã nguồn mở - Teachable Machine.'
         ],

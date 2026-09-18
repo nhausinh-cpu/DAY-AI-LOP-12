@@ -19,7 +19,7 @@ export const module6: Lesson[] = [
         id: 'l11_s1', title: 'Giải Pháp Hệ Thống AI - AI Agent', visualType: 'title',
         content: [
           '📘 Tiết 11-12: Giải pháp hệ thống AI - Phát triển hệ thống AI (Tác nhân AI - AI Agent)',
-          '🎯 Yêu cầu cần đạt: 12.D1.1 • 12.D1.MR1 • 12.D2.1 • 12.D2.MR1 • 12.D2.MR2 • 12.D2.MR3',
+          '🎯 Học xong buổi này, các em sẽ: phân tích được phương án thiết kế, vận hành hệ thống AI hiệu quả; hiểu vai trò hợp tác đa chuyên môn trong phát triển sản phẩm AI; xây dựng và kiểm thử được một AI Agent đơn giản.',
           '🏁 Buổi tổng kết chuyên đề Giáo dục AI - Lớp 12',
           '📅 Tuần thực hiện: 26/10 - 31/10/2026'
         ],
@@ -61,7 +61,7 @@ export const module6: Lesson[] = [
             { source: 'a5', target: 'a3', label: 'giám sát' }
           ]
         },
-        speakerNotes: 'Trình bày cấu trúc AI agent theo đúng nội dung KHBD (mục tiêu, đầu vào, các bước xử lí, đầu ra, người giám sát) - yêu cầu cần đạt 12.D2.MR2.'
+        speakerNotes: 'Trình bày cấu trúc AI agent theo đúng nội dung KHBD (mục tiêu, đầu vào, các bước xử lí, đầu ra, người giám sát).'
       },
       {
         id: 'l11_s4', title: 'Các Vai Trò Trong Phát Triển Sản Phẩm AI', visualType: 'concepts',
@@ -73,7 +73,7 @@ export const module6: Lesson[] = [
           '🤝 Việc tạo ra sản phẩm AI cần có sự hợp tác giữa nhiều người với chuyên môn khác nhau.'
         ],
         visualUrl: svgVisual('Vai Trò Phát Triển Sản Phẩm AI', 'Ý tưởng - Lập trình - Huấn luyện - Kiểm thử', '#312e81', '#6d28d9', '🤝'),
-        speakerNotes: 'Trình bày các vai trò trong quá trình phát triển sản phẩm AI theo yêu cầu cần đạt 12.D2.1, nhấn mạnh tính hợp tác đa chuyên môn.'
+        speakerNotes: 'Trình bày các vai trò trong quá trình phát triển sản phẩm AI, nhấn mạnh tính hợp tác đa chuyên môn.'
       },
       {
         id: 'l11_s5', title: 'Thực Hành: Dựng Thử AI Agent Với Google AI Studio', visualType: 'activity',
@@ -96,7 +96,7 @@ export const module6: Lesson[] = [
           hint: 'Liên hệ với ý tưởng công cụ AI nhóm đã đề xuất ở Buổi 4 (Tiết 7-8): mục tiêu, đối tượng sử dụng, dữ liệu cần có.',
           suggestedAnswer: 'Sản phẩm là một prototype/ứng dụng đơn giản trên Google AI Studio, kèm bản mô tả đầy đủ theo cấu trúc AI agent.'
         },
-        speakerNotes: 'Hoạt động Hình thành kiến thức trọng tâm của buổi tổng kết - thể hiện đầy đủ các yêu cầu cần đạt 12.D1.1; 12.D1.MR1; 12.D2.MR3.'
+        speakerNotes: 'Hoạt động Hình thành kiến thức trọng tâm của buổi tổng kết - thể hiện đầy đủ kĩ năng thiết kế phương án vận hành AI và xây dựng, kiểm thử AI agent.'
       },
       {
         id: 'l11_s6', title: 'Luyện Tập: Rủi Ro Khi Vận Hành AI Agent', visualType: 'interactive',
@@ -116,7 +116,7 @@ export const module6: Lesson[] = [
           hint: 'Nhớ lại vai trò "người kiểm thử" trong quá trình phát triển sản phẩm AI.',
           suggestedAnswer: 'Cần kiểm thử kỹ và cập nhật dữ liệu trước khi đưa AI agent vào sử dụng thực tế, nhấn mạnh vai trò giám sát của con người.'
         },
-        speakerNotes: 'Củng cố yêu cầu cần đạt 12.D2.MR1, GV tổng hợp và nhấn mạnh vai trò kiểm thử trước khi đưa AI agent vào sử dụng thực tế.'
+        speakerNotes: 'Củng cố kĩ năng phân tích và xử lí vấn đề phát sinh trong hệ thống AI, GV tổng hợp và nhấn mạnh vai trò kiểm thử trước khi đưa AI agent vào sử dụng thực tế.'
       }
     ]
   },
@@ -207,7 +207,7 @@ export const module6: Lesson[] = [
         id: 'l12_s6', title: 'Tổng Kết Toàn Bộ Chuyên Đề', visualType: 'summary',
         content: [
           '🎉 Hoàn thành 12 tiết (6 buổi) Chuyên đề Giáo dục Trí tuệ nhân tạo (AI) - Lớp 12!',
-          '✅ Đã đạt yêu cầu cần đạt: 12.D1.1; 12.D1.MR1; 12.D2.1; 12.D2.MR1; 12.D2.MR2; 12.D2.MR3.',
+          '✅ Các em đã đạt được: phân tích phương án thiết kế, vận hành hệ thống AI hiệu quả; hiểu vai trò hợp tác trong phát triển sản phẩm AI; xây dựng và kiểm thử được một AI Agent đơn giản.',
           '🏆 Cảm ơn các em học sinh Trường THPT Tân Lược đã tích cực tham gia chuyên đề!',
           '📌 GV tổng hợp toàn bộ minh chứng để hoàn thành đánh giá, nhận xét trước khi kết thúc Học kỳ I.'
         ],

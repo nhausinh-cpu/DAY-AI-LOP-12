@@ -19,7 +19,7 @@ export const module5: Lesson[] = [
         id: 'l9_s1', title: 'Tối Ưu Hệ Thống AI Và Cải Thiện Dữ Liệu', visualType: 'title',
         content: [
           '📘 Tiết 9-10: Tùy chỉnh, tối ưu hệ thống AI - Thu thập, cải thiện dữ liệu',
-          '🎯 Yêu cầu cần đạt: 12.C3.2 • 12.C3.MR2 • 12.C3.MR3 • 12.C4.MR1 • 12.C4.MR2',
+          '🎯 Học xong buổi này, các em sẽ: nêu được cách đánh giá hiệu quả hệ thống AI; hiểu hàm mục tiêu và hiện tượng quá khớp dữ liệu (overfitting); thu thập, tổ chức và cải thiện được dữ liệu để phát triển hệ thống AI.',
           '📅 Tuần thực hiện: 19/10 - 24/10/2026'
         ],
         visualUrl: svgVisual('Tối Ưu Hệ Thống AI', 'Hàm mục tiêu • Overfitting • Cải thiện dữ liệu', '#065f46', '#0d9488', '📈'),
@@ -44,7 +44,7 @@ export const module5: Lesson[] = [
           '😊 Mức độ phù hợp với người dùng: hệ thống có dễ sử dụng, đáp ứng đúng nhu cầu thực tế hay không.'
         ],
         visualUrl: svgVisual('Đánh Giá Hiệu Quả AI', 'Độ chính xác - Tốc độ - Phù hợp người dùng', '#0f766e', '#059669', '📊'),
-        speakerNotes: 'Trình bày 3 tiêu chí đánh giá hiệu quả hệ thống AI theo yêu cầu cần đạt 12.C3.2.'
+        speakerNotes: 'Trình bày 3 tiêu chí đánh giá hiệu quả hệ thống AI.'
       },
       {
         id: 'l9_s4', title: 'Hàm Mục Tiêu, Tối Ưu Hoá Và Overfitting', visualType: 'concepts',
@@ -55,7 +55,7 @@ export const module5: Lesson[] = [
           '💡 Ví dụ trực quan: học sinh học thuộc lòng đề mẫu nhưng không hiểu bản chất, thi đề khác dạng sẽ làm sai.'
         ],
         visualUrl: svgVisual('Overfitting Là Gì?', 'Mô hình học thuộc lòng - không khái quát hoá được', '#134e4a', '#0891b2', '🧠'),
-        speakerNotes: 'Đây là nội dung khó nhất của buổi học (yêu cầu cần đạt 12.C3.MR3) - nên dùng ví dụ trực quan gần gũi (học thuộc lòng vs hiểu bản chất) để học sinh dễ hình dung khái niệm overfitting.'
+        speakerNotes: 'Đây là nội dung khó nhất của buổi học - nên dùng ví dụ trực quan gần gũi (học thuộc lòng vs hiểu bản chất) để học sinh dễ hình dung khái niệm overfitting.'
       },
       {
         id: 'l9_s5', title: 'Thực Hành: Bổ Sung Dữ Liệu Cải Thiện Mô Hình', visualType: 'activity',
@@ -77,7 +77,7 @@ export const module5: Lesson[] = [
           hint: 'Nếu mô hình đã khá chính xác, hãy thử thêm ảnh ở điều kiện khó hơn (ánh sáng yếu, góc chụp lạ) để kiểm tra độ bền vững.',
           suggestedAnswer: 'Kết quả mong đợi: sau khi bổ sung dữ liệu, tỉ lệ dự đoán đúng của mô hình tăng lên so với trước.'
         },
-        speakerNotes: 'Hoạt động Hình thành kiến thức trọng tâm của buổi - thực hành trực tiếp thể hiện yêu cầu cần đạt 12.C4.MR1; 12.C4.MR2.'
+        speakerNotes: 'Hoạt động Hình thành kiến thức trọng tâm của buổi - thực hành trực tiếp kĩ năng thu thập, tổ chức và cải thiện dữ liệu.'
       },
       {
         id: 'l9_s6', title: 'Luyện Tập: Nguồn Dữ Liệu Bổ Sung', visualType: 'interactive',
@@ -97,7 +97,7 @@ export const module5: Lesson[] = [
           hint: 'GV đã nhấn mạnh nội dung này khi hướng dẫn liệt kê nguồn dữ liệu.',
           suggestedAnswer: 'Ba nguồn dữ liệu gợi ý: (1) tự chụp thêm ảnh thực tế, (2) tìm ảnh trên Internet đã được cấp phép sử dụng, (3) xin dữ liệu từ nhóm khác trong lớp.'
         },
-        speakerNotes: 'Củng cố yêu cầu cần đạt 12.C4.MR1, đặc biệt nhấn mạnh vấn đề bản quyền khi thu thập dữ liệu từ Internet.'
+        speakerNotes: 'Củng cố kĩ năng thu thập và tổ chức dữ liệu, đặc biệt nhấn mạnh vấn đề bản quyền khi thu thập dữ liệu từ Internet.'
       }
     ]
   },
@@ -128,7 +128,7 @@ export const module5: Lesson[] = [
           '📈 Đánh giá khả năng tối ưu hệ thống AI thông qua cập nhật công nghệ, kĩ thuật mới (ví dụ: dùng mô hình có sẵn, dùng thêm cảm biến...).'
         ],
         visualUrl: svgVisual('Chọn Nền Tảng Phù Hợp', 'Teachable Machine • MIT App Inventor • Google AI Studio', '#0c4a6e', '#0d9488', '🧭'),
-        speakerNotes: 'Nội dung này đạt yêu cầu cần đạt 12.C4.MR2 và 12.C3.MR2 - học sinh cần biết lựa chọn công cụ phù hợp với mục tiêu cụ thể của dự án nhóm.'
+        speakerNotes: 'Nội dung này giúp học sinh biết lựa chọn công cụ và nền tảng phù hợp với mục tiêu cụ thể của dự án nhóm.'
       },
       {
         id: 'l10_s3', title: 'Thực Hành: Kế Hoạch Hoàn Thiện Sản Phẩm', visualType: 'activity',
@@ -168,7 +168,7 @@ export const module5: Lesson[] = [
           hint: 'Nhớ lại 3 tiêu chí đánh giá hiệu quả hệ thống AI: độ chính xác, tốc độ, mức độ phù hợp.',
           suggestedAnswer: 'Nên điều chỉnh kỹ thuật để cân bằng giữa tốc độ xử lý và độ chính xác, phù hợp với thiết bị sử dụng thực tế.'
         },
-        speakerNotes: 'Củng cố yêu cầu cần đạt 12.C3.MR2 - học sinh biết đánh giá và đề xuất giải pháp tối ưu hệ thống AI phù hợp với điều kiện thực tế.'
+        speakerNotes: 'Củng cố kĩ năng đánh giá và đề xuất giải pháp tối ưu hệ thống AI phù hợp với điều kiện thực tế.'
       },
       {
         id: 'l10_s5', title: 'Vận Dụng: Xác Định Công Cụ Cho Buổi Tổng Kết', visualType: 'activity',
@@ -193,7 +193,7 @@ export const module5: Lesson[] = [
       {
         id: 'l10_s6', title: 'Tổng Kết Buổi 5', visualType: 'summary',
         content: [
-          '✅ Đã đạt yêu cầu cần đạt: 12.C3.2; 12.C3.MR2; 12.C3.MR3; 12.C4.MR1; 12.C4.MR2.',
+          '✅ Các em đã đạt được: nêu cách đánh giá hiệu quả hệ thống AI; hiểu hàm mục tiêu và hiện tượng overfitting; thu thập, tổ chức, cải thiện dữ liệu để phát triển hệ thống AI.',
           '🧠 Ghi nhớ: đánh giá hiệu quả AI, overfitting, cách cải thiện dữ liệu và tối ưu hệ thống.',
           '➡️ Buổi cuối cùng (Tiết 11-12): Giải pháp hệ thống AI - Phát triển hệ thống tác nhân AI (AI Agent) và tổng kết chuyên đề.'
         ],

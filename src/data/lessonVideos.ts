@@ -1,15 +1,33 @@
 import { SlideVideo } from '../types';
 
 // Video mở rộng (không bắt buộc trong KHBD) minh hoạ thêm cho từng buổi học.
-// Buổi 1-3, 6 (Tiết 1-6, 11-12): dùng video giải thích AI Agent / hệ thống AI ra quyết định tự động
-// để làm ví dụ liên hệ về quyền kiểm soát, trách nhiệm và đạo đức của con người.
-// Buổi 4-5 (Tiết 7-10): dùng video hướng dẫn thực hành Teachable Machine - đúng công cụ KHBD yêu cầu.
+// Mỗi buổi dùng một video RIÊNG, đúng chủ đề của buổi đó - tránh lặp lại một video
+// cho nhiều buổi có nội dung khác nhau. Chỉ Buổi 4-5 (cùng thực hành 1 công cụ) mới
+// dùng chung video hướng dẫn Teachable Machine.
 const AI_AGENT_VIDEO = {
   youtubeId: 'Uoltd_N5hbw',
   videoUrl: 'https://www.youtube.com/embed/Uoltd_N5hbw?autoplay=1&rel=0',
   thumbnailUrl: 'https://img.youtube.com/vi/Uoltd_N5hbw/hqdefault.jpg',
   duration: '15:00',
   sourceLabel: 'Video tiếng Việt (YouTube) - Tư liệu mở rộng, không bắt buộc'
+};
+
+// Buổi 2 - đúng chủ đề nguyên tắc đạo đức khi phát triển AI (VTV24).
+const AI_ETHICS_VIDEO = {
+  youtubeId: 'E_jFmDMALO4',
+  videoUrl: 'https://www.youtube.com/embed/E_jFmDMALO4?autoplay=1&rel=0',
+  thumbnailUrl: 'https://img.youtube.com/vi/E_jFmDMALO4/hqdefault.jpg',
+  duration: '5:00',
+  sourceLabel: 'Video tiếng Việt (YouTube - VTV24) - Tư liệu mở rộng, không bắt buộc'
+};
+
+// Buổi 3 - đúng chủ đề rủi ro và ảnh hưởng tiêu cực của AI (Truyền hình Quốc hội Việt Nam).
+const AI_RISK_VIDEO = {
+  youtubeId: 'I4oskLgFGxg',
+  videoUrl: 'https://www.youtube.com/embed/I4oskLgFGxg?autoplay=1&rel=0',
+  thumbnailUrl: 'https://img.youtube.com/vi/I4oskLgFGxg/hqdefault.jpg',
+  duration: '5:00',
+  sourceLabel: 'Video tiếng Việt (YouTube - Truyền hình Quốc hội Việt Nam) - Tư liệu mở rộng, không bắt buộc'
 };
 
 const TEACHABLE_MACHINE_VIDEO = {
@@ -37,30 +55,30 @@ export const lessonVideos: Record<number, SlideVideo> = {
   },
   3: {
     id: 'vid_lesson_3',
-    title: 'Khi AI tự động hoá quyết định: nguyên tắc đạo đức nào cần tuân thủ?',
-    description: 'Video mở rộng về hệ thống AI tự động ra quyết định, dùng làm ví dụ liên hệ tới 6 nguyên tắc đạo đức khi thiết kế và phát triển sản phẩm AI.',
-    ...AI_AGENT_VIDEO,
-    discussionQuestion: 'Nếu nhóm em thiết kế một hệ thống AI tương tự trong video, nguyên tắc đạo đức nào (an toàn, công bằng, minh bạch, riêng tư, trách nhiệm, lợi ích xã hội) cần được ưu tiên hàng đầu? Vì sao?'
+    title: 'Trí tuệ nhân tạo: Công cụ hay mối đe dọa? Tất cả phụ thuộc vào đạo đức phát triển',
+    description: 'Video mở rộng (VTV24) bàn về vai trò của đạo đức trong phát triển AI, dùng làm ví dụ liên hệ tới 6 nguyên tắc đạo đức khi thiết kế và phát triển sản phẩm AI.',
+    ...AI_ETHICS_VIDEO,
+    discussionQuestion: 'Theo nội dung video, nguyên tắc đạo đức nào (an toàn, công bằng, minh bạch, riêng tư, trách nhiệm, lợi ích xã hội) cần được ưu tiên hàng đầu khi phát triển một sản phẩm AI? Vì sao?'
   },
   4: {
     id: 'vid_lesson_4',
-    title: 'Trách nhiệm công dân số khi hệ thống AI hoạt động tự động',
-    description: 'Video mở rộng minh hoạ một hệ thống AI tự vận hành, làm cơ sở để học sinh viết bản cam kết cá nhân về sử dụng AI có trách nhiệm.',
-    ...AI_AGENT_VIDEO,
-    discussionQuestion: 'Là một công dân số, em cần làm gì để sử dụng các hệ thống AI tự động như trong video một cách an toàn, trung thực và có đạo đức?'
+    title: 'Đạo đức phát triển AI và trách nhiệm công dân số',
+    description: 'Video mở rộng (VTV24) về ranh giới giữa AI là công cụ hữu ích hay mối đe dọa, làm cơ sở để học sinh viết bản cam kết cá nhân về sử dụng AI có trách nhiệm.',
+    ...AI_ETHICS_VIDEO,
+    discussionQuestion: 'Là một công dân số, em cần làm gì để sử dụng AI một cách an toàn, trung thực và có đạo đức như nội dung video đã nêu?'
   },
   5: {
     id: 'vid_lesson_5',
-    title: 'Vì sao hệ thống AI tự động có thể sai lệch?',
-    description: 'Video mở rộng về cách một hệ thống AI ra quyết định tự động, giúp liên hệ tới nguyên nhân sai lệch dữ liệu, thuật toán và bối cảnh sử dụng.',
-    ...AI_AGENT_VIDEO,
-    discussionQuestion: 'Theo em, một hệ thống AI tự động như trong video có thể gặp rủi ro gì nếu dữ liệu huấn luyện không đầy đủ hoặc thiên lệch?'
+    title: 'Hạn chế rủi ro và ảnh hưởng tiêu cực của trí tuệ nhân tạo',
+    description: 'Video mở rộng (Truyền hình Quốc hội Việt Nam) về các rủi ro của AI trong thực tế, giúp liên hệ tới nguyên nhân sai lệch dữ liệu, thuật toán và bối cảnh sử dụng.',
+    ...AI_RISK_VIDEO,
+    discussionQuestion: 'Theo nội dung video, một hệ thống AI có thể gây ra những rủi ro gì nếu dữ liệu huấn luyện không đầy đủ hoặc bị lạm dụng?'
   },
   6: {
     id: 'vid_lesson_6',
-    title: 'Quyền và trách nhiệm của các bên khi vận hành hệ thống AI',
-    description: 'Video mở rộng giúp học sinh hình dung vai trò của người phát triển, người sử dụng khi một hệ thống AI hoạt động gần như tự động.',
-    ...AI_AGENT_VIDEO,
+    title: 'Quyền và trách nhiệm của các bên khi hạn chế rủi ro AI',
+    description: 'Video mở rộng (Truyền hình Quốc hội Việt Nam) giúp học sinh hình dung vai trò của người phát triển, người sử dụng và cơ quan quản lí trong việc hạn chế rủi ro AI.',
+    ...AI_RISK_VIDEO,
     discussionQuestion: 'Trong hệ sinh thái AI, ai là người có quyền và trách nhiệm góp ý xây dựng quy định sử dụng AI tại trường học của em?'
   },
   7: {

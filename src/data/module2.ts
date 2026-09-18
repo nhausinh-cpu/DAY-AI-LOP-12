@@ -19,7 +19,7 @@ export const module2: Lesson[] = [
         id: 'l3_s1', title: 'Nguyên Tắc Đạo Đức Khi Thiết Kế AI', visualType: 'title',
         content: [
           '📘 Tiết 3-4: Nguyên tắc đạo đức khi thiết kế AI - Trách nhiệm công dân trong xã hội có AI',
-          '🎯 Yêu cầu cần đạt: 12.A2.1 • 12.A2.MR1 • 12.A3.1',
+          '🎯 Học xong buổi này, các em sẽ: trình bày được 6 nguyên tắc đạo đức khi thiết kế, phát triển sản phẩm AI; vận dụng soạn được bộ nguyên tắc cá nhân cho một dự án AI cụ thể; phân tích được trách nhiệm công dân trong xã hội có AI.',
           '📅 Tuần thực hiện: 28/9 - 3/10/2026'
         ],
         visualUrl: svgVisual('Nguyên Tắc Đạo Đức Thiết Kế AI', 'An toàn • Công bằng • Minh bạch • Riêng tư • Trách nhiệm • Lợi ích xã hội', '#7c3aed', '#c026d3', '⚖️'),
@@ -47,7 +47,7 @@ export const module2: Lesson[] = [
           '🌍 Lợi ích xã hội: phục vụ con người, cộng đồng và phát triển bền vững.'
         ],
         visualUrl: svgVisual('6 Nguyên Tắc Đạo Đức AI', 'An toàn - Công bằng - Minh bạch - Riêng tư - Trách nhiệm - Lợi ích XH', '#4c1d95', '#7c3aed', '📜'),
-        speakerNotes: 'Trình bày đầy đủ 6 nguyên tắc đạo đức theo đúng nội dung yêu cầu cần đạt 12.A2.1. Có thể lấy ví dụ thực tế cho từng nguyên tắc.'
+        speakerNotes: 'Trình bày đầy đủ 6 nguyên tắc đạo đức khi thiết kế AI theo đúng nội dung KHBD. Có thể lấy ví dụ thực tế cho từng nguyên tắc.'
       },
       {
         id: 'l3_s4', title: 'Thực Hành: Bộ Nguyên Tắc Cho Dự Án Giả Định', visualType: 'concepts',
@@ -131,7 +131,7 @@ export const module2: Lesson[] = [
           '🌐 Đóng góp vào việc xây dựng môi trường số tích cực, công bằng và nhân văn.'
         ],
         visualUrl: svgVisual('Trách Nhiệm Công Dân Số', 'An toàn - Trung thực - Tôn trọng - Tích cực', '#4338ca', '#7c3aed', '🧑‍💻'),
-        speakerNotes: 'Trình bày đầy đủ nội hàm trách nhiệm công dân trong xã hội có AI theo yêu cầu cần đạt 12.A3.1.'
+        speakerNotes: 'Trình bày đầy đủ nội hàm trách nhiệm công dân trong xã hội có AI theo đúng nội dung KHBD.'
       },
       {
         id: 'l4_s3', title: 'Case Study: Deepfake Và Hệ Lụy', visualType: 'concepts',
@@ -161,7 +161,7 @@ export const module2: Lesson[] = [
           hint: 'Nguyên tắc liên quan đến việc tránh thiên vị trong kết quả đầu ra của AI.',
           suggestedAnswer: 'Vi phạm nguyên tắc Công bằng.'
         },
-        speakerNotes: 'Củng cố yêu cầu cần đạt 12.A2.1 qua hoạt động luyện tập nhận diện vi phạm nguyên tắc đạo đức.'
+        speakerNotes: 'Củng cố kĩ năng nhận diện vi phạm nguyên tắc đạo đức AI qua hoạt động luyện tập.'
       },
       {
         id: 'l4_s5', title: 'Vận Dụng: Việc Làm Cụ Thể Của Công Dân Số', visualType: 'activity',
@@ -185,7 +185,7 @@ export const module2: Lesson[] = [
       {
         id: 'l4_s6', title: 'Tổng Kết Buổi 2', visualType: 'summary',
         content: [
-          '✅ Đã đạt yêu cầu cần đạt: 12.A2.1; 12.A2.MR1; 12.A3.1.',
+          '✅ Các em đã đạt được: trình bày 6 nguyên tắc đạo đức khi thiết kế AI; soạn được bộ nguyên tắc cá nhân cho một dự án AI cụ thể; phân tích trách nhiệm công dân trong xã hội có AI.',
           '🧠 Ghi nhớ 6 nguyên tắc đạo đức AI và trách nhiệm công dân số.',
           '➡️ Buổi tiếp theo (Tiết 5-6): Vấn đề đạo đức của AI - Mức độ rủi ro - Trách nhiệm trong hệ sinh thái AI.'
         ],
