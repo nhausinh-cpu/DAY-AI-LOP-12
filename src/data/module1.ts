@@ -20,8 +20,7 @@ export const module1: Lesson[] = [
         content: [
           '📘 Tiết 1-2: Con người trong hệ thống AI - Quyền kiểm soát của con người trong dự án AI',
           '🎯 Học xong buổi này, các em sẽ: phân tích được quyền kiểm soát và trách nhiệm của con người trong vòng đời một hệ thống AI; xác định được vai trò của con người và AI trong quá trình ra quyết định; kiểm tra được trách nhiệm giải trình khi đối chiếu với quy định hiện hành.',
-          '🏫 Trường THPT Tân Lược - Tổ Toán - Tin',
-          '📅 Tuần thực hiện: 21/9 - 26/9/2026'
+          '🏫 Trường THPT Tân Lược - Tổ Toán - Tin'
         ],
         visualUrl: svgVisual('Quyền Kiểm Soát Của Con Người Trong AI', 'Chuyên đề Giáo dục AI - Lớp 12 - Buổi 1', '#4338ca', '#0ea5e9', '🕹️'),
         speakerNotes: 'Giới thiệu chuyên đề, nêu rõ đây là buổi đầu tiên trong 6 buổi (12 tiết) của Chuyên đề Giáo dục AI lớp 12, tập trung vào quyền kiểm soát và trách nhiệm của con người.'

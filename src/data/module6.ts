@@ -20,8 +20,7 @@ export const module6: Lesson[] = [
         content: [
           '📘 Tiết 11-12: Giải pháp hệ thống AI - Phát triển hệ thống AI (Tác nhân AI - AI Agent)',
           '🎯 Học xong buổi này, các em sẽ: phân tích được phương án thiết kế, vận hành hệ thống AI hiệu quả; hiểu vai trò hợp tác đa chuyên môn trong phát triển sản phẩm AI; xây dựng và kiểm thử được một AI Agent đơn giản.',
-          '🏁 Buổi tổng kết chuyên đề Giáo dục AI - Lớp 12',
-          '📅 Tuần thực hiện: 26/10 - 31/10/2026'
+          '🏁 Buổi tổng kết chuyên đề Giáo dục AI - Lớp 12'
         ],
         visualUrl: svgVisual('AI Agent - Tác Nhân Trí Tuệ Nhân Tạo', 'Buổi tổng kết chuyên đề Giáo dục AI - Lớp 12', '#4338ca', '#7c3aed', '🧠'),
         speakerNotes: 'Giới thiệu buổi tổng kết chuyên đề - buổi học cuối cùng, tập trung vào khái niệm AI agent và hoạt động dựng thử sản phẩm bằng Google AI Studio.'

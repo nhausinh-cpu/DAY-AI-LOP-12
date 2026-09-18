@@ -1230,7 +1230,7 @@ export const SlidePresenter: React.FC<SlidePresenterProps> = ({
                           className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-md border border-amber-400/40 mb-1"
                         >
                           <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
-                          <span>Trường THPT Tân Lược • Design by: Nguyễn Phước Hậu</span>
+                          <span>Trường THPT Tân Lược</span>
                         </motion.div>
                         {(() => {
                           const TITLE_LINE_STYLES = [

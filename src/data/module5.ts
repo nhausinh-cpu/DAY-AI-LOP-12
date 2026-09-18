@@ -19,8 +19,7 @@ export const module5: Lesson[] = [
         id: 'l9_s1', title: 'Tối Ưu Hệ Thống AI Và Cải Thiện Dữ Liệu', visualType: 'title',
         content: [
           '📘 Tiết 9-10: Tùy chỉnh, tối ưu hệ thống AI - Thu thập, cải thiện dữ liệu',
-          '🎯 Học xong buổi này, các em sẽ: nêu được cách đánh giá hiệu quả hệ thống AI; hiểu hàm mục tiêu và hiện tượng quá khớp dữ liệu (overfitting); thu thập, tổ chức và cải thiện được dữ liệu để phát triển hệ thống AI.',
-          '📅 Tuần thực hiện: 19/10 - 24/10/2026'
+          '🎯 Học xong buổi này, các em sẽ: nêu được cách đánh giá hiệu quả hệ thống AI; hiểu hàm mục tiêu và hiện tượng quá khớp dữ liệu (overfitting); thu thập, tổ chức và cải thiện được dữ liệu để phát triển hệ thống AI.'
         ],
         visualUrl: svgVisual('Tối Ưu Hệ Thống AI', 'Hàm mục tiêu • Overfitting • Cải thiện dữ liệu', '#065f46', '#0d9488', '📈'),
         speakerNotes: 'Giới thiệu buổi 5, tiếp nối trực tiếp từ mô hình Teachable Machine đã huấn luyện ở Buổi 4, đi sâu vào việc cải thiện độ chính xác.'

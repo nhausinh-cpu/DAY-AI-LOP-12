@@ -19,8 +19,7 @@ export const module3: Lesson[] = [
         id: 'l5_s1', title: 'Vấn Đề Đạo Đức Và Rủi Ro Của AI', visualType: 'title',
         content: [
           '📘 Tiết 5-6: Vấn đề đạo đức của AI - Mức độ rủi ro - Trách nhiệm trong hệ sinh thái AI',
-          '🎯 Học xong buổi này, các em sẽ: phân tích được nguyên nhân gây ra vấn đề đạo đức hoặc sai lệch của hệ thống AI; xác định được mức độ rủi ro khi dùng AI có thể vi phạm quy định; trình bày được quyền và trách nhiệm của người phát triển, người sử dụng AI.',
-          '📅 Tuần thực hiện: 5/10 - 10/10/2026'
+          '🎯 Học xong buổi này, các em sẽ: phân tích được nguyên nhân gây ra vấn đề đạo đức hoặc sai lệch của hệ thống AI; xác định được mức độ rủi ro khi dùng AI có thể vi phạm quy định; trình bày được quyền và trách nhiệm của người phát triển, người sử dụng AI.'
         ],
         visualUrl: svgVisual('Rủi Ro & Đạo Đức Của Hệ Thống AI', 'Nguyên nhân sai lệch - Phân loại rủi ro - Hệ sinh thái AI', '#b91c1c', '#ea580c', '⚠️'),
         speakerNotes: 'Giới thiệu buổi 3, trọng tâm là hiểu nguyên nhân sai lệch của AI, phân loại mức độ rủi ro và trách nhiệm các bên trong hệ sinh thái AI.'

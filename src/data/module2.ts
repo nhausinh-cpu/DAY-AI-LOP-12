@@ -19,8 +19,7 @@ export const module2: Lesson[] = [
         id: 'l3_s1', title: 'Nguyên Tắc Đạo Đức Khi Thiết Kế AI', visualType: 'title',
         content: [
           '📘 Tiết 3-4: Nguyên tắc đạo đức khi thiết kế AI - Trách nhiệm công dân trong xã hội có AI',
-          '🎯 Học xong buổi này, các em sẽ: trình bày được 6 nguyên tắc đạo đức khi thiết kế, phát triển sản phẩm AI; vận dụng soạn được bộ nguyên tắc cá nhân cho một dự án AI cụ thể; phân tích được trách nhiệm công dân trong xã hội có AI.',
-          '📅 Tuần thực hiện: 28/9 - 3/10/2026'
+          '🎯 Học xong buổi này, các em sẽ: trình bày được 6 nguyên tắc đạo đức khi thiết kế, phát triển sản phẩm AI; vận dụng soạn được bộ nguyên tắc cá nhân cho một dự án AI cụ thể; phân tích được trách nhiệm công dân trong xã hội có AI.'
         ],
         visualUrl: svgVisual('Nguyên Tắc Đạo Đức Thiết Kế AI', 'An toàn • Công bằng • Minh bạch • Riêng tư • Trách nhiệm • Lợi ích xã hội', '#7c3aed', '#c026d3', '⚖️'),
         speakerNotes: 'Giới thiệu buổi 2, nhấn mạnh trọng tâm là 6 nguyên tắc đạo đức khi thiết kế AI và trách nhiệm công dân số.'

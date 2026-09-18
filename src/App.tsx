@@ -4,7 +4,7 @@ import { LessonList } from './components/LessonList';
 import { SlidePresenter } from './components/SlidePresenter';
 import { ExportToGoogleSlides } from './components/ExportToGoogleSlides';
 import { Lesson, Slide } from './types';
-import { Sparkles, Award, GraduationCap, CheckCircle, MonitorPlay } from 'lucide-react';
+import { Sparkles, Award, GraduationCap, CheckCircle, MonitorPlay, Trophy } from 'lucide-react';
 
 export default function App() {
   // Store lessons in state to allow AI real-time customization to persist during session
@@ -94,7 +94,7 @@ export default function App() {
                 Design by: Nguyễn Phước Hậu
               </span>
               <span className="text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-full flex items-center gap-1">
-                <Sparkles className="w-3 h-3 fill-current text-amber-600" />
+                <Trophy className="w-3 h-3 fill-current text-amber-500" />
                 Dành Cho Khối 12
               </span>
             </div>

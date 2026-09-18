@@ -20,8 +20,7 @@ export const module4: Lesson[] = [
         content: [
           '📘 Tiết 7-8: Yêu cầu công cụ AI hỗ trợ học tập, xã hội - Công cụ thiết kế và phát triển hệ thống AI',
           '🎯 Học xong buổi này, các em sẽ: chọn được ý tưởng thiết kế một công cụ AI để thực hiện công việc cụ thể; tùy chỉnh được hệ thống AI phục vụ học tập; biết và sử dụng được công cụ mã nguồn mở như Teachable Machine.',
-          '💻 Thực hành tại phòng máy với công cụ Teachable Machine',
-          '📅 Tuần thực hiện: 12/10 - 17/10/2026'
+          '💻 Thực hành tại phòng máy với công cụ Teachable Machine'
         ],
         visualUrl: svgVisual('Công Cụ Thiết Kế AI Mã Nguồn Mở', 'Teachable Machine • ML5.js • TensorFlow.js • MIT App Inventor', '#0e7490', '#0891b2', '🛠️'),
         speakerNotes: 'Giới thiệu buổi 4, chuyển từ lý thuyết đạo đức/rủi ro sang thực hành công cụ AI mã nguồn mở tại phòng máy.'
