@@ -76,3 +76,51 @@ export interface PeriodMeta {
   duration: string;
   keyConcepts: string[];
 }
+
+export interface QuizQuestion {
+  id: string;
+  period: number;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+  standardCode: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+}
+
+export interface JudgeScenario {
+  id: string;
+  period: number;
+  title: string;
+  situation: string;
+  context: string;
+  correctDecision: 'human_only' | 'human_approved' | 'ai_auto';
+  decisionLabels: {
+    human_only: string;
+    human_approved: string;
+    ai_auto: string;
+  };
+  explanation: string;
+  ethicalStandard: string;
+}
+
+export interface BiasCase {
+  id: string;
+  title: string;
+  scenario: string;
+  flawType: 'bias' | 'hallucination' | 'deepfake' | 'privacy_breach';
+  riskLevel: 'low' | 'medium' | 'high';
+  clues: string[];
+  remediation: string;
+  standard: string;
+}
+
+export interface StudentBadge {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  unlocked: boolean;
+  unlockedAt?: string;
+  category: 'mastery' | 'ethics' | 'developer' | 'collaborator';
+}

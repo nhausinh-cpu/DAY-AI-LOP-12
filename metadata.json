@@ -1,6 +1,6 @@
 {
   "name": "Bài Trình Chiếu Chuyên Đề Ứng Dụng AI THPT",
-  "description": "Bài trình chiếu 110 slide dạy học chuyên đề ứng dụng AI 12 tiết dành cho học sinh THPT theo GDPT 2018 và QĐ 2422/QĐ-BGDĐT",
+  "description": "Ứng dụng dạy học chuyên đề ứng dụng AI 12 tiết THPT gồm 110 slide bài giảng, trò chơi tương tác và hoạt động học tập bám sát GDPT 2018 & QĐ 2422/QĐ-BGDĐT",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
