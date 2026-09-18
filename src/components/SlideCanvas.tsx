@@ -25,10 +25,10 @@ export type FontSizeOption = '20pt' | '22pt' | '24pt' | '28pt' | '32pt';
 
 const FONT_SCALE_MAP: Record<FontSizeOption, number> = {
   '20pt': 0.85,
-  '22pt': 0.92,
-  '24pt': 1,
-  '28pt': 1.12,
-  '32pt': 1.25,
+  '22pt': 0.95,
+  '24pt': 1.1,
+  '28pt': 1.3,
+  '32pt': 1.5,
 };
 
 interface SlideCanvasProps {
@@ -38,6 +38,10 @@ interface SlideCanvasProps {
   fontSize?: FontSizeOption;
   fullscreen?: boolean;
   hideStandardFooter?: boolean;
+  /** Chế độ hiển thị từng đối tượng khi click (giống Khối 11) */
+  isClickToReveal?: boolean;
+  /** Chỉ số đối tượng (element) đã được hiển thị đến (0-based) khi isClickToReveal = true */
+  revealStep?: number;
 }
 
 export const SlideCanvas: React.FC<SlideCanvasProps> = ({
@@ -47,9 +51,12 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
   fontSize = '24pt',
   fullscreen = false,
   hideStandardFooter = false,
+  isClickToReveal = false,
+  revealStep = 999,
 }) => {
   const fontScale = FONT_SCALE_MAP[fontSize];
-  const maxWidthClass = fullscreen ? 'max-w-[1400px]' : 'max-w-5xl';
+  const maxWidthClass = fullscreen ? 'max-w-[1800px]' : 'max-w-5xl';
+  const isStepVisible = (idx: number) => !isClickToReveal || revealStep >= idx;
   // Animation variants
   const containerVariants: any = {
     hidden: { opacity: 0 },
@@ -107,27 +114,35 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
         >
           {/* Badge & Title */}
           <motion.div variants={showAnimation ? itemVariants : undefined} className="mb-4">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-2 border border-emerald-500/30">
+            <div className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold uppercase tracking-wider mb-2 border border-emerald-500/30 ${fullscreen ? 'text-sm' : 'text-xs'}`}>
               <Sparkles className="w-3.5 h-3.5" />
               {slide.categoryLabel}
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+            <h2 className={`font-bold tracking-tight text-white leading-tight ${fullscreen ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-2xl sm:text-3xl md:text-4xl'}`}>
               {slide.title}
             </h2>
             {slide.subtitle && (
-              <p className="mt-1.5 text-sm sm:text-base md:text-lg text-slate-300 font-normal leading-relaxed max-w-3xl">
+              <p className={`mt-1.5 text-slate-300 font-normal leading-relaxed max-w-4xl ${fullscreen ? 'text-lg sm:text-xl md:text-2xl' : 'text-sm sm:text-base md:text-lg'}`}>
                 {slide.subtitle}
               </p>
             )}
           </motion.div>
 
-          {/* Dynamic Content Based on Slide Elements */}
-          {slide.elements.map((el) => {
+          {/* Dynamic Content Based on Slide Elements (hỗ trợ hiện từng đối tượng khi click) */}
+          {slide.elements.map((el, elIdx) => {
+            if (!isStepVisible(elIdx)) return null;
+
+            const cardTitleCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
+            const cardDescCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
+            const bodyCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
+
             if (el.type === 'cards' && Array.isArray(el.data)) {
               return (
                 <motion.div
                   key={el.id}
-                  variants={showAnimation ? itemVariants : undefined}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
                   className={`grid gap-3 ${
                     el.data.length === 2
                       ? 'grid-cols-1 sm:grid-cols-2'
@@ -147,10 +162,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                             {card.tag}
                           </span>
                         )}
-                        <h3 className="font-semibold text-base sm:text-lg text-slate-100 mb-1">
+                        <h3 className={`font-semibold text-slate-100 mb-1 ${cardTitleCls}`}>
                           {card.title}
                         </h3>
-                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                        <p className={`text-slate-300 leading-relaxed ${cardDescCls}`}>
                           {card.desc}
                         </p>
                       </div>
@@ -170,7 +185,9 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               return (
                 <motion.div
                   key={el.id}
-                  variants={showAnimation ? itemVariants : undefined}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
                   className="space-y-2"
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
@@ -187,10 +204,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                             {step.role}
                           </span>
                         </div>
-                        <div className="font-semibold text-sm sm:text-base text-white mb-1">
+                        <div className={`font-semibold text-white mb-1 ${fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base'}`}>
                           {step.name}
                         </div>
-                        <div className="text-xs sm:text-[13px] text-slate-300 leading-snug">
+                        <div className={`text-slate-300 leading-snug ${fullscreen ? 'text-sm sm:text-base' : 'text-xs sm:text-[13px]'}`}>
                           {step.details}
                         </div>
                       </div>
@@ -204,10 +221,12 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               return (
                 <motion.div
                   key={el.id}
-                  variants={showAnimation ? itemVariants : undefined}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
                   className="overflow-x-auto rounded-xl border border-slate-700 bg-slate-800/90"
                 >
-                  <table className="w-full text-left text-sm sm:text-base">
+                  <table className={`w-full text-left ${bodyCls}`}>
                     <thead className="bg-slate-900/80 text-indigo-300 font-semibold border-b border-slate-700">
                       <tr>
                         {el.data.headers.map((h: string, i: number) => (
@@ -237,14 +256,16 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               return (
                 <motion.div
                   key={el.id}
-                  variants={showAnimation ? itemVariants : undefined}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
                   className="p-4 rounded-xl bg-slate-800/90 border border-indigo-500/40"
                 >
-                  <h4 className="font-semibold text-base sm:text-lg text-indigo-300 mb-2.5 flex items-center gap-2">
+                  <h4 className={`font-semibold text-indigo-300 mb-2.5 flex items-center gap-2 ${cardTitleCls}`}>
                     <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                     {el.data.taskTitle}
                   </h4>
-                  <ul className="space-y-1.5 text-sm sm:text-base text-slate-200">
+                  <ul className={`space-y-1.5 text-slate-200 ${bodyCls}`}>
                     {el.data.items?.map((item: string, i: number) => (
                       <li key={i} className="flex items-start gap-2">
                         <span className="w-4 h-4 rounded bg-indigo-900 text-indigo-300 flex items-center justify-center text-[10px] mt-0.5 flex-shrink-0">
@@ -262,14 +283,16 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               return (
                 <motion.div
                   key={el.id}
-                  variants={showAnimation ? itemVariants : undefined}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
                   className="p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-indigo-500/10 to-transparent border border-amber-500/30 text-center my-2"
                 >
-                  <p className="text-lg sm:text-xl md:text-2xl font-bold text-amber-200 tracking-wide uppercase">
+                  <p className={`font-bold text-amber-200 tracking-wide uppercase ${fullscreen ? 'text-xl sm:text-2xl md:text-3xl' : 'text-lg sm:text-xl md:text-2xl'}`}>
                     "{el.data.highlight}"
                   </p>
                   {el.data.subtext && (
-                    <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+                    <p className={`mt-2 text-slate-300 max-w-2xl mx-auto ${bodyCls}`}>
                       {el.data.subtext}
                     </p>
                   )}
@@ -286,14 +309,16 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               return (
                 <motion.div
                   key={el.id}
-                  variants={showAnimation ? itemVariants : undefined}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
                   className="p-4 rounded-xl bg-indigo-950/50 border border-indigo-500/40"
                 >
                   <div className="flex items-center gap-2 text-indigo-300 font-semibold text-sm mb-1.5">
                     <Lightbulb className="w-4 h-4 text-amber-400" />
                     Câu hỏi thảo luận phản biện:
                   </div>
-                  <p className="text-base sm:text-lg font-medium text-white mb-2">
+                  <p className={`font-medium text-white mb-2 ${fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg'}`}>
                     {el.data.question}
                   </p>
                   {el.data.instruction && (
@@ -309,8 +334,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               return (
                 <motion.ul
                   key={el.id}
-                  variants={showAnimation ? itemVariants : undefined}
-                  className="space-y-2 text-sm sm:text-base text-slate-200"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className={`space-y-2 text-slate-200 ${bodyCls}`}
                 >
                   {el.data.map((item: string, i: number) => (
                     <li key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/60">
