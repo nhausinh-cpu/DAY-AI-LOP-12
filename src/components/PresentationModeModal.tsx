@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { Slide } from '../types';
 import { SlideCanvas, type FontSizeOption } from './SlideCanvas';
-import {
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Maximize2,
-  Minimize2,
-  BookOpen,
-} from 'lucide-react';
+import { ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
 
 interface PresentationModeModalProps {
   isOpen: boolean;
@@ -57,44 +50,6 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black flex flex-col justify-between p-4 select-none">
-      {/* Top Floating Controls */}
-      <div className="flex items-center justify-between text-slate-300 text-xs py-1 px-4 bg-slate-900/60 backdrop-blur rounded-full border border-slate-800 mx-auto w-full max-w-4xl mb-2">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-white truncate max-w-xs sm:max-w-md">
-            {currentSlide.periodTitle}
-          </span>
-          <span className="text-slate-500 hidden sm:inline">|</span>
-          <span className="text-slate-400 hidden sm:inline truncate max-w-xs">
-            {currentSlide.title}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setShowNotes(!showNotes)}
-            className={`p-1.5 rounded-lg text-xs flex items-center gap-1.5 transition-colors ${
-              showNotes ? 'bg-indigo-600 text-white' : 'hover:bg-slate-800 text-slate-400'
-            }`}
-            title="Bật/Tắt ghi chú giáo viên (phím N)"
-          >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Ghi chú (N)</span>
-          </button>
-
-          <span className="font-mono text-slate-400">
-            {currentIndex + 1} / {slides.length}
-          </span>
-
-          <button
-            onClick={onClose}
-            className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white"
-            title="Thoát chế độ trình chiếu (Esc)"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-
       {/* Main Slide Presentation Stage */}
       <div className="flex-1 flex items-center justify-center relative w-full overflow-hidden">
         {/* Previous Button */}
@@ -107,8 +62,15 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
         </button>
 
         {/* Slide Canvas */}
-        <div className="w-full max-w-5xl transition-all">
-          <SlideCanvas slide={currentSlide} totalSlides={slides.length} showAnimation={true} fontSize={fontSize} />
+        <div className="w-full max-w-[1400px] transition-all">
+          <SlideCanvas
+            slide={currentSlide}
+            totalSlides={slides.length}
+            showAnimation={true}
+            fontSize={fontSize}
+            fullscreen={true}
+            hideStandardFooter={true}
+          />
         </div>
 
         {/* Next Button */}

@@ -36,6 +36,8 @@ interface SlideCanvasProps {
   totalSlides: number;
   showAnimation?: boolean;
   fontSize?: FontSizeOption;
+  fullscreen?: boolean;
+  hideStandardFooter?: boolean;
 }
 
 export const SlideCanvas: React.FC<SlideCanvasProps> = ({
@@ -43,8 +45,11 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
   totalSlides,
   showAnimation = true,
   fontSize = '24pt',
+  fullscreen = false,
+  hideStandardFooter = false,
 }) => {
   const fontScale = FONT_SCALE_MAP[fontSize];
+  const maxWidthClass = fullscreen ? 'max-w-[1400px]' : 'max-w-5xl';
   // Animation variants
   const containerVariants: any = {
     hidden: { opacity: 0 },
@@ -65,7 +70,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
   return (
     <div
       id={`slide-canvas-${slide.id}`}
-      className="relative w-full aspect-[16/9] max-w-5xl mx-auto bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden flex flex-col justify-between p-6 sm:p-8 select-none"
+      className={`relative w-full aspect-[16/9] ${maxWidthClass} mx-auto bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden flex flex-col justify-between p-6 sm:p-8 select-none`}
       style={{ zoom: fontScale } as React.CSSProperties}
     >
       {/* Background Subtle Gradient & Accents */}
@@ -106,11 +111,11 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               <Sparkles className="w-3.5 h-3.5" />
               {slide.categoryLabel}
             </div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-white leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
               {slide.title}
             </h2>
             {slide.subtitle && (
-              <p className="mt-1 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed max-w-3xl">
+              <p className="mt-1.5 text-sm sm:text-base md:text-lg text-slate-300 font-normal leading-relaxed max-w-3xl">
                 {slide.subtitle}
               </p>
             )}
@@ -142,10 +147,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                             {card.tag}
                           </span>
                         )}
-                        <h3 className="font-semibold text-sm sm:text-base text-slate-100 mb-1">
+                        <h3 className="font-semibold text-base sm:text-lg text-slate-100 mb-1">
                           {card.title}
                         </h3>
-                        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                           {card.desc}
                         </p>
                       </div>
@@ -182,10 +187,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                             {step.role}
                           </span>
                         </div>
-                        <div className="font-semibold text-xs sm:text-sm text-white mb-1">
+                        <div className="font-semibold text-sm sm:text-base text-white mb-1">
                           {step.name}
                         </div>
-                        <div className="text-[11px] text-slate-300 leading-snug">
+                        <div className="text-xs sm:text-[13px] text-slate-300 leading-snug">
                           {step.details}
                         </div>
                       </div>
@@ -202,7 +207,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                   variants={showAnimation ? itemVariants : undefined}
                   className="overflow-x-auto rounded-xl border border-slate-700 bg-slate-800/90"
                 >
-                  <table className="w-full text-left text-xs sm:text-sm">
+                  <table className="w-full text-left text-sm sm:text-base">
                     <thead className="bg-slate-900/80 text-indigo-300 font-semibold border-b border-slate-700">
                       <tr>
                         {el.data.headers.map((h: string, i: number) => (
@@ -235,11 +240,11 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                   variants={showAnimation ? itemVariants : undefined}
                   className="p-4 rounded-xl bg-slate-800/90 border border-indigo-500/40"
                 >
-                  <h4 className="font-semibold text-sm sm:text-base text-indigo-300 mb-2.5 flex items-center gap-2">
+                  <h4 className="font-semibold text-base sm:text-lg text-indigo-300 mb-2.5 flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                     {el.data.taskTitle}
                   </h4>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-slate-200">
+                  <ul className="space-y-1.5 text-sm sm:text-base text-slate-200">
                     {el.data.items?.map((item: string, i: number) => (
                       <li key={i} className="flex items-start gap-2">
                         <span className="w-4 h-4 rounded bg-indigo-900 text-indigo-300 flex items-center justify-center text-[10px] mt-0.5 flex-shrink-0">
@@ -260,11 +265,11 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                   variants={showAnimation ? itemVariants : undefined}
                   className="p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-indigo-500/10 to-transparent border border-amber-500/30 text-center my-2"
                 >
-                  <p className="text-base sm:text-lg md:text-xl font-bold text-amber-200 tracking-wide uppercase">
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold text-amber-200 tracking-wide uppercase">
                     "{el.data.highlight}"
                   </p>
                   {el.data.subtext && (
-                    <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto">
+                    <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
                       {el.data.subtext}
                     </p>
                   )}
@@ -288,11 +293,11 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                     <Lightbulb className="w-4 h-4 text-amber-400" />
                     Câu hỏi thảo luận phản biện:
                   </div>
-                  <p className="text-sm sm:text-base font-medium text-white mb-2">
+                  <p className="text-base sm:text-lg font-medium text-white mb-2">
                     {el.data.question}
                   </p>
                   {el.data.instruction && (
-                    <p className="text-xs text-indigo-200 italic">
+                    <p className="text-xs sm:text-sm text-indigo-200 italic">
                       💡 {el.data.instruction}
                     </p>
                   )}
@@ -305,7 +310,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                 <motion.ul
                   key={el.id}
                   variants={showAnimation ? itemVariants : undefined}
-                  className="space-y-2 text-xs sm:text-sm text-slate-200"
+                  className="space-y-2 text-sm sm:text-base text-slate-200"
                 >
                   {el.data.map((item: string, i: number) => (
                     <li key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/60">
@@ -341,20 +346,22 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
       </AnimatePresence>
 
       {/* Footer: Standard Badge & Worksheet Tag */}
-      <div className="relative z-10 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-        <div className="flex items-center gap-2 truncate max-w-xl">
-          <Award className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0" />
-          <span className="font-mono text-slate-300 truncate">
-            {slide.competencyStandard}
-          </span>
-        </div>
+      {!hideStandardFooter && (
+        <div className="relative z-10 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+          <div className="flex items-center gap-2 truncate max-w-xl">
+            <Award className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0" />
+            <span className="font-mono text-slate-300 truncate">
+              {slide.competencyStandard}
+            </span>
+          </div>
 
-        {slide.worksheetNumber && (
-          <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/40 text-[10px]">
-            Phiếu học tập số {slide.worksheetNumber}
-          </span>
-        )}
-      </div>
+          {slide.worksheetNumber && (
+            <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/40 text-[10px]">
+              Phiếu học tập số {slide.worksheetNumber}
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };

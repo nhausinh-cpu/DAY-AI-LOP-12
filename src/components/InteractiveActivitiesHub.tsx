@@ -7,16 +7,19 @@ import {
   Layers,
   Award,
   BookOpen,
+  ArrowLeft,
 } from 'lucide-react';
 
 interface InteractiveActivitiesHubProps {
   onUnlockBadge: (badgeId: string) => void;
   onAddScore: (points: number) => void;
+  onBackToSlides?: () => void;
 }
 
 export const InteractiveActivitiesHub: React.FC<InteractiveActivitiesHubProps> = ({
   onUnlockBadge,
   onAddScore,
+  onBackToSlides,
 }) => {
   const [activeActivity, setActiveActivity] = useState<'policy' | 'canvas' | 'rubric'>('policy');
 
@@ -24,6 +27,16 @@ export const InteractiveActivitiesHub: React.FC<InteractiveActivitiesHubProps> =
     <div className="space-y-6">
       {/* Teacher instruction banner */}
       <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3">
+        {onBackToSlides && (
+          <button
+            onClick={onBackToSlides}
+            className="shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all cursor-pointer"
+            title="Quay lại trang trình chiếu Slide"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Quay Lại Slide</span>
+          </button>
+        )}
         <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-500/30">
           <BookOpen className="w-4 h-4" />
         </div>

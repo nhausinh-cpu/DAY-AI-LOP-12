@@ -1,17 +1,25 @@
 import React from 'react';
 import type { Slide } from '../types';
-import { Sparkles, Award } from 'lucide-react';
+import { Gamepad2, FileText } from 'lucide-react';
 
 interface SlideThumbnailListProps {
   slides: Slide[];
   activeSlideId: number;
   onSelectSlide: (slide: Slide) => void;
+  onOpenGame?: () => void;
+  onOpenActivity?: () => void;
 }
+
+// Tiết nào có Game tương tác, tiết nào có Hoạt động nhóm (khớp với TeacherNotesDrawer)
+const GAME_PERIODS = new Set([1, 2, 3, 4, 5, 7, 8]);
+const ACTIVITY_PERIODS = new Set([6, 9, 10, 11, 12]);
 
 export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
   slides,
   activeSlideId,
   onSelectSlide,
+  onOpenGame,
+  onOpenActivity,
 }) => {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3 shadow-md flex flex-col h-full max-h-[750px]">
@@ -23,6 +31,11 @@ export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
       <div className="flex-1 overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-thumb-slate-700">
         {slides.map((s) => {
           const isActive = s.id === activeSlideId;
+          // Chỉ gắn lối tắt Trò Chơi/Hoạt Động vào đúng slide "Hoạt động nhóm" có Phiếu học tập
+          const showShortcut = !!s.worksheetNumber;
+          const isGame = showShortcut && GAME_PERIODS.has(s.period);
+          const isActivity = showShortcut && ACTIVITY_PERIODS.has(s.period);
+
           return (
             <div
               key={s.id}
@@ -63,6 +76,34 @@ export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
                 <p className="text-[11px] text-slate-400 truncate mt-0.5">
                   {s.subtitle || s.topic}
                 </p>
+
+                {isGame && onOpenGame && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenGame();
+                    }}
+                    className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-600/20 text-indigo-300 border border-indigo-500/40 text-[10px] font-semibold hover:bg-indigo-600/40 hover:text-white transition-colors cursor-pointer"
+                    title="Mở Trò Chơi của Tiết này"
+                  >
+                    <Gamepad2 className="w-3 h-3" />
+                    Trò Chơi Tiết {s.period}
+                  </button>
+                )}
+
+                {isActivity && onOpenActivity && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenActivity();
+                    }}
+                    className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-teal-600/20 text-teal-300 border border-teal-500/40 text-[10px] font-semibold hover:bg-teal-600/40 hover:text-white transition-colors cursor-pointer"
+                    title="Mở Hoạt Động của Tiết này"
+                  >
+                    <FileText className="w-3 h-3" />
+                    Hoạt Động Tiết {s.period}
+                  </button>
+                )}
               </div>
             </div>
           );
