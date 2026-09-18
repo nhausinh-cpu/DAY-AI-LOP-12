@@ -71,8 +71,8 @@ interface SlideCanvasProps {
   /** Chỉ số đối tượng (element) đã được hiển thị đến (0-based) khi isClickToReveal = true */
   revealStep?: number;
   /** Mở nhanh Trò Chơi/Hoạt Động gắn với tiết học của slide này (hiện biểu tượng nổi bật nếu có) */
-  onOpenGame?: () => void;
-  onOpenActivity?: () => void;
+  onOpenGame?: (period?: number) => void;
+  onOpenActivity?: (period?: number) => void;
 }
 
 export const SlideCanvas: React.FC<SlideCanvasProps> = ({
@@ -142,7 +142,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
         <div className="flex items-center gap-2">
           {(isGameSlide || isActivitySlide) && (
             <button
-              onClick={isGameSlide ? onOpenGame : onOpenActivity}
+              onClick={() => (isGameSlide ? onOpenGame?.(slide.period) : onOpenActivity?.(slide.period))}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border shadow-lg animate-pulse cursor-pointer transition-all hover:animate-none ${
                 isGameSlide
                   ? 'bg-indigo-600 border-indigo-400 text-white hover:bg-indigo-500'
@@ -174,14 +174,17 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
           className="relative z-10 my-auto flex-1 flex flex-col justify-center py-4"
         >
           {/* Badge & Title */}
-          <motion.div variants={showAnimation ? itemVariants : undefined} className="mb-4">
+          <motion.div variants={showAnimation ? itemVariants : undefined} className={slide.illustration?.imageUrl ? 'mb-1' : 'mb-4'}>
             <div className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold uppercase tracking-wider mb-2 border border-emerald-500/30 ${fullscreen ? 'text-sm' : 'text-xs'}`}>
               <Sparkles className="w-3.5 h-3.5" />
               {slide.categoryLabel}
             </div>
-            <h2 className={`font-bold tracking-tight text-white leading-tight ${fullscreen ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-xl sm:text-2xl md:text-3xl'}`}>
-              {slide.title}
-            </h2>
+            {/* Bỏ tiêu đề chữ trắng riêng với slide có ảnh minh hoạ lớn (vd. slide bế mạc), vì đã có câu chúc lớn dưới ảnh thay thế */}
+            {!slide.illustration?.imageUrl && (
+              <h2 className={`font-bold tracking-tight text-white leading-tight ${fullscreen ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-xl sm:text-2xl md:text-3xl'}`}>
+                {slide.title}
+              </h2>
+            )}
           </motion.div>
 
           {/* Dynamic Content Based on Slide Elements (hỗ trợ hiện từng đối tượng/từng bước khi click) */}
@@ -457,15 +460,15 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
           {slide.illustration?.imageUrl && (
             <motion.div
               variants={showAnimation ? itemVariants : undefined}
-              className="flex flex-col items-center justify-center gap-3 my-2"
+              className="flex flex-col items-center justify-center gap-2 my-1"
             >
               <img
                 src={`${import.meta.env.BASE_URL}${slide.illustration.imageUrl}`}
                 alt={slide.illustration.caption || 'Ảnh minh hoạ'}
-                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-80 sm:h-[26rem]' : 'h-56 sm:h-72'}`}
+                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-[19rem] sm:h-[24rem]' : 'h-48 sm:h-64'}`}
               />
               {slide.illustration.caption && (
-                <p className={`text-center font-bold text-amber-200 max-w-3xl leading-relaxed ${fullscreen ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}>
+                <p className={`text-center font-extrabold text-amber-200 max-w-2xl mx-auto leading-snug ${fullscreen ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'}`}>
                   {slide.illustration.caption}
                 </p>
               )}

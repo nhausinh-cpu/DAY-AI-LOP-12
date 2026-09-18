@@ -24,6 +24,10 @@ import {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'slides' | 'games' | 'activities'>('slides');
+  // Khi mở Trò Chơi/Hoạt Động từ đúng 1 Tiết cụ thể (nút trên Slide), chỉ hiện đúng thẻ của Tiết đó
+  // để giáo viên không bị rối mắt vì các thẻ Tiết khác. Mở từ menu trên cùng thì để undefined (hiện đủ).
+  const [gameFilterPeriod, setGameFilterPeriod] = useState<number | undefined>(undefined);
+  const [activityFilterPeriod, setActivityFilterPeriod] = useState<number | undefined>(undefined);
   const [activeSlideId, setActiveSlideId] = useState<number>(1);
   const [isPresentationOpen, setIsPresentationOpen] = useState<boolean>(false);
   const [fontSize, setFontSize] = useState<FontSizeOption>('24pt');
@@ -135,7 +139,10 @@ export default function App() {
             </button>
 
             <button
-              onClick={() => setActiveTab('games')}
+              onClick={() => {
+                setGameFilterPeriod(undefined);
+                setActiveTab('games');
+              }}
               className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'games'
                   ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm'
@@ -150,7 +157,10 @@ export default function App() {
             </button>
 
             <button
-              onClick={() => setActiveTab('activities')}
+              onClick={() => {
+                setActivityFilterPeriod(undefined);
+                setActiveTab('activities');
+              }}
               className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'activities'
                   ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm'
@@ -208,8 +218,14 @@ export default function App() {
                   slides={ALL_SLIDES}
                   activeSlideId={activeSlideId}
                   onSelectSlide={(s) => setActiveSlideId(s.id)}
-                  onOpenGame={() => setActiveTab('games')}
-                  onOpenActivity={() => setActiveTab('activities')}
+                  onOpenGame={(period) => {
+                    setGameFilterPeriod(period);
+                    setActiveTab('games');
+                  }}
+                  onOpenActivity={(period) => {
+                    setActivityFilterPeriod(period);
+                    setActiveTab('activities');
+                  }}
                 />
               </div>
 
@@ -294,8 +310,14 @@ export default function App() {
                     fontSize={fontSize}
                     isClickToReveal={isClickToReveal}
                     revealStep={revealStep}
-                    onOpenGame={() => setActiveTab('games')}
-                    onOpenActivity={() => setActiveTab('activities')}
+                    onOpenGame={(period) => {
+                      setGameFilterPeriod(period);
+                      setActiveTab('games');
+                    }}
+                    onOpenActivity={(period) => {
+                      setActivityFilterPeriod(period);
+                      setActiveTab('activities');
+                    }}
                   />
                 </div>
 
@@ -344,8 +366,14 @@ export default function App() {
                 <div className="mt-1">
                   <TeacherNotesDrawer
                     slide={currentSlide}
-                    onLaunchGame={() => setActiveTab('games')}
-                    onLaunchActivity={() => setActiveTab('activities')}
+                    onLaunchGame={(period) => {
+                      setGameFilterPeriod(period);
+                      setActiveTab('games');
+                    }}
+                    onLaunchActivity={(period) => {
+                      setActivityFilterPeriod(period);
+                      setActiveTab('activities');
+                    }}
                   />
                 </div>
               </div>
@@ -359,6 +387,7 @@ export default function App() {
             onUnlockBadge={handleUnlockBadge}
             onAddScore={handleAddScore}
             totalScore={totalScore}
+            filterPeriod={gameFilterPeriod}
             onBackToSlides={() => setActiveTab('slides')}
           />
         )}
@@ -368,6 +397,7 @@ export default function App() {
           <InteractiveActivitiesHub
             onUnlockBadge={handleUnlockBadge}
             onAddScore={handleAddScore}
+            filterPeriod={activityFilterPeriod}
             onBackToSlides={() => setActiveTab('slides')}
           />
         )}
@@ -396,12 +426,14 @@ export default function App() {
         initialSlideIndex={currentIndexInAll}
         fontSize={fontSize}
         onFontSizeChange={setFontSize}
-        onOpenGame={() => {
+        onOpenGame={(period) => {
           setIsPresentationOpen(false);
+          setGameFilterPeriod(period);
           setActiveTab('games');
         }}
-        onOpenActivity={() => {
+        onOpenActivity={(period) => {
           setIsPresentationOpen(false);
+          setActivityFilterPeriod(period);
           setActiveTab('activities');
         }}
       />

@@ -4,8 +4,8 @@ import { Sparkles } from 'lucide-react';
 
 interface TeacherNotesDrawerProps {
   slide: Slide;
-  onLaunchGame?: (gameId?: string) => void;
-  onLaunchActivity?: (activityId?: string) => void;
+  onLaunchGame?: (period?: number) => void;
+  onLaunchActivity?: (period?: number) => void;
 }
 
 export const TeacherNotesDrawer: React.FC<TeacherNotesDrawerProps> = ({
@@ -37,7 +37,7 @@ export const TeacherNotesDrawer: React.FC<TeacherNotesDrawerProps> = ({
       <div className="flex items-center gap-2 shrink-0">
         {(slide.period === 6 || slide.period >= 9) && onLaunchActivity && (
           <button
-            onClick={() => onLaunchActivity()}
+            onClick={() => onLaunchActivity(slide.period)}
             className="px-3 py-1 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold cursor-pointer transition-colors"
           >
             Mở Hoạt Động
@@ -46,7 +46,7 @@ export const TeacherNotesDrawer: React.FC<TeacherNotesDrawerProps> = ({
 
         {onLaunchGame && (
           <button
-            onClick={() => onLaunchGame()}
+            onClick={() => onLaunchGame(slide.period)}
             className="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold cursor-pointer transition-colors"
           >
             Mở Trò Chơi

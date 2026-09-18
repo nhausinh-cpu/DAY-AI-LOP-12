@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AILifecycleGame } from './games/AILifecycleGame';
 import { HumanVsAIJudgeGame } from './games/HumanVsAIJudgeGame';
 import { BiasDetectiveGame } from './games/BiasDetectiveGame';
 import { AITestingLabGame } from './games/AITestingLabGame';
 import { AIMasterQuizGame } from './games/AIMasterQuizGame';
+import { getGameIdForPeriod, type GameId } from '../utils/gameActivityPeriods';
 import {
   Gamepad2,
   Layers,
@@ -20,6 +21,8 @@ interface InteractiveGamesHubProps {
   onUnlockBadge: (badgeId: string) => void;
   onAddScore: (points: number) => void;
   totalScore: number;
+  // Nếu có: chỉ hiện đúng 1 thẻ trò chơi khớp với Tiết này (mở từ nút "Trò Chơi Tiết N" trên Slide)
+  filterPeriod?: number;
   onBackToSlides?: () => void;
 }
 
@@ -27,11 +30,20 @@ export const InteractiveGamesHub: React.FC<InteractiveGamesHubProps> = ({
   onUnlockBadge,
   onAddScore,
   totalScore,
+  filterPeriod,
   onBackToSlides,
 }) => {
-  const [activeGame, setActiveGame] = useState<
-    'lifecycle' | 'judge' | 'bias' | 'testing' | 'quiz'
-  >('lifecycle');
+  const [activeGame, setActiveGame] = useState<GameId>('lifecycle');
+
+  const filterGameId = filterPeriod != null ? getGameIdForPeriod(filterPeriod) : null;
+
+  // Khi mở đúng từ 1 Tiết cụ thể, tự động chọn ngay trò chơi khớp Tiết đó
+  useEffect(() => {
+    if (filterGameId) {
+      setActiveGame(filterGameId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterPeriod]);
 
   const games = [
     {
@@ -81,32 +93,38 @@ export const InteractiveGamesHub: React.FC<InteractiveGamesHubProps> = ({
     },
   ];
 
+  const visibleGames = filterGameId ? games.filter((g) => g.id === filterGameId) : games;
+
   return (
     <div className="space-y-6">
+      {/* Nút Quay Lại Slide: đặt riêng 1 hàng trên cùng, dễ thấy, không bị khuất bởi banner hướng dẫn */}
+      {onBackToSlides && (
+        <button
+          onClick={onBackToSlides}
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold border border-slate-600 shadow-md transition-all cursor-pointer"
+          title="Quay lại trang trình chiếu Slide"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Quay Lại Slide</span>
+        </button>
+      )}
+
       {/* Teacher instruction banner */}
       <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3">
-        {onBackToSlides && (
-          <button
-            onClick={onBackToSlides}
-            className="shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all cursor-pointer"
-            title="Quay lại trang trình chiếu Slide"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Quay Lại Slide</span>
-          </button>
-        )}
         <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-500/30">
           <Sparkles className="w-4 h-4" />
         </div>
         <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
           <span className="font-bold text-white">Dành cho giáo viên trình chiếu trên lớp:</span>{' '}
-          chọn trò chơi phù hợp với tiết đang dạy, chiếu lên màn hình/máy chiếu, rồi gọi học sinh xung phong lên bảng hoặc trả lời tại chỗ. Giáo viên điều khiển tiến trình và chốt kiến thức sau mỗi lượt chơi.
+          {filterGameId
+            ? 'đây là trò chơi đúng của tiết đang dạy, chiếu lên màn hình/máy chiếu, rồi gọi học sinh xung phong lên bảng hoặc trả lời tại chỗ. Giáo viên điều khiển tiến trình và chốt kiến thức sau mỗi lượt chơi.'
+            : 'chọn trò chơi phù hợp với tiết đang dạy, chiếu lên màn hình/máy chiếu, rồi gọi học sinh xung phong lên bảng hoặc trả lời tại chỗ. Giáo viên điều khiển tiến trình và chốt kiến thức sau mỗi lượt chơi.'}
         </p>
       </div>
 
-      {/* Game Selection Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-        {games.map((g) => {
+      {/* Game Selection Cards: nếu mở từ 1 Tiết cụ thể thì chỉ hiện đúng thẻ Tiết đó, tránh rối mắt */}
+      <div className={`grid gap-3 ${filterGameId ? 'grid-cols-1 sm:grid-cols-1 max-w-sm' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'}`}>
+        {visibleGames.map((g) => {
           const Icon = g.icon;
           const isActive = activeGame === g.id;
           return (

@@ -7,8 +7,8 @@ interface SlideThumbnailListProps {
   slides: Slide[];
   activeSlideId: number;
   onSelectSlide: (slide: Slide) => void;
-  onOpenGame?: () => void;
-  onOpenActivity?: () => void;
+  onOpenGame?: (period?: number) => void;
+  onOpenActivity?: (period?: number) => void;
 }
 
 // Nhóm 12 Tiết theo 5 Chuyên đề (khớp với curriculumData.ts), bố trí chung 1 khung
@@ -137,7 +137,7 @@ export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onOpenGame();
+                onOpenGame(s.period);
               }}
               className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-600/20 text-indigo-300 border border-indigo-500/40 text-[10px] font-semibold hover:bg-indigo-600/40 hover:text-white transition-colors cursor-pointer"
               title="Mở Trò Chơi của Tiết này"
@@ -151,7 +151,7 @@ export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                onOpenActivity();
+                onOpenActivity(s.period);
               }}
               className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-teal-600/20 text-teal-300 border border-teal-500/40 text-[10px] font-semibold hover:bg-teal-600/40 hover:text-white transition-colors cursor-pointer"
               title="Mở Hoạt Động của Tiết này"

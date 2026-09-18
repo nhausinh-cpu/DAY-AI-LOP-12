@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SchoolAIPolicyBuilder } from './activities/SchoolAIPolicyBuilder';
 import { AIProjectCanvasModal } from './activities/AIProjectCanvasModal';
 import { InteractiveRubricEvaluator } from './activities/InteractiveRubricEvaluator';
+import { getActivityIdForPeriod, type ActivityId } from '../utils/gameActivityPeriods';
 import {
   FileText,
   Layers,
@@ -13,41 +14,59 @@ import {
 interface InteractiveActivitiesHubProps {
   onUnlockBadge: (badgeId: string) => void;
   onAddScore: (points: number) => void;
+  // Nếu có: chỉ hiện đúng 1 thẻ hoạt động khớp với Tiết này (mở từ nút "Hoạt Động Tiết N" trên Slide)
+  filterPeriod?: number;
   onBackToSlides?: () => void;
 }
 
 export const InteractiveActivitiesHub: React.FC<InteractiveActivitiesHubProps> = ({
   onUnlockBadge,
   onAddScore,
+  filterPeriod,
   onBackToSlides,
 }) => {
-  const [activeActivity, setActiveActivity] = useState<'policy' | 'canvas' | 'rubric'>('policy');
+  const [activeActivity, setActiveActivity] = useState<ActivityId>('policy');
+
+  const filterActivityId = filterPeriod != null ? getActivityIdForPeriod(filterPeriod) : null;
+
+  // Khi mở đúng từ 1 Tiết cụ thể, tự động chọn ngay hoạt động khớp Tiết đó
+  useEffect(() => {
+    if (filterActivityId) {
+      setActiveActivity(filterActivityId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterPeriod]);
 
   return (
     <div className="space-y-6">
+      {/* Nút Quay Lại Slide: đặt riêng 1 hàng trên cùng, dễ thấy, không bị khuất bởi banner hướng dẫn */}
+      {onBackToSlides && (
+        <button
+          onClick={onBackToSlides}
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold border border-slate-600 shadow-md transition-all cursor-pointer"
+          title="Quay lại trang trình chiếu Slide"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Quay Lại Slide</span>
+        </button>
+      )}
+
       {/* Teacher instruction banner */}
       <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3">
-        {onBackToSlides && (
-          <button
-            onClick={onBackToSlides}
-            className="shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all cursor-pointer"
-            title="Quay lại trang trình chiếu Slide"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Quay Lại Slide</span>
-          </button>
-        )}
         <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-500/30">
           <BookOpen className="w-4 h-4" />
         </div>
         <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
           <span className="font-bold text-white">Dành cho giáo viên tổ chức hoạt động nhóm trên lớp:</span>{' '}
-          chọn hoạt động đúng tiết học, hướng dẫn cả lớp thực hiện theo nhóm hoặc cả lớp cùng thảo luận, giáo viên quan sát và nhận xét trực tiếp.
+          {filterActivityId
+            ? 'đây là hoạt động đúng của tiết đang dạy, hướng dẫn cả lớp thực hiện theo nhóm hoặc cả lớp cùng thảo luận, giáo viên quan sát và nhận xét trực tiếp.'
+            : 'chọn hoạt động đúng tiết học, hướng dẫn cả lớp thực hiện theo nhóm hoặc cả lớp cùng thảo luận, giáo viên quan sát và nhận xét trực tiếp.'}
         </p>
       </div>
 
-      {/* Activity Navigation Tabs */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {/* Activity Navigation Tabs: nếu mở từ 1 Tiết cụ thể thì chỉ hiện đúng thẻ Tiết đó, tránh rối mắt */}
+      <div className={`grid gap-3 ${filterActivityId ? 'grid-cols-1 max-w-sm' : 'grid-cols-1 sm:grid-cols-3'}`}>
+        {(!filterActivityId || filterActivityId === 'policy') && (
         <button
           onClick={() => setActiveActivity('policy')}
           className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3.5 ${
@@ -71,7 +90,9 @@ export const InteractiveActivitiesHub: React.FC<InteractiveActivitiesHubProps> =
             </p>
           </div>
         </button>
+        )}
 
+        {(!filterActivityId || filterActivityId === 'canvas') && (
         <button
           onClick={() => setActiveActivity('canvas')}
           className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3.5 ${
@@ -95,7 +116,9 @@ export const InteractiveActivitiesHub: React.FC<InteractiveActivitiesHubProps> =
             </p>
           </div>
         </button>
+        )}
 
+        {(!filterActivityId || filterActivityId === 'rubric') && (
         <button
           onClick={() => setActiveActivity('rubric')}
           className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3.5 ${
@@ -119,6 +142,7 @@ export const InteractiveActivitiesHub: React.FC<InteractiveActivitiesHubProps> =
             </p>
           </div>
         </button>
+        )}
       </div>
 
       {/* Render Active Activity */}

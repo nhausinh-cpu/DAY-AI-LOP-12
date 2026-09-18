@@ -11,8 +11,8 @@ interface PresentationModeModalProps {
   initialSlideIndex: number;
   fontSize?: FontSizeOption;
   onFontSizeChange?: (size: FontSizeOption) => void;
-  onOpenGame?: () => void;
-  onOpenActivity?: () => void;
+  onOpenGame?: (period?: number) => void;
+  onOpenActivity?: (period?: number) => void;
 }
 
 export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
@@ -156,7 +156,7 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
         {/* Lối tắt Trò Chơi/Hoạt Động nếu Tiết này có gắn Phiếu học tập */}
         {(isGameSlide || isActivitySlide) && (
           <button
-            onClick={isGameSlide ? onOpenGame : onOpenActivity}
+            onClick={() => (isGameSlide ? onOpenGame?.(currentSlide.period) : onOpenActivity?.(currentSlide.period))}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
               isGameSlide
                 ? 'bg-indigo-600 hover:bg-indigo-500 border-indigo-400 text-white'
