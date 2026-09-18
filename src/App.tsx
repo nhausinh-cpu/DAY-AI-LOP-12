@@ -7,7 +7,7 @@ import { TeacherNotesDrawer } from './components/TeacherNotesDrawer';
 import { PresentationModeModal } from './components/PresentationModeModal';
 import { InteractiveGamesHub } from './components/InteractiveGamesHub';
 import { InteractiveActivitiesHub } from './components/InteractiveActivitiesHub';
-import type { FontSizeOption } from './components/SlideCanvas';
+import { FONT_SIZE_OPTIONS, type FontSizeOption } from './components/SlideCanvas';
 import {
   Play,
   ChevronLeft,
@@ -19,8 +19,6 @@ import {
   Trophy,
   Type,
 } from 'lucide-react';
-
-const FONT_SIZE_OPTIONS: FontSizeOption[] = ['20pt', '22pt', '24pt', '28pt', '32pt'];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'slides' | 'games' | 'activities'>('slides');
@@ -319,6 +317,7 @@ export default function App() {
         slides={ALL_SLIDES}
         initialSlideIndex={currentIndexInAll}
         fontSize={fontSize}
+        onFontSizeChange={setFontSize}
       />
     </div>
   );

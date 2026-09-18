@@ -12,6 +12,8 @@ import {
 
 export type FontSizeOption = '20pt' | '22pt' | '24pt' | '28pt' | '32pt';
 
+export const FONT_SIZE_OPTIONS: FontSizeOption[] = ['20pt', '22pt', '24pt', '28pt', '32pt'];
+
 const FONT_SCALE_MAP: Record<FontSizeOption, number> = {
   '20pt': 0.85,
   '22pt': 0.95,
@@ -19,6 +21,16 @@ const FONT_SCALE_MAP: Record<FontSizeOption, number> = {
   '28pt': 1.3,
   '32pt': 1.5,
 };
+
+// Bảng màu xen kẽ cho từng hàng của bảng dữ liệu (giống bảng biểu trong Word)
+const TABLE_ROW_PALETTE = [
+  { bg: 'bg-indigo-950/30', ordinal: 'text-indigo-300' },
+  { bg: 'bg-emerald-950/30', ordinal: 'text-emerald-300' },
+  { bg: 'bg-amber-950/30', ordinal: 'text-amber-300' },
+  { bg: 'bg-rose-950/30', ordinal: 'text-rose-300' },
+  { bg: 'bg-sky-950/30', ordinal: 'text-sky-300' },
+  { bg: 'bg-purple-950/30', ordinal: 'text-purple-300' },
+];
 
 // Bảng màu để làm nổi bật từng thẻ (Card/Bước) khác nhau trên cùng 1 slide
 const CARD_COLOR_PALETTE = [
@@ -37,6 +49,7 @@ export const getSlideStepCount = (slide?: Slide): number => {
   if (!slide?.elements?.length) return 1;
   return slide.elements.reduce((acc, el) => {
     if (el.type === 'steps' && Array.isArray(el.data)) return acc + el.data.length;
+    if (el.type === 'table' && Array.isArray(el.data?.rows)) return acc + el.data.rows.length;
     return acc + 1;
   }, 0);
 };
@@ -149,7 +162,8 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             let unitCursor = 0; // đếm dồn "đơn vị hiển thị" qua các phần tử để hỗ trợ hiện từng bước
             return slide.elements.map((el) => {
               const isSteps = el.type === 'steps' && Array.isArray(el.data);
-              const elUnitCount = isSteps ? el.data.length : 1;
+              const isTableRows = el.type === 'table' && Array.isArray(el.data?.rows);
+              const elUnitCount = isSteps ? el.data.length : isTableRows ? el.data.rows.length : 1;
               const elStartUnit = unitCursor;
               unitCursor += elUnitCount;
 
@@ -265,22 +279,43 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                       <thead className="bg-slate-900/80 text-indigo-300 font-semibold">
                         <tr>
                           {el.data.headers.map((h: string, i: number) => (
-                            <th key={i} className="py-2.5 px-3 border border-slate-700">
+                            <th
+                              key={i}
+                              className={`py-2.5 px-3 border border-slate-700 ${i === 0 ? 'text-center' : ''}`}
+                            >
                               {h}
                             </th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
-                        {el.data.rows.map((row: string[], rIdx: number) => (
-                          <tr key={rIdx} className="hover:bg-slate-700/40">
-                            {row.map((cell: string, cIdx: number) => (
-                              <td key={cIdx} className="py-2 px-3 text-slate-200 whitespace-pre-line border border-slate-700">
-                                {cell}
-                              </td>
-                            ))}
-                          </tr>
-                        ))}
+                        {el.data.rows.map((row: string[], rIdx: number) => {
+                          // Bảng dữ liệu: mỗi hàng là 1 đơn vị hiện riêng khi bật Hiện Từng Bước
+                          if (isClickToReveal && revealStep < elStartUnit + rIdx) return null;
+                          const rowPalette = TABLE_ROW_PALETTE[rIdx % TABLE_ROW_PALETTE.length];
+                          return (
+                            <motion.tr
+                              key={rIdx}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className={`${rowPalette.bg} hover:brightness-125 transition-all`}
+                            >
+                              {row.map((cell: string, cIdx: number) => (
+                                <td
+                                  key={cIdx}
+                                  className={`py-2 px-3 whitespace-pre-line border border-slate-700 ${
+                                    cIdx === 0
+                                      ? `text-center font-bold ${rowPalette.ordinal}`
+                                      : 'text-slate-200'
+                                  }`}
+                                >
+                                  {cell}
+                                </td>
+                              ))}
+                            </motion.tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </motion.div>
@@ -422,7 +457,9 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             <motion.div
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-1.5 p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-100 italic text-xs sm:text-sm"
+              className={`mt-1.5 p-3 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-100 italic leading-relaxed ${
+                fullscreen ? 'text-lg sm:text-xl md:text-2xl' : 'text-sm sm:text-base md:text-lg'
+              }`}
             >
               💬 "{slide.teacherNotes.teacherScript}"
             </motion.div>

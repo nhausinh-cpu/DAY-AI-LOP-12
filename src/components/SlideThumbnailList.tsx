@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Slide } from '../types';
-import { Gamepad2, FileText, Sparkles } from 'lucide-react';
+import { Gamepad2, FileText, Sparkles, ChevronDown } from 'lucide-react';
 
 interface SlideThumbnailListProps {
   slides: Slide[];
@@ -62,6 +62,10 @@ const TOPIC_GROUPS: TopicGroup[] = [
   },
 ];
 
+// Tìm nhóm Chủ đề chứa 1 tiết cho trước
+const findGroupNumByPeriod = (period: number): number =>
+  TOPIC_GROUPS.find((g) => g.periods.includes(period))?.num ?? TOPIC_GROUPS[0].num;
+
 export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
   slides,
   activeSlideId,
@@ -69,6 +73,29 @@ export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
   onOpenGame,
   onOpenActivity,
 }) => {
+  const activeSlide = slides.find((s) => s.id === activeSlideId);
+
+  // Danh sách chủ đề dạng rút gọn (accordion): mặc định chỉ mở nhóm đang chứa slide hiện tại
+  const [expandedGroups, setExpandedGroups] = useState<Set<number>>(
+    () => new Set([findGroupNumByPeriod(activeSlide?.period ?? 1)])
+  );
+
+  // Khi chọn 1 slide ở nhóm khác (vd. bấm mũi tên chuyển slide), tự mở nhóm chứa slide đó
+  useEffect(() => {
+    if (!activeSlide) return;
+    const groupNum = findGroupNumByPeriod(activeSlide.period);
+    setExpandedGroups((prev) => (prev.has(groupNum) ? prev : new Set(prev).add(groupNum)));
+  }, [activeSlide]);
+
+  const toggleGroup = (groupNum: number) => {
+    setExpandedGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(groupNum)) next.delete(groupNum);
+      else next.add(groupNum);
+      return next;
+    });
+  };
+
   const renderSlideItem = (s: Slide) => {
     const isActive = s.id === activeSlideId;
     // Chỉ gắn lối tắt Trò Chơi/Hoạt Động vào đúng slide "Hoạt động nhóm" có Phiếu học tập
@@ -152,23 +179,27 @@ export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
         {TOPIC_GROUPS.map((group) => {
           const groupSlides = slides.filter((s) => group.periods.includes(s.period));
           if (groupSlides.length === 0) return null;
+          const isExpanded = expandedGroups.has(group.num);
 
           return (
             <div key={group.num} className="space-y-1.5">
-              {/* Group Header: Chuyên đề N */}
-              <div
-                className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg border flex items-center justify-between ${group.headerColor}`}
+              {/* Group Header: Chủ đề N (danh sách rút gọn - bấm để mở/thu gọn) */}
+              <button
+                onClick={() => toggleGroup(group.num)}
+                className={`w-full text-[10px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg border flex items-center justify-between cursor-pointer transition-all ${group.headerColor}`}
+                title={isExpanded ? 'Thu gọn danh sách slide của chủ đề này' : 'Xem danh sách slide của chủ đề này'}
               >
-                <span>
-                  Chuyên Đề {group.num}: {group.title}
+                <span className="flex items-center gap-1.5 text-left">
+                  <ChevronDown className={`w-3 h-3 shrink-0 transition-transform ${isExpanded ? 'rotate-0' : '-rotate-90'}`} />
+                  Chủ Đề {group.num}: {group.title}
                 </span>
                 <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 ml-1 ${group.badgeColor}`}>
                   {group.periods.length} Tiết
                 </span>
-              </div>
+              </button>
 
-              {/* Slides inside this Chuyên đề */}
-              <div className="space-y-1.5">{groupSlides.map(renderSlideItem)}</div>
+              {/* Slides inside this Chủ đề (chỉ hiện khi mở rộng) */}
+              {isExpanded && <div className="space-y-1.5">{groupSlides.map(renderSlideItem)}</div>}
             </div>
           );
         })}
@@ -180,7 +211,7 @@ export const SlideThumbnailList: React.FC<SlideThumbnailListProps> = ({
           <Sparkles className="w-3 h-3 text-amber-400" />
           Tổng: {slides.length} Slides
         </span>
-        <span>5 Chuyên Đề · 12 Tiết</span>
+        <span>5 Chủ Đề · 12 Tiết</span>
       </div>
     </div>
   );

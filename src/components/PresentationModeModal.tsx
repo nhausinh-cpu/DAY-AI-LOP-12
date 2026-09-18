@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { Slide } from '../types';
-import { SlideCanvas, getSlideStepCount, type FontSizeOption } from './SlideCanvas';
-import { MousePointerClick, Eye } from 'lucide-react';
+import { SlideCanvas, getSlideStepCount, FONT_SIZE_OPTIONS, type FontSizeOption } from './SlideCanvas';
+import { MousePointerClick, Eye, Type } from 'lucide-react';
 
 interface PresentationModeModalProps {
   isOpen: boolean;
@@ -9,6 +9,7 @@ interface PresentationModeModalProps {
   slides: Slide[];
   initialSlideIndex: number;
   fontSize?: FontSizeOption;
+  onFontSizeChange?: (size: FontSizeOption) => void;
 }
 
 export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
@@ -17,6 +18,7 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
   slides,
   initialSlideIndex,
   fontSize = '24pt',
+  onFontSizeChange,
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(initialSlideIndex);
 
@@ -109,6 +111,30 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
             <Eye className="w-3.5 h-3.5" />
             <span>Hiện Tất Cả</span>
           </button>
+        )}
+
+        {/* Thẻ cỡ chữ hiển thị ngay cạnh nút Hiện Từng Bước */}
+        {onFontSizeChange && (
+          <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-700">
+            <span className="text-[11px] font-bold text-slate-500 px-1.5 flex items-center gap-1">
+              <Type className="w-3.5 h-3.5" />
+              Cỡ chữ:
+            </span>
+            {FONT_SIZE_OPTIONS.map((size) => (
+              <button
+                key={size}
+                onClick={() => onFontSizeChange(size)}
+                className={`px-2 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  fontSize === size
+                    ? 'bg-indigo-600 text-white shadow-xs'
+                    : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                }`}
+                title={`Đặt cỡ chữ slide là ${size}`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
         )}
       </div>
 
