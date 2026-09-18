@@ -14,6 +14,10 @@ export interface IllustrationInfo {
   source?: string;
   iconName?: string;
   accentColor?: string;
+  /** Ảnh minh hoạ hiển thị trực tiếp trên slide (đường dẫn trong thư mục public/) */
+  imageUrl?: string;
+  /** ID video YouTube minh hoạ phù hợp nội dung/chủ đề của slide (nhúng dạng khung nhỏ) */
+  youtubeId?: string;
 }
 
 export interface TableData {

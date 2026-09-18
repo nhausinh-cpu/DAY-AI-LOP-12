@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { Slide } from '../types';
 import { Gamepad2, FileText, Sparkles, ChevronDown } from 'lucide-react';
+import { GAME_PERIODS, ACTIVITY_PERIODS } from '../utils/gameActivityPeriods';
 
 interface SlideThumbnailListProps {
   slides: Slide[];
@@ -9,10 +10,6 @@ interface SlideThumbnailListProps {
   onOpenGame?: () => void;
   onOpenActivity?: () => void;
 }
-
-// Tiết nào có Game tương tác, tiết nào có Hoạt động nhóm (khớp với TeacherNotesDrawer)
-const GAME_PERIODS = new Set([1, 2, 3, 4, 5, 7, 8]);
-const ACTIVITY_PERIODS = new Set([6, 9, 10, 11, 12]);
 
 // Nhóm 12 Tiết theo 5 Chuyên đề (khớp với curriculumData.ts), bố trí chung 1 khung
 // "Danh Sách Slide" giống cách trình bày của Khối 11 (LessonList.tsx)

@@ -259,7 +259,14 @@ export default function App() {
 
                 {/* Main Interactive Slide Canvas */}
                 <div className="w-full">
-                  <SlideCanvas slide={currentSlide} totalSlides={TOTAL_SLIDES_COUNT} showAnimation={true} fontSize={fontSize} />
+                  <SlideCanvas
+                    slide={currentSlide}
+                    totalSlides={TOTAL_SLIDES_COUNT}
+                    showAnimation={true}
+                    fontSize={fontSize}
+                    onOpenGame={() => setActiveTab('games')}
+                    onOpenActivity={() => setActiveTab('activities')}
+                  />
                 </div>
 
                 {/* Game/Activity Shortcut */}
@@ -318,6 +325,14 @@ export default function App() {
         initialSlideIndex={currentIndexInAll}
         fontSize={fontSize}
         onFontSizeChange={setFontSize}
+        onOpenGame={() => {
+          setIsPresentationOpen(false);
+          setActiveTab('games');
+        }}
+        onOpenActivity={() => {
+          setIsPresentationOpen(false);
+          setActiveTab('activities');
+        }}
       />
     </div>
   );

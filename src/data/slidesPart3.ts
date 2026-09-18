@@ -597,8 +597,8 @@ export const SLIDES_PART_3: Slide[] = [
         id: 'el_89_1',
         type: 'quote',
         data: {
-          highlight: 'MỖI VAI TRÒ CÓ CHUYÊN MÔN RIÊNG; KHÔNG AI LÀM ĐƯỢC TẤT CẢ MỘT MÌNH.',
-          subtext: 'HỢP TÁC NHIỀU CHUYÊN MÔN = SẢN PHẨM AI CHẤT LƯỢNG VÀ BỀN VỮNG.',
+          highlight: 'MỖI NGƯỜI CÓ MỘT THẾ MẠNH RIÊNG, KHÔNG AI CÓ THỂ LÀM TẤT CẢ MỘT MÌNH.',
+          subtext: 'HỢP TÁC CỦA NHIỀU NGƯỜI CÓ THẾ MẠNH KHÁC NHAU = SẢN PHẨM AI CHẤT LƯỢNG VÀ BỀN VỮNG.',
           author: 'Quyết định 2422/QĐ-BGDĐT',
         },
       },
@@ -1476,8 +1476,9 @@ export const SLIDES_PART_3: Slide[] = [
     ],
     illustration: {
       type: 'robot_learning',
-      caption: 'Chúc mừng tập thể lớp đã hoàn thành xuất sắc 12 tiết chuyên đề Trí tuệ nhân tạo!',
+      caption: '🏆 Thầy/Cô chúc mừng tập thể lớp đã hoàn thành xuất sắc 12 tiết chuyên đề Trí tuệ nhân tạo!',
       source: 'Quyết định 2422/QĐ-BGDĐT (18/8/2026) · Chương trình GDPT 2018',
+      imageUrl: 'trophy-tot-nghiep.png',
     },
     teacherNotes: {
       teacherScript: 'Thầy/cô chúc mừng tất cả các em! Hãy lưu giữ các phiếu học tập và mô hình AI của mình làm hồ sơ học tập (portfolio) cho tương lai. Tạm biệt và hẹn gặp lại các em!',

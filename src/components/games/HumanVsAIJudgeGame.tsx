@@ -107,11 +107,11 @@ export const HumanVsAIJudgeGame: React.FC<HumanVsAIJudgeGameProps> = ({
               </span>
             </div>
 
-            <h3 className="text-base sm:text-lg font-bold text-white">
+            <h3 className="text-lg sm:text-xl font-bold text-white">
               {scenario.title}
             </h3>
 
-            <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-xs sm:text-sm text-slate-200 leading-relaxed">
+            <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-sm sm:text-base text-slate-200 leading-relaxed">
               <p className="font-semibold text-slate-100 mb-1">Tình huống thực tế:</p>
               <p>{scenario.situation}</p>
               <p className="mt-2 text-slate-400 italic">Bối cảnh: {scenario.context}</p>

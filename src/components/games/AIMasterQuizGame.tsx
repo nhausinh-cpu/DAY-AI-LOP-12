@@ -172,7 +172,7 @@ export const AIMasterQuizGame: React.FC<AIMasterQuizGameProps> = ({
 
           {/* Question Card */}
           <div className="p-5 rounded-2xl bg-slate-850 border border-slate-700/80 shadow-md">
-            <h3 className="text-base sm:text-lg font-bold text-white leading-relaxed">
+            <h3 className="text-lg sm:text-xl font-bold text-white leading-relaxed">
               {question.question}
             </h3>
           </div>

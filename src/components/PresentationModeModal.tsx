@@ -10,6 +10,8 @@ interface PresentationModeModalProps {
   initialSlideIndex: number;
   fontSize?: FontSizeOption;
   onFontSizeChange?: (size: FontSizeOption) => void;
+  onOpenGame?: () => void;
+  onOpenActivity?: () => void;
 }
 
 export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
@@ -19,6 +21,8 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
   initialSlideIndex,
   fontSize = '24pt',
   onFontSizeChange,
+  onOpenGame,
+  onOpenActivity,
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(initialSlideIndex);
 
@@ -155,6 +159,8 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
             hideStandardFooter={true}
             isClickToReveal={isClickToReveal}
             revealStep={revealStep}
+            onOpenGame={onOpenGame}
+            onOpenActivity={onOpenActivity}
           />
         </div>
 

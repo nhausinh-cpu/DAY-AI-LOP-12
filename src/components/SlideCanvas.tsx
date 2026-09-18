@@ -8,16 +8,20 @@ import {
   ChevronRight,
   Award,
   HelpCircle,
+  Gamepad2,
+  FileText,
 } from 'lucide-react';
+import { GAME_PERIODS, ACTIVITY_PERIODS } from '../utils/gameActivityPeriods';
 
-export type FontSizeOption = '20pt' | '22pt' | '24pt' | '28pt' | '32pt';
+export type FontSizeOption = '20pt' | '22pt' | '24pt' | '26pt' | '28pt' | '32pt';
 
-export const FONT_SIZE_OPTIONS: FontSizeOption[] = ['20pt', '22pt', '24pt', '28pt', '32pt'];
+export const FONT_SIZE_OPTIONS: FontSizeOption[] = ['20pt', '22pt', '24pt', '26pt', '28pt', '32pt'];
 
 const FONT_SCALE_MAP: Record<FontSizeOption, number> = {
   '20pt': 0.85,
   '22pt': 0.95,
   '24pt': 1.1,
+  '26pt': 1.2,
   '28pt': 1.3,
   '32pt': 1.5,
 };
@@ -66,6 +70,9 @@ interface SlideCanvasProps {
   isClickToReveal?: boolean;
   /** Chỉ số đối tượng (element) đã được hiển thị đến (0-based) khi isClickToReveal = true */
   revealStep?: number;
+  /** Mở nhanh Trò Chơi/Hoạt Động gắn với tiết học của slide này (hiện biểu tượng nổi bật nếu có) */
+  onOpenGame?: () => void;
+  onOpenActivity?: () => void;
 }
 
 export const SlideCanvas: React.FC<SlideCanvasProps> = ({
@@ -77,7 +84,13 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
   hideStandardFooter = false,
   isClickToReveal = false,
   revealStep = 999,
+  onOpenGame,
+  onOpenActivity,
 }) => {
+  // Slide thuộc tiết có Game/Hoạt động + có Phiếu học tập riêng -> hiện biểu tượng nổi bật để GV dễ thấy & bấm vào
+  const showShortcut = !!slide.worksheetNumber;
+  const isGameSlide = showShortcut && GAME_PERIODS.has(slide.period);
+  const isActivitySlide = showShortcut && ACTIVITY_PERIODS.has(slide.period);
   const fontScale = FONT_SCALE_MAP[fontSize];
   const maxWidthClass = fullscreen ? 'max-w-[1800px]' : 'max-w-5xl';
 
@@ -126,7 +139,25 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
           </span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          {(isGameSlide || isActivitySlide) && (
+            <button
+              onClick={isGameSlide ? onOpenGame : onOpenActivity}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border shadow-lg animate-pulse cursor-pointer transition-all hover:animate-none ${
+                isGameSlide
+                  ? 'bg-indigo-600 border-indigo-400 text-white hover:bg-indigo-500'
+                  : 'bg-teal-600 border-teal-400 text-white hover:bg-teal-500'
+              }`}
+              title={
+                isGameSlide
+                  ? `Mở Trò Chơi của Tiết ${slide.period} · Phiếu học tập số ${slide.worksheetNumber}`
+                  : `Mở Hoạt Động của Tiết ${slide.period} · Phiếu học tập số ${slide.worksheetNumber}`
+              }
+            >
+              {isGameSlide ? <Gamepad2 className="w-3.5 h-3.5" /> : <FileText className="w-3.5 h-3.5" />}
+              <span>{isGameSlide ? 'Trò Chơi Tiết' : 'Hoạt Động Tiết'} {slide.period}</span>
+            </button>
+          )}
           <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[11px] font-mono border border-slate-700">
             Slide {slide.id} / {totalSlides}
           </span>
@@ -148,7 +179,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               <Sparkles className="w-3.5 h-3.5" />
               {slide.categoryLabel}
             </div>
-            <h2 className={`font-bold tracking-tight text-white leading-tight ${fullscreen ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-2xl sm:text-3xl md:text-4xl'}`}>
+            <h2 className={`font-bold tracking-tight text-white leading-tight ${fullscreen ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-xl sm:text-2xl md:text-3xl'}`}>
               {slide.title}
             </h2>
           </motion.div>
@@ -421,6 +452,36 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             });
           })()}
 
+          {/* Ảnh minh hoạ trực tiếp trên slide (vd. cúp chúc mừng ở slide bế mạc) */}
+          {slide.illustration?.imageUrl && (
+            <motion.div
+              variants={showAnimation ? itemVariants : undefined}
+              className="flex justify-center my-2"
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}${slide.illustration.imageUrl}`}
+                alt={slide.illustration.caption || 'Ảnh minh hoạ'}
+                className={`object-contain drop-shadow-xl ${fullscreen ? 'h-40 sm:h-52' : 'h-28 sm:h-36'}`}
+              />
+            </motion.div>
+          )}
+
+          {/* Video minh hoạ (YouTube) phù hợp nội dung/chủ đề của slide */}
+          {slide.illustration?.youtubeId && (
+            <motion.div
+              variants={showAnimation ? itemVariants : undefined}
+              className="my-2 mx-auto w-full max-w-2xl aspect-video rounded-xl overflow-hidden border border-slate-700 shadow-lg"
+            >
+              <iframe
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${slide.illustration.youtubeId}`}
+                title={slide.illustration.caption || 'Video minh hoạ'}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </motion.div>
+          )}
+
           {/* Dòng ghi chú minh hoạ + Icon câu hỏi đặt vấn đề cho học sinh */}
           {(slide.illustration || slide.teacherNotes?.teacherScript) && (
             <motion.div
@@ -461,7 +522,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
               className={`mt-1.5 p-3 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-100 italic leading-relaxed ${
-                fullscreen ? 'text-base sm:text-lg' : 'text-xs sm:text-sm md:text-base'
+                fullscreen ? 'text-xl sm:text-2xl' : 'text-sm sm:text-base md:text-lg'
               }`}
             >
               💬 "{slide.teacherNotes.teacherScript}"

@@ -110,11 +110,11 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
               </span>
             </div>
 
-            <h3 className="text-base sm:text-lg font-bold text-white leading-snug">
+            <h3 className="text-lg sm:text-xl font-bold text-white leading-snug">
               {biasCase.title}
             </h3>
 
-            <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 text-xs sm:text-sm text-slate-200 leading-relaxed">
+            <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 text-sm sm:text-base text-slate-200 leading-relaxed">
               <p className="font-semibold text-amber-300 mb-1">Mô tả vụ việc:</p>
               {biasCase.scenario}
             </div>
