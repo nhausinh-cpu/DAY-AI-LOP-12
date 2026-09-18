@@ -1,0 +1,6 @@
+{
+  "name": "Chuyên Đề Giáo Dục AI Lớp 12 - THPT Tân Lược",
+  "description": "Slide trình chiếu 12 tiết (6 buổi) Chuyên đề Giáo dục Trí tuệ nhân tạo (AI) - Lớp 12, bám sát Kế hoạch bài dạy Trường THPT Tân Lược, tích hợp trắc nghiệm tương tác và trình chiếu toàn màn hình.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
