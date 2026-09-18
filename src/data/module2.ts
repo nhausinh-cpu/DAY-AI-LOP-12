@@ -2,194 +2,178 @@ import { Lesson } from '../types';
 import { svgVisual } from './visual';
 
 // BUỔI 2 - TIẾT 3-4
-// Chủ đề: NGUYÊN TẮC ĐẠO ĐỨC KHI THIẾT KẾ AI - TRÁCH NHIỆM CÔNG DÂN TRONG XÃ HỘI CÓ AI
-// Yêu cầu cần đạt: 12.A2.1; 12.A2.MR1; 12.A3.1
+// Tiết 3: Chuyên đề 1 (Mạch A) - Trách nhiệm giải trình & pháp luật | Tiết 4: Chuyên đề 2 (Mạch B) - 6 nguyên tắc đạo đức khi thiết kế AI
+// Yêu cầu cần đạt: 12.A1.3 (Tiết 3); 12.A2.1 (Tiết 4)
 export const module2: Lesson[] = [
   {
     period: 3,
-    title: 'Nguyên Tắc Đạo Đức Khi Thiết Kế AI (Phần 1)',
-    description: 'Trình bày các nguyên tắc đạo đức cơ bản khi thiết kế, phát triển sản phẩm AI.',
+    title: 'Trách Nhiệm Giải Trình & Pháp Luật',
+    description: 'Hiểu khái niệm trách nhiệm giải trình khi dùng/phát triển AI, biết một số quy định pháp luật liên quan và dùng bộ tiêu chí để kiểm tra trách nhiệm giải trình của một hệ thống AI.',
     objectives: [
-      'Trình bày các nguyên tắc đạo đức cơ bản khi thiết kế, phát triển sản phẩm AI: an toàn, công bằng, minh bạch, tôn trọng quyền riêng tư, trách nhiệm, lợi ích xã hội.',
-      'Vận dụng các nguyên tắc để soạn thảo bộ nguyên tắc cá nhân cho một dự án AI cụ thể.',
-      'Phân tích nội hàm "trách nhiệm công dân trong xã hội có AI".'
+      '12.A1.3: Kiểm tra được việc thực hiện trách nhiệm giải trình của con người đối với các quyết định, đối chiếu với các quy định hiện hành trong nước và quốc tế.',
+      'Nêu được khái niệm "trách nhiệm giải trình" khi sử dụng/phát triển AI; kể được một số quy định pháp luật Việt Nam liên quan đến AI, dữ liệu, an ninh mạng.',
+      'Dùng bộ tiêu chí (checklist) để kiểm tra trách nhiệm giải trình của một hệ thống AI; đối chiếu một tình huống với quy định pháp luật.'
     ],
     slides: [
       {
-        id: 'l3_s1', title: 'Nguyên Tắc Đạo Đức Khi Thiết Kế AI', visualType: 'title',
+        id: 'l3_s1', title: 'Khởi Động: "AI Tự Làm, Chúng Tôi Không Biết"', visualType: 'intro',
         content: [
-          '📘 Tiết 3-4: Nguyên tắc đạo đức khi thiết kế AI - Trách nhiệm công dân trong xã hội có AI',
-          '🎯 Học xong buổi này, các em sẽ: trình bày được 6 nguyên tắc đạo đức khi thiết kế, phát triển sản phẩm AI; vận dụng soạn được bộ nguyên tắc cá nhân cho một dự án AI cụ thể; phân tích được trách nhiệm công dân trong xã hội có AI.'
+          '📘 Tiết 3: Trách nhiệm giải trình & pháp luật khi dùng AI.',
+          '💭 Tình huống: Một công ty dùng AI lọc hồ sơ, loại nhầm một ứng viên rất giỏi. Khi bị hỏi, công ty nói: "AI tự làm, chúng tôi không biết."',
+          '❓ Câu trả lời này có chấp nhận được không?',
+          '💡 Dự kiến: HS nhận ra không thể đổ lỗi cho máy - con người phải giải trình và chịu trách nhiệm.'
         ],
-        visualUrl: svgVisual('Nguyên Tắc Đạo Đức Thiết Kế AI', 'An toàn • Công bằng • Minh bạch • Riêng tư • Trách nhiệm • Lợi ích xã hội', '#7c3aed', '#c026d3', '⚖️'),
-        speakerNotes: 'Giới thiệu buổi 2, nhấn mạnh trọng tâm là 6 nguyên tắc đạo đức khi thiết kế AI và trách nhiệm công dân số.'
+        visualUrl: svgVisual('Không Thể Đổ Lỗi Cho Máy', 'Trách nhiệm giải trình khi AI gây hại', '#7c2d12', '#c2410c', '❓'),
+        answerHint: 'Câu trả lời "AI tự làm" là né tránh trách nhiệm - công ty vẫn phải giải trình vì đã lựa chọn triển khai và vận hành hệ thống AI đó.',
+        speakerNotes: 'GV nêu tình huống thực tế, mời học sinh phát biểu, chốt lại: không thể đổ lỗi cho máy, dẫn vào khái niệm trách nhiệm giải trình.'
       },
       {
-        id: 'l3_s2', title: 'Khởi Động: Vì Sao AI Có Thể Thiên Vị?', visualType: 'intro',
+        id: 'l3_s2', title: 'Trách Nhiệm Giải Trình Là Gì?', visualType: 'concepts',
         content: [
-          '📰 Tin tức: một công ty phải ngừng sử dụng hệ thống AI tuyển dụng vì bị phát hiện thiên vị ứng viên nam.',
-          '❓ Câu hỏi: "Vì sao một hệ thống AI lại có thể thiên vị?"',
-          '💭 Học sinh suy nghĩ cá nhân, ghi nhanh ý kiến, 3-4 học sinh chia sẻ.'
+          '📖 Trách nhiệm giải trình = nghĩa vụ GIẢI THÍCH (hệ thống AI hoạt động thế nào, dùng dữ liệu gì, ra quyết định ra sao) và CHỊU TRÁCH NHIỆM về hậu quả.',
+          '🚫 Người phát triển và người sử dụng AI đều KHÔNG được "đổ lỗi cho máy".',
+          '🇻🇳 Quy định pháp luật liên quan (Việt Nam): Luật An ninh mạng - bảo vệ an toàn thông tin, chống thông tin xấu độc; Luật Dữ liệu/Luật Bảo vệ dữ liệu cá nhân - quyền của cá nhân với dữ liệu của mình.',
+          '🌍 Quốc tế (khái niệm): Đạo luật AI của EU (EU AI Act) phân loại rủi ro và buộc hệ thống AI phải minh bạch, có người chịu trách nhiệm.'
         ],
-        visualUrl: svgVisual('Vì Sao AI Thiên Vị?', 'Tình huống: AI tuyển dụng bị phát hiện thiên vị giới tính', '#b91c1c', '#ea580c', '📰'),
-        answerHint: 'Gợi ý: dữ liệu huấn luyện không cân bằng, phản ánh định kiến sẵn có trong lịch sử tuyển dụng.',
-        speakerNotes: 'Dẫn dắt học sinh nhận ra AI học từ dữ liệu con người cung cấp, nên có thể "học" luôn cả định kiến, thiên vị có trong dữ liệu đó.'
+        visualUrl: svgVisual('Trách Nhiệm Giải Trình', 'Giải thích được + Chịu trách nhiệm được', '#7c2d12', '#c2410c', '⚖️'),
+        speakerNotes: 'Giảng khái niệm trách nhiệm giải trình gồm 2 phần: GIẢI THÍCH được và CHỊU TRÁCH NHIỆM - thiếu một trong hai đều chưa đạt. Giới thiệu các luật liên quan ở mức khái niệm, không đi sâu điều luật.'
       },
       {
-        id: 'l3_s3', title: '6 Nguyên Tắc Đạo Đức Khi Thiết Kế AI', visualType: 'concepts',
+        id: 'l3_s3', title: 'Bộ Tiêu Chí Kiểm Tra Trách Nhiệm Giải Trình', visualType: 'concepts',
         content: [
-          '🛡️ An toàn: không gây nguy hiểm cho con người và môi trường.',
-          '⚖️ Công bằng: tránh thiên vị, phân biệt đối xử trong dữ liệu và kết quả.',
-          '🔍 Minh bạch: công khai cách hoạt động, không che giấu thông tin.',
-          '🔒 Tôn trọng quyền riêng tư: không sử dụng, chia sẻ dữ liệu cá nhân trái phép.',
-          '✅ Trách nhiệm: kiểm tra, đánh giá và chịu trách nhiệm về sản phẩm tạo ra.',
-          '🌍 Lợi ích xã hội: phục vụ con người, cộng đồng và phát triển bền vững.'
+          '1️⃣ Có xác định rõ AI đang được ai vận hành, ai chịu trách nhiệm không?',
+          '2️⃣ Có giải thích được cách AI ra kết quả (dữ liệu, cách hoạt động) không?',
+          '3️⃣ Có cơ chế cho người bị ảnh hưởng khiếu nại/phúc khảo không?',
+          '4️⃣ Có tuân thủ quy định pháp luật (dữ liệu cá nhân, an ninh mạng) không?'
         ],
-        visualUrl: svgVisual('6 Nguyên Tắc Đạo Đức AI', 'An toàn - Công bằng - Minh bạch - Riêng tư - Trách nhiệm - Lợi ích XH', '#4c1d95', '#7c3aed', '📜'),
-        speakerNotes: 'Trình bày đầy đủ 6 nguyên tắc đạo đức khi thiết kế AI theo đúng nội dung KHBD. Có thể lấy ví dụ thực tế cho từng nguyên tắc.'
+        visualUrl: svgVisual('4 Tiêu Chí Kiểm Tra', 'Vận hành - Giải thích - Khiếu nại - Tuân thủ pháp luật', '#78350f', '#b45309', '✅'),
+        speakerNotes: 'Đây là bộ 4 tiêu chí dùng cho hoạt động luyện tập nhóm ngay sau đó - GV giải thích rõ từng tiêu chí trước khi học sinh áp dụng.'
       },
       {
-        id: 'l3_s4', title: 'Thực Hành: Bộ Nguyên Tắc Cho Dự Án Giả Định', visualType: 'concepts',
+        id: 'l3_s4', title: 'Luyện Tập Nhóm: Chấm Đạt/Chưa Đạt Theo Checklist', visualType: 'interactive',
         content: [
-          '💡 Dự án giả định: Thiết kế ứng dụng học tiếng Anh có AI.',
-          '📝 Nhiệm vụ nhóm: soạn bộ nguyên tắc cá nhân/nhóm cho dự án này, dựa trên 6 nguyên tắc đã học.',
-          '🔄 Đối chiếu các quyết định thiết kế (mục tiêu, dữ liệu, tính năng, kiểm thử) với bộ nguyên tắc đó và điều chỉnh khi phát hiện nguy cơ vi phạm.',
-          '📄 Sản phẩm: Phiếu học tập số 2 hoàn chỉnh.'
-        ],
-        visualUrl: svgVisual('Bộ Nguyên Tắc Cá Nhân Cho Dự Án AI', 'Ví dụ: ứng dụng học tiếng Anh có AI', '#6d28d9', '#9333ea', '📄'),
-        speakerNotes: 'Hoạt động Hình thành kiến thức - học sinh làm việc nhóm hoàn thành Phiếu học tập số 2, đề xuất hành động cụ thể cho từng nguyên tắc đạo đức áp dụng vào dự án giả định.'
-      },
-      {
-        id: 'l3_s5', title: 'Luyện Tập: Nguyên Tắc Nào Bị Vi Phạm?', visualType: 'interactive',
-        content: [
-          '🔎 3 tình huống: deepfake, lộ dữ liệu học sinh, AI chấm điểm thiên vị.',
-          '📋 Làm việc cá nhân trong 7 phút, ghép tình huống với nguyên tắc bị vi phạm.'
+          '📋 Nhóm dùng bộ 4 tiêu chí kiểm tra tình huống "AI chấm điểm thi" (hoặc tình huống lọc hồ sơ) → chấm Đạt/Chưa đạt từng tiêu chí + đề xuất cách khắc phục.',
+          '✅ Sản phẩm: Phiếu kiểm (Phiếu học tập số 3) đã điền + đề xuất khắc phục của nhóm.'
         ],
         interactiveQuiz: {
-          question: 'Một trường học để lộ dữ liệu điểm số, thông tin cá nhân của học sinh do phần mềm quản lý học tập AI bị tấn công. Đây là vi phạm nguyên tắc đạo đức nào?',
+          question: 'Một ứng dụng dùng AI nhưng không hề công bố mình đang thu thập và sử dụng dữ liệu gì của người dùng. Ứng dụng này KHÔNG đạt tiêu chí nào trong bộ tiêu chí trách nhiệm giải trình?',
           options: [
-            'Chăm chỉ',
-            'Tôn trọng quyền riêng tư',
-            'Lợi ích xã hội',
-            'Sáng tạo'
+            'Tiêu chí 1 - xác định ai vận hành, ai chịu trách nhiệm',
+            'Tiêu chí 2 - giải thích được cách AI ra kết quả (dữ liệu, cách hoạt động)',
+            'Tiêu chí 3 - cơ chế khiếu nại/phúc khảo',
+            'Không vi phạm tiêu chí nào vì đây là chuyện bình thường'
           ],
           answerIndex: 1,
-          explanation: 'Việc để lộ dữ liệu cá nhân của học sinh vi phạm trực tiếp nguyên tắc Tôn trọng quyền riêng tư - không sử dụng, chia sẻ dữ liệu cá nhân trái phép.',
-          hint: 'Nghĩ đến nguyên tắc liên quan trực tiếp đến bảo vệ dữ liệu cá nhân.',
-          suggestedAnswer: 'Vi phạm nguyên tắc Tôn trọng quyền riêng tư.'
+          explanation: 'Việc không công bố dữ liệu đang thu thập và cách hoạt động chính là vi phạm tiêu chí 2 - "giải thích được cách AI ra kết quả (dữ liệu, cách hoạt động)".',
+          hint: 'Trách nhiệm giải trình bao gồm việc GIẢI THÍCH minh bạch cách hệ thống hoạt động.',
+          suggestedAnswer: 'Ứng dụng vi phạm tiêu chí 2 vì không minh bạch về dữ liệu và cách AI hoạt động - cần công khai để người dùng biết và có thể kiểm chứng.'
         },
-        speakerNotes: 'GV gọi ngẫu nhiên một số học sinh trả lời, chốt đáp án đúng và giải thích thêm nếu cần cho cả 3 tình huống (deepfake, lộ dữ liệu, AI chấm điểm thiên vị).'
+        speakerNotes: 'Học sinh làm việc nhóm áp dụng checklist vào tình huống cụ thể, 2 nhóm trình bày, GV nhận xét và chốt cách khắc phục phù hợp.'
       },
       {
-        id: 'l3_s6', title: 'Vận Dụng: Bản Cam Kết Cá Nhân', visualType: 'activity',
+        id: 'l3_s5', title: 'Vận Dụng: Nếu Em Tạo Ra Một Sản Phẩm AI', visualType: 'activity',
         content: [
-          '✍️ Viết cam kết cá nhân (5-7 dòng) về việc sử dụng AI có trách nhiệm trong học tập.',
-          '📌 Dựa trên 6 nguyên tắc đạo đức đã học trong buổi.'
+          '🗣️ Nếu sau này em tạo ra một sản phẩm AI, em sẽ làm gì để thể hiện trách nhiệm giải trình? Viết 3 câu và chia sẻ.',
+          '📌 Bài tập về nhà: tìm 1 tin tức về sự cố liên quan đến AI, chỉ ra ai lẽ ra phải giải trình và chịu trách nhiệm; viết đoạn 4-5 câu vì sao không được "đổ lỗi cho máy" khi AI gây hại.'
         ],
         activity: {
-          title: 'Bản cam kết sử dụng AI có trách nhiệm',
-          duration: 'Tại lớp hoặc mang về nhà hoàn thiện',
+          title: 'Bài tập vận dụng: Trách nhiệm giải trình trong thực tế',
+          duration: 'Viết 3 câu tại lớp + hoàn thiện ở nhà',
           instructions: [
-            'Viết 5-7 dòng cam kết cá nhân về việc sử dụng AI có trách nhiệm trong học tập.',
-            'Liên hệ ít nhất 2-3 trong số 6 nguyên tắc đạo đức đã học.',
-            'Nộp lại làm minh chứng đánh giá quá trình.'
+            '1. Tìm 1 tin tức về sự cố liên quan đến AI. Chỉ ra: ai lẽ ra phải giải trình và chịu trách nhiệm?',
+            '2. Viết đoạn 4-5 câu: vì sao không được "đổ lỗi cho máy" khi AI gây hại?'
           ],
-          tips: 'Cam kết nên cụ thể, ví dụ: "Tôi cam kết luôn kiểm tra lại thông tin do AI cung cấp trước khi sử dụng" (nguyên tắc Trách nhiệm).',
-          hint: 'Liên hệ với nội hàm "trách nhiệm công dân trong xã hội có AI": sử dụng AI an toàn, trung thực, có đạo đức.',
-          suggestedAnswer: 'Bản cam kết cần thể hiện rõ ý thức trách nhiệm cá nhân khi sử dụng AI, không sao chép nguyên văn, tôn trọng quyền riêng tư của người khác.'
+          tips: 'Có thể liên hệ lại tình huống lọc hồ sơ hoặc chấm thi đã học ở lớp.',
+          hint: 'Nhớ 2 phần của trách nhiệm giải trình: GIẢI THÍCH được và CHỊU TRÁCH NHIỆM.',
+          suggestedAnswer: 'Câu trả lời tuỳ tin tức học sinh tìm được, cần chỉ rõ chủ thể (người phát triển hoặc người vận hành) lẽ ra phải giải trình, và lí do vì sao AI không thể tự chịu trách nhiệm.'
         },
-        speakerNotes: 'GV giao nhiệm vụ cuối tiết, thu làm minh chứng đánh giá quá trình cho năng lực NLa.'
+        speakerNotes: 'GV chốt bài, dặn dò Tiết 4 sẽ chuyển sang Chuyên đề 2 - Đạo đức & pháp luật khi dùng/tạo AI, với nội dung 6 nguyên tắc đạo đức khi thiết kế AI.'
       }
     ]
   },
   {
     period: 4,
-    title: 'Trách Nhiệm Công Dân Trong Xã Hội Có AI (Phần 2)',
-    description: 'Phân tích nội hàm trách nhiệm công dân số và củng cố việc nhận diện vi phạm đạo đức AI.',
+    title: '6 Nguyên Tắc Đạo Đức Khi Thiết Kế AI',
+    description: 'Trình bày và giải thích 6 nguyên tắc đạo đức cơ bản khi thiết kế, phát triển sản phẩm AI: an toàn, công bằng, minh bạch, tôn trọng quyền riêng tư, trách nhiệm, lợi ích xã hội.',
     objectives: [
-      'Phân tích nội hàm "trách nhiệm công dân trong xã hội có AI": an toàn, trung thực, tôn trọng quyền riêng tư.',
-      'Củng cố khả năng nhận diện nguyên tắc đạo đức bị vi phạm qua tình huống thực tế.',
-      'Rèn tư duy phản biện qua phân tích case study.'
+      '12.A2.1: Trình bày được một số nguyên tắc đạo đức cơ bản trong thiết kế, phát triển sản phẩm AI: an toàn, công bằng, minh bạch, tôn trọng quyền riêng tư, trách nhiệm, lợi ích xã hội.',
+      'Nhận diện được tình huống vi phạm từng nguyên tắc.',
+      'Ghép được tình huống thực tế với nguyên tắc bị vi phạm và đề xuất cách sửa.'
     ],
     slides: [
       {
-        id: 'l4_s1', title: 'Ôn Lại: 6 Nguyên Tắc Đạo Đức AI', visualType: 'intro',
+        id: 'l4_s1', title: 'Khởi Động: AI Tuyển Dụng Thiên Vị', visualType: 'intro',
         content: [
-          '🔁 Nhắc nhanh 6 nguyên tắc: An toàn - Công bằng - Minh bạch - Riêng tư - Trách nhiệm - Lợi ích xã hội.',
-          '💬 Mời 1-2 nhóm chia sẻ bộ nguyên tắc cá nhân đã soạn ở Tiết 3 cho dự án ứng dụng học tiếng Anh có AI.'
+          '🔁 Ôn nhanh: nhắc lại khái niệm trách nhiệm giải trình và 4 tiêu chí kiểm tra đã học ở Tiết 3.',
+          '📰 Tin tức: một hệ thống AI tuyển dụng lại loại ứng viên nữ nhiều hơn nam dù họ giỏi ngang nhau.',
+          '❓ Theo các em, AI này đã vi phạm điều gì?',
+          '💡 Dự kiến: HS trả lời "không công bằng" - đây là 1 trong 6 nguyên tắc đạo đức khi thiết kế AI.'
         ],
-        visualUrl: svgVisual('Ôn Tập Nhanh', '6 nguyên tắc đạo đức khi thiết kế AI', '#5b21b6', '#9333ea', '🔁'),
-        speakerNotes: 'Dành thời gian đầu giờ để học sinh nhắc lại kiến thức Tiết 3, tạo cầu nối sang nội dung trách nhiệm công dân số.'
+        visualUrl: svgVisual('6 Nguyên Tắc Đạo Đức AI', 'Từ một tình huống thiên vị tuyển dụng', '#312e81', '#7c3aed', '⚖️'),
+        speakerNotes: 'Dẫn dắt từ tình huống AI tuyển dụng thiên vị để giới thiệu chủ đề 6 nguyên tắc đạo đức khi thiết kế, phát triển sản phẩm AI (Chuyên đề 2 - Mạch B).'
       },
       {
-        id: 'l4_s2', title: 'Trách Nhiệm Công Dân Trong Xã Hội Có AI', visualType: 'concepts',
+        id: 'l4_s2', title: '6 Nguyên Tắc Đạo Đức Khi Thiết Kế AI', visualType: 'concepts',
         content: [
-          '🧑‍💻 Sử dụng AI một cách an toàn, trung thực và có đạo đức.',
-          '🔒 Tôn trọng quyền riêng tư và dữ liệu của người khác.',
-          '🚫 Không sử dụng AI để lan truyền thông tin sai lệch, gian lận hay gây hại.',
-          '🌐 Đóng góp vào việc xây dựng môi trường số tích cực, công bằng và nhân văn.'
+          '1️⃣ An toàn: không gây nguy hiểm cho con người và môi trường. Vi phạm: AI điều khiển thiết bị nhưng không có cơ chế dừng khẩn cấp.',
+          '2️⃣ Công bằng: tránh thiên vị, phân biệt đối xử trong dữ liệu và kết quả. Vi phạm: AI tuyển dụng loại ứng viên nữ nhiều hơn nam.',
+          '3️⃣ Minh bạch: công khai cách hoạt động, không che giấu. Vi phạm: app dùng AI nhưng không cho biết đang thu thập/dùng dữ liệu gì.',
+          '4️⃣ Tôn trọng quyền riêng tư: không dùng, chia sẻ dữ liệu cá nhân trái phép. Vi phạm: app lén ghi âm, lấy vị trí người dùng.',
+          '5️⃣ Trách nhiệm: kiểm tra, đánh giá và chịu trách nhiệm về sản phẩm. Vi phạm: tung sản phẩm AI ra dùng mà không kiểm thử, gây hại rồi chối bỏ.',
+          '6️⃣ Lợi ích xã hội: phục vụ con người, cộng đồng, phát triển bền vững. Vi phạm: làm AI chỉ để lừa đảo, thao túng người dùng.'
         ],
-        visualUrl: svgVisual('Trách Nhiệm Công Dân Số', 'An toàn - Trung thực - Tôn trọng - Tích cực', '#4338ca', '#7c3aed', '🧑‍💻'),
-        speakerNotes: 'Trình bày đầy đủ nội hàm trách nhiệm công dân trong xã hội có AI theo đúng nội dung KHBD.'
+        visualUrl: svgVisual('An Toàn - Công Bằng - Minh Bạch', 'Riêng tư - Trách nhiệm - Lợi ích xã hội', '#4c1d95', '#7c3aed', '🔑'),
+        speakerNotes: 'Giảng từng nguyên tắc kèm 1 ví dụ vi phạm cụ thể. Sau mỗi nguyên tắc, đưa 1 thẻ tình huống để học sinh đoán vi phạm nguyên tắc nào. Chốt ghi nhớ: một sản phẩm AI tốt phải tuân thủ cả 6 nguyên tắc.'
       },
       {
-        id: 'l4_s3', title: 'Case Study: Deepfake Và Hệ Lụy', visualType: 'concepts',
+        id: 'l4_s3', title: 'Luyện Tập Nhóm: Ghép Tình Huống - Nguyên Tắc - Cách Sửa', visualType: 'interactive',
         content: [
-          '🎭 Deepfake: công nghệ AI tạo hình ảnh, video, giọng nói giả mạo giống thật.',
-          '⚠️ Hệ lụy: lan truyền tin giả, xâm phạm danh dự, gây hoang mang xã hội.',
-          '🧭 Liên hệ: đây là hành vi vi phạm trực tiếp trách nhiệm công dân số (không dùng AI gây hại, không lan truyền thông tin sai lệch).'
-        ],
-        visualUrl: svgVisual('Deepfake Và Trách Nhiệm Công Dân', 'Không dùng AI để lan truyền thông tin sai lệch', '#991b1b', '#c2410c', '🎭'),
-        speakerNotes: 'Phân tích sâu case study deepfake để học sinh hiểu rõ hơn về ranh giới đạo đức khi sử dụng công nghệ AI tạo sinh.'
-      },
-      {
-        id: 'l4_s4', title: 'Luyện Tập: Ghép Tình Huống - Nguyên Tắc', visualType: 'interactive',
-        content: [
-          '🔗 Ghép 3 tình huống (deepfake, lộ dữ liệu học sinh, AI chấm điểm thiên vị) với nguyên tắc đạo đức tương ứng bị vi phạm.'
+          '🎴 Mỗi nhóm nhận 3 thẻ tình huống vi phạm (AI thiên vị tuyển dụng, app lén thu dữ liệu, deepfake, AI gây nguy hiểm...) → xác định vi phạm nguyên tắc nào + đề xuất cách sửa.',
+          '✅ Sản phẩm: Bảng ghép "tình huống ↔ nguyên tắc ↔ cách sửa" của nhóm (Phiếu học tập số 4).'
         ],
         interactiveQuiz: {
-          question: 'Một hệ thống AI chấm điểm bài thi tự động có kết quả thiên lệch, cho điểm cao hơn với bài viết theo một phong cách nhất định. Đây là vi phạm nguyên tắc nào?',
+          question: 'Một ứng dụng học tập bí mật ghi âm và thu thập vị trí của học sinh mà không thông báo. Ứng dụng này vi phạm chủ yếu nguyên tắc đạo đức nào?',
           options: [
+            'An toàn',
             'Công bằng',
-            'Chăm chỉ',
-            'Sáng tạo',
-            'Không vi phạm nguyên tắc nào'
+            'Tôn trọng quyền riêng tư (và cả Minh bạch, vì không công khai việc thu thập)',
+            'Lợi ích xã hội'
           ],
-          answerIndex: 0,
-          explanation: 'Kết quả chấm điểm thiên lệch theo phong cách viết là biểu hiện của việc vi phạm nguyên tắc Công bằng - tránh thiên vị, phân biệt đối xử trong kết quả.',
-          hint: 'Nguyên tắc liên quan đến việc tránh thiên vị trong kết quả đầu ra của AI.',
-          suggestedAnswer: 'Vi phạm nguyên tắc Công bằng.'
+          answerIndex: 2,
+          explanation: 'Việc lén ghi âm, thu thập vị trí mà không thông báo vi phạm trực tiếp nguyên tắc "Tôn trọng quyền riêng tư"; đồng thời cũng vi phạm nguyên tắc "Minh bạch" vì không công khai cho người dùng biết.',
+          hint: 'Nhớ ví dụ vi phạm nguyên tắc riêng tư trong bài: "app lén ghi âm, lấy vị trí người dùng".',
+          suggestedAnswer: 'Vi phạm nguyên tắc tôn trọng quyền riêng tư (và minh bạch); cách sửa là công khai rõ việc thu thập dữ liệu và xin phép người dùng trước khi thu thập.'
         },
-        speakerNotes: 'Củng cố kĩ năng nhận diện vi phạm nguyên tắc đạo đức AI qua hoạt động luyện tập.'
+        speakerNotes: 'Học sinh khá có thể phân tích thêm nhiều nguyên tắc bị vi phạm cùng lúc trong một tình huống. GV tổng hợp bảng ghép của các nhóm.'
       },
       {
-        id: 'l4_s5', title: 'Vận Dụng: Việc Làm Cụ Thể Của Công Dân Số', visualType: 'activity',
+        id: 'l4_s4', title: 'Vận Dụng: Cam Kết Tuân Thủ Một Nguyên Tắc', visualType: 'activity',
         content: [
-          '🙋 Nêu ít nhất 2 việc làm cụ thể thể hiện "trách nhiệm công dân" khi sử dụng AI trong học tập.'
+          '🗣️ Nếu em thiết kế 1 sản phẩm AI, em chọn 1 nguyên tắc và nêu 1 việc cụ thể em sẽ làm để tuân thủ nó.',
+          '📌 Bài tập về nhà: tìm/nghĩ 1 ví dụ AI trong đời sống - nó tuân thủ tốt nguyên tắc nào? có nguy cơ vi phạm nguyên tắc nào? Viết 5 câu giải thích vì sao "công bằng" và "tôn trọng quyền riêng tư" lại quan trọng với AI.'
         ],
         activity: {
-          title: 'Thể hiện trách nhiệm công dân số',
-          duration: '5-7 phút tại lớp',
+          title: 'Bài tập vận dụng: 6 nguyên tắc đạo đức AI trong đời sống',
+          duration: 'Chia sẻ nhanh tại lớp + hoàn thiện ở nhà',
           instructions: [
-            'Nêu ít nhất 2 việc làm cụ thể thể hiện trách nhiệm công dân khi dùng AI trong học tập.',
-            'Ví dụ gợi ý: luôn kiểm chứng lại thông tin AI cung cấp; không sao chép nguyên văn bài AI viết để nộp bài.',
-            'Chia sẻ trước lớp.'
+            '1. Tìm/nghĩ 1 ví dụ AI trong đời sống. Nó tuân thủ tốt nguyên tắc nào? Có nguy cơ vi phạm nguyên tắc nào?',
+            '2. Viết 5 câu giải thích vì sao "công bằng" và "tôn trọng quyền riêng tư" lại quan trọng với AI.'
           ],
-          tips: 'Liên hệ trực tiếp với nội hàm trách nhiệm công dân số đã học ở đầu tiết.',
-          hint: 'Nghĩ về việc học sinh dùng AI để học tập hằng ngày (tra cứu, hỏi bài, dịch thuật...).',
-          suggestedAnswer: 'Ví dụ: (1) Luôn kiểm tra, đối chiếu lại thông tin do AI cung cấp trước khi sử dụng; (2) Không dùng AI để làm bài hộ hoàn toàn mà chỉ dùng để gợi ý, tham khảo.'
+          tips: 'Chọn ví dụ gần gũi: mạng xã hội, app điện thoại, phần mềm học tập có AI.',
+          hint: 'Xem lại bảng 6 nguyên tắc và ví dụ vi phạm tương ứng đã học.',
+          suggestedAnswer: 'Câu trả lời tuỳ ví dụ học sinh chọn, cần nêu rõ nguyên tắc được tuân thủ tốt, nguyên tắc có nguy cơ vi phạm, và giải thích hợp lí về tầm quan trọng của công bằng và quyền riêng tư.'
         },
-        speakerNotes: 'GV thu bài làm minh chứng đánh giá quá trình cho năng lực NLa, cùng với bản cam kết cá nhân đã viết ở Tiết 3.'
+        speakerNotes: 'GV chốt bài, dặn dò Tiết 5 sẽ học về trách nhiệm công dân trong xã hội AI và cách phân loại mức độ rủi ro khi dùng AI.'
       },
       {
-        id: 'l4_s6', title: 'Tổng Kết Buổi 2', visualType: 'summary',
+        id: 'l4_s5', title: 'Tổng Kết Buổi 2', visualType: 'summary',
         content: [
-          '✅ Các em đã đạt được: trình bày 6 nguyên tắc đạo đức khi thiết kế AI; soạn được bộ nguyên tắc cá nhân cho một dự án AI cụ thể; phân tích trách nhiệm công dân trong xã hội có AI.',
-          '🧠 Ghi nhớ 6 nguyên tắc đạo đức AI và trách nhiệm công dân số.',
-          '➡️ Buổi tiếp theo (Tiết 5-6): Vấn đề đạo đức của AI - Mức độ rủi ro - Trách nhiệm trong hệ sinh thái AI.'
+          '✅ Các em đã đạt được: hiểu khái niệm trách nhiệm giải trình và bộ tiêu chí kiểm tra; nêu và giải thích được 6 nguyên tắc đạo đức khi thiết kế AI; ghép được tình huống vi phạm với nguyên tắc và đề xuất cách sửa.',
+          '🧠 Ghi nhớ: 6 nguyên tắc AN TOÀN - CÔNG BẰNG - MINH BẠCH - TÔN TRỌNG QUYỀN RIÊNG TƯ - TRÁCH NHIỆM - LỢI ÍCH XÃ HỘI.',
+          '➡️ Buổi tiếp theo (Tiết 5-6): Trách nhiệm công dân & rủi ro khi dùng AI - Quyền, trách nhiệm và góp ý chính sách AI.'
         ],
-        visualUrl: svgVisual('Hoàn Thành Buổi 2', 'Sẵn sàng cho Buổi 3: Rủi ro & Hệ sinh thái AI', '#065f46', '#0d9488', '🏁'),
-        speakerNotes: 'Chốt kiến thức trọng tâm, kết nối sang chủ đề rủi ro và hệ sinh thái AI ở buổi tiếp theo.'
+        visualUrl: svgVisual('Hoàn Thành Buổi 2', 'Sẵn sàng cho Buổi 3: Trách nhiệm công dân số & chính sách AI', '#4c1d95', '#7c3aed', '🏁'),
+        speakerNotes: 'Chốt lại kiến thức trọng tâm buổi học (trách nhiệm giải trình, 6 nguyên tắc đạo đức), kết nối sang chủ đề trách nhiệm công dân số ở buổi tiếp theo.'
       }
     ]
   }

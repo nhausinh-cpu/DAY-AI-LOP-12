@@ -2,202 +2,189 @@ import { Lesson } from '../types';
 import { svgVisual } from './visual';
 
 // BUỔI 5 - TIẾT 9-10
-// Chủ đề: TÙY CHỈNH, TỐI ƯU HỆ THỐNG AI - THU THẬP, CẢI THIỆN DỮ LIỆU
-// Yêu cầu cần đạt: 12.C3.2; 12.C3.MR2; 12.C3.MR3; 12.C4.MR1; 12.C4.MR2
+// Chuyên đề 4: Thiết kế & phát triển hệ thống AI - Mạch D: Thiết kế hệ thống AI
+// Yêu cầu cần đạt: 12.D1.1 (Tiết 9); 12.D2.1 phần 1 (Tiết 10)
 export const module5: Lesson[] = [
   {
     period: 9,
-    title: 'Tối Ưu Hệ Thống AI Và Cải Thiện Dữ Liệu (Phần 1)',
-    description: 'Tìm hiểu cách đánh giá hiệu quả hệ thống AI, khái niệm overfitting và cải thiện dữ liệu.',
+    title: 'Phương Án Thiết Kế & Vận Hành Hệ Thống AI',
+    description: 'Nêu được 5 thành phần cơ bản của một hệ thống AI, mối liên hệ giữa chúng và các tiêu chí để so sánh, chọn phương án thiết kế phù hợp.',
     objectives: [
-      'Nêu ví dụ về cách thức đánh giá hiệu quả của hệ thống AI.',
-      'Trình bày khái niệm cơ bản: hàm mục tiêu, tối ưu hoá hệ thống, quá khớp dữ liệu (overfitting).',
-      'Thu thập và tổ chức dữ liệu đáp ứng yêu cầu phát triển hệ thống AI.'
+      '12.D1.1: Nhận biết được một số phương án thiết kế và vận hành hệ thống AI phù hợp để đạt hiệu quả cao trong một số nhiệm vụ cụ thể.',
+      'Nêu được 5 thành phần cơ bản của một hệ thống AI và mối liên hệ giữa chúng; biết một nhiệm vụ có thể có nhiều phương án thiết kế và tiêu chí để chọn.',
+      'Đề xuất 2 phương án cho 1 bài toán và so sánh, chọn phương án phù hợp cho dự án nhóm.'
     ],
     slides: [
       {
-        id: 'l9_s1', title: 'Tối Ưu Hệ Thống AI Và Cải Thiện Dữ Liệu', visualType: 'title',
+        id: 'l9_s1', title: 'Khởi Động: Một Bài Toán, Nhiều Cách Làm', visualType: 'intro',
         content: [
-          '📘 Tiết 9-10: Tùy chỉnh, tối ưu hệ thống AI - Thu thập, cải thiện dữ liệu',
-          '🎯 Học xong buổi này, các em sẽ: nêu được cách đánh giá hiệu quả hệ thống AI; hiểu hàm mục tiêu và hiện tượng quá khớp dữ liệu (overfitting); thu thập, tổ chức và cải thiện được dữ liệu để phát triển hệ thống AI.'
+          '📘 Tiết 9: Phương án thiết kế & vận hành hệ thống AI.',
+          '❓ Muốn làm một AI phân loại rác tái chế, theo các em có mấy cách làm? Cách nào tốt hơn?',
+          '💬 Học sinh nêu ý kiến trước khi vào bài mới.'
         ],
-        visualUrl: svgVisual('Tối Ưu Hệ Thống AI', 'Hàm mục tiêu • Overfitting • Cải thiện dữ liệu', '#065f46', '#0d9488', '📈'),
-        speakerNotes: 'Giới thiệu buổi 5, tiếp nối trực tiếp từ mô hình Teachable Machine đã huấn luyện ở Buổi 4, đi sâu vào việc cải thiện độ chính xác.'
+        visualUrl: svgVisual('Thiết Kế Hệ Thống AI', '5 thành phần cơ bản của một hệ thống AI', '#312e81', '#4338ca', '🧩'),
+        speakerNotes: 'Đặt vấn đề: cùng một nhiệm vụ (phân loại rác) có thể có nhiều cách làm khác nhau, dẫn vào khái niệm 5 thành phần hệ thống AI và tiêu chí chọn phương án.'
       },
       {
-        id: 'l9_s2', title: 'Khởi Động: Vì Sao Mô Hình Dự Đoán Sai?', visualType: 'intro',
+        id: 'l9_s2', title: '5 Thành Phần Cơ Bản Của Một Hệ Thống AI', visualType: 'diagram',
         content: [
-          '🔁 1-2 nhóm nhắc lại trường hợp mô hình dự đoán sai ở buổi trước.',
-          '❓ Câu hỏi: "Vì sao mô hình lại dự đoán sai và làm sao để cải thiện?"',
-          '💭 Học sinh nhớ lại, trao đổi nhanh, 2-3 nhóm chia sẻ.'
+          '🔄 5 thành phần: Dữ liệu → Thuật toán (huấn luyện) → Mô hình → Đầu ra → Phản hồi (để cải tiến).',
+          '🔁 Các thành phần liên kết thành một vòng: phản hồi giúp cải tiến dữ liệu & mô hình.',
+          '📌 Với cùng một nhiệm vụ, có thể có NHIỀU phương án thiết kế (khác dữ liệu, khác công cụ).'
         ],
-        visualUrl: svgVisual('Vì Sao Mô Hình Sai?', 'Ôn lại kết quả kiểm thử Teachable Machine Buổi 4', '#134e4a', '#0f766e', '🔍'),
-        answerHint: 'Gợi ý: thường do dữ liệu huấn luyện còn ít hoặc chưa đa dạng.',
-        speakerNotes: 'Dẫn dắt vào nội dung tối ưu hệ thống AI và cải thiện dữ liệu, kết nối trực tiếp với hoạt động thực hành Buổi 4.'
-      },
-      {
-        id: 'l9_s3', title: 'Đánh Giá Hiệu Quả Hệ Thống AI', visualType: 'concepts',
-        content: [
-          '🎯 Độ chính xác (accuracy): tỉ lệ dự đoán đúng trên tổng số lần dự đoán.',
-          '⚡ Tốc độ: thời gian xử lý, phản hồi của hệ thống.',
-          '😊 Mức độ phù hợp với người dùng: hệ thống có dễ sử dụng, đáp ứng đúng nhu cầu thực tế hay không.'
-        ],
-        visualUrl: svgVisual('Đánh Giá Hiệu Quả AI', 'Độ chính xác - Tốc độ - Phù hợp người dùng', '#0f766e', '#059669', '📊'),
-        speakerNotes: 'Trình bày 3 tiêu chí đánh giá hiệu quả hệ thống AI.'
-      },
-      {
-        id: 'l9_s4', title: 'Hàm Mục Tiêu, Tối Ưu Hoá Và Overfitting', visualType: 'concepts',
-        content: [
-          '🎯 Hàm mục tiêu (objective function): thước đo mà mô hình cố gắng tối ưu (ví dụ: giảm tỉ lệ dự đoán sai).',
-          '⚙️ Tối ưu hoá hệ thống: quá trình điều chỉnh mô hình để đạt kết quả tốt nhất theo hàm mục tiêu.',
-          '⚠️ Quá khớp dữ liệu (Overfitting): mô hình "học thuộc" dữ liệu huấn luyện, dự đoán rất tốt với dữ liệu cũ nhưng kém với dữ liệu mới.',
-          '💡 Ví dụ trực quan: học sinh học thuộc lòng đề mẫu nhưng không hiểu bản chất, thi đề khác dạng sẽ làm sai.'
-        ],
-        visualUrl: svgVisual('Overfitting Là Gì?', 'Mô hình học thuộc lòng - không khái quát hoá được', '#134e4a', '#0891b2', '🧠'),
-        speakerNotes: 'Đây là nội dung khó nhất của buổi học - nên dùng ví dụ trực quan gần gũi (học thuộc lòng vs hiểu bản chất) để học sinh dễ hình dung khái niệm overfitting.'
-      },
-      {
-        id: 'l9_s5', title: 'Thực Hành: Bổ Sung Dữ Liệu Cải Thiện Mô Hình', visualType: 'activity',
-        content: [
-          '📸 Thu thập thêm ảnh mẫu mới cho mô hình Teachable Machine đã huấn luyện ở Buổi 4.',
-          '🔁 Huấn luyện lại mô hình với dữ liệu đã bổ sung.',
-          '📊 So sánh kết quả trước - sau khi bổ sung dữ liệu.'
-        ],
-        activity: {
-          title: 'Cải thiện mô hình bằng dữ liệu bổ sung',
-          duration: 'Thực hành nhóm tại phòng máy',
-          instructions: [
-            'Mở lại dự án Teachable Machine đã huấn luyện ở Buổi 4.',
-            'Chụp/thu thập thêm ảnh mẫu mới cho mỗi nhãn (đa dạng góc chụp, ánh sáng).',
-            'Huấn luyện lại mô hình (Train Model) với dữ liệu đã bổ sung.',
-            'So sánh kết quả kiểm thử trước và sau khi bổ sung dữ liệu, hoàn thành Phiếu học tập số 5.'
+        diagramData: {
+          nodes: [
+            { id: 'p1', label: '1. Dữ liệu', x: 12, y: 30, color: '#4338ca' },
+            { id: 'p2', label: '2. Thuật toán (huấn luyện)', x: 32, y: 12, color: '#4f46e5' },
+            { id: 'p3', label: '3. Mô hình', x: 55, y: 20, color: '#6366f1' },
+            { id: 'p4', label: '4. Đầu ra', x: 78, y: 40, color: '#7c3aed' },
+            { id: 'p5', label: '5. Phản hồi (cải tiến)', x: 45, y: 65, color: '#0891b2' }
           ],
-          tips: 'Ghi lại cụ thể tỉ lệ đúng/sai trước và sau để thấy rõ hiệu quả của việc bổ sung dữ liệu.',
-          hint: 'Nếu mô hình đã khá chính xác, hãy thử thêm ảnh ở điều kiện khó hơn (ánh sáng yếu, góc chụp lạ) để kiểm tra độ bền vững.',
-          suggestedAnswer: 'Kết quả mong đợi: sau khi bổ sung dữ liệu, tỉ lệ dự đoán đúng của mô hình tăng lên so với trước.'
+          links: [
+            { source: 'p1', target: 'p2' },
+            { source: 'p2', target: 'p3' },
+            { source: 'p3', target: 'p4' },
+            { source: 'p4', target: 'p5', label: 'đánh giá kết quả' },
+            { source: 'p5', target: 'p1', label: 'cải tiến dữ liệu' }
+          ]
         },
-        speakerNotes: 'Hoạt động Hình thành kiến thức trọng tâm của buổi - thực hành trực tiếp kĩ năng thu thập, tổ chức và cải thiện dữ liệu.'
+        speakerNotes: 'Trình bày sơ đồ 5 thành phần, so sánh 2 phương án cho bài toán phân loại rác (dùng ẢNH chụp rác vs dùng CẢM BIẾN); nêu ưu-nhược theo tiêu chí. Nhấn mạnh: không có phương án "đúng tuyệt đối" - ta chọn phương án PHÙ HỢP nhất với mục tiêu, điều kiện và đạo đức.'
       },
       {
-        id: 'l9_s6', title: 'Luyện Tập: Nguồn Dữ Liệu Bổ Sung', visualType: 'interactive',
+        id: 'l9_s3', title: 'Tiêu Chí Chọn Phương Án Thiết Kế', visualType: 'concepts',
         content: [
-          '📋 Liệt kê 3 nguồn dữ liệu có thể thu thập thêm để cải thiện mô hình của nhóm.'
+          '🎯 Độ chính xác: phương án nào cho kết quả đúng hơn?',
+          '💰 Chi phí: phương án nào tốn ít thời gian/thiết bị hơn?',
+          '🛠️ Dễ thực hiện: học sinh/nhóm có làm được không?',
+          '🔒 An toàn & đạo đức: có thu thập dữ liệu nhạy cảm không? Có rủi ro gì?',
+          '🌍 Thực tế: có giải quyết đúng vấn đề đời thực không?'
+        ],
+        visualUrl: svgVisual('Tiêu Chí Chọn Phương Án', 'Độ chính xác - Chi phí - Dễ thực hiện - An toàn - Thực tế', '#1e1b4b', '#4338ca', '✅'),
+        speakerNotes: 'Giải thích rõ 5 tiêu chí, đây sẽ là căn cứ để các nhóm so sánh và lựa chọn phương án thiết kế cho dự án của mình ở hoạt động luyện tập.'
+      },
+      {
+        id: 'l9_s4', title: 'Luyện Tập Nhóm: Thiết Kế Phương Án Cho Dự Án', visualType: 'interactive',
+        content: [
+          '📐 Nhóm lấy ý tưởng đã chốt (Tiết 7) → đề xuất 2 phương án thiết kế (vẽ sơ đồ 5 thành phần) → so sánh và CHỌN 1, ghi lí do.',
+          '✅ Sản phẩm: Sơ đồ phương án đã chọn (5 thành phần) + lí do chọn (Phiếu học tập số 9).'
         ],
         interactiveQuiz: {
-          question: 'Khi tìm ảnh trên Internet để bổ sung dữ liệu huấn luyện, học sinh cần lưu ý điều gì quan trọng nhất?',
+          question: 'Nhóm đề xuất 2 phương án cho dự án phân loại rác: (A) dùng ảnh chụp qua Teachable Machine, (B) dùng cảm biến điện tử phức tạp cần lập trình chuyên sâu. Với điều kiện của nhóm học sinh phổ thông, tiêu chí nào giúp quyết định chọn phương án A?',
           options: [
-            'Ảnh phải có độ phân giải thật cao',
-            'Vấn đề bản quyền - chỉ nên dùng ảnh đã được cấp phép sử dụng',
-            'Ảnh phải có màu sắc bắt mắt',
-            'Không cần lưu ý gì, cứ tải về sử dụng thoải mái'
+            'Chỉ cần dựa vào tiêu chí "thực tế" mà bỏ qua các tiêu chí khác',
+            'Kết hợp các tiêu chí "dễ thực hiện" và "chi phí" - phương án A phù hợp hơn với năng lực và điều kiện của nhóm',
+            'Luôn chọn phương án phức tạp hơn vì trông chuyên nghiệp hơn',
+            'Không cần so sánh, chọn ngẫu nhiên phương án nào cũng được'
           ],
           answerIndex: 1,
-          explanation: 'Cần đặc biệt lưu ý vấn đề bản quyền khi lấy dữ liệu từ Internet - chỉ nên dùng ảnh đã được cấp phép hoặc tự chụp để tránh vi phạm bản quyền.',
-          hint: 'GV đã nhấn mạnh nội dung này khi hướng dẫn liệt kê nguồn dữ liệu.',
-          suggestedAnswer: 'Ba nguồn dữ liệu gợi ý: (1) tự chụp thêm ảnh thực tế, (2) tìm ảnh trên Internet đã được cấp phép sử dụng, (3) xin dữ liệu từ nhóm khác trong lớp.'
+          explanation: 'Tiêu chí "dễ thực hiện" (nhóm học sinh có làm được không) và "chi phí" (tốn ít thời gian/thiết bị hơn) là căn cứ quan trọng để chọn phương án phù hợp với năng lực thực tế của nhóm.',
+          hint: 'Nhớ lại 5 tiêu chí: độ chính xác, chi phí, dễ thực hiện, an toàn & đạo đức, thực tế.',
+          suggestedAnswer: 'Nên chọn phương án A (Teachable Machine) vì dễ thực hiện hơn, chi phí thấp hơn, phù hợp với điều kiện và năng lực của nhóm học sinh.'
         },
-        speakerNotes: 'Củng cố kĩ năng thu thập và tổ chức dữ liệu, đặc biệt nhấn mạnh vấn đề bản quyền khi thu thập dữ liệu từ Internet.'
+        speakerNotes: 'Không yêu cầu học sinh lập trình thật ở tiết này - trọng tâm là TƯ DUY THIẾT KẾ. Học sinh khá có thể so sánh nhiều hơn 2 phương án.'
+      },
+      {
+        id: 'l9_s5', title: 'Vận Dụng: Lường Trước Vấn Đề Khi Vận Hành', visualType: 'activity',
+        content: [
+          '🗣️ Nhóm dự đoán 1 vấn đề có thể xảy ra khi vận hành phương án đã chọn và nêu cách khắc phục.',
+          '📌 Bài tập về nhà: vẽ sơ đồ 5 thành phần cho 1 hệ thống AI em biết (ví dụ trợ lí ảo); nêu 2 phương án cho 1 nhiệm vụ và chọn 1, giải thích.'
+        ],
+        activity: {
+          title: 'Bài tập vận dụng: Sơ đồ 5 thành phần và so sánh phương án',
+          duration: 'Dự đoán tại lớp + vẽ sơ đồ ở nhà',
+          instructions: [
+            '1. Vẽ sơ đồ 5 thành phần cho 1 hệ thống AI em biết (ví dụ trợ lí ảo).',
+            '2. Nêu 2 phương án cho 1 nhiệm vụ và chọn 1, giải thích lí do.'
+          ],
+          tips: 'Có thể chọn lại chính ý tưởng dự án của nhóm để luyện tập thêm.',
+          hint: 'Nhớ 5 thành phần: Dữ liệu → Thuật toán → Mô hình → Đầu ra → Phản hồi.',
+          suggestedAnswer: 'Sơ đồ cần thể hiện đủ 5 thành phần với nội dung cụ thể cho hệ thống AI được chọn, và phần so sánh 2 phương án cần dựa trên các tiêu chí đã học.'
+        },
+        speakerNotes: 'GV chốt bài, dặn dò Tiết 10 sẽ học về các vai trò khác nhau trong nhóm phát triển sản phẩm AI, chuẩn bị phân vai cho dự án.'
       }
     ]
   },
   {
     period: 10,
-    title: 'Thu Thập, Cải Thiện Dữ Liệu (Phần 2)',
-    description: 'Xác định nền tảng, công cụ tiếp tục phát triển ý tưởng công cụ AI của nhóm.',
+    title: 'Các Vai Trò Trong Nhóm Phát Triển AI',
+    description: 'Nêu được 4 vai trò chính khi phát triển sản phẩm AI (đề xuất ý tưởng, lập trình, huấn luyện, kiểm thử) và phân công vai trò phù hợp cho dự án nhóm.',
     objectives: [
-      'Phân tích, xác định nền tảng/công cụ phát triển AI phù hợp cho ý tưởng của nhóm.',
-      'Đánh giá khả năng tối ưu hệ thống AI thông qua cập nhật công nghệ, kĩ thuật mới.',
-      'Chuẩn bị cho buổi báo cáo tổng kết chuyên đề ở Tiết 11-12.'
+      '12.D2.1 (phần 1): Nhận biết được các vai trò khác nhau khi phát triển một sản phẩm AI và việc tạo ra sản phẩm AI cần sự hợp tác giữa nhiều người.',
+      'Nêu được 4 vai trò chính khi phát triển một sản phẩm AI và việc mỗi vai trò làm; hiểu vì sao làm sản phẩm AI cần hợp tác nhiều chuyên môn.',
+      'Phân công được vai trò cho các thành viên trong nhóm dự án.'
     ],
     slides: [
       {
-        id: 'l10_s1', title: 'Ôn Lại: Overfitting Và Cải Thiện Dữ Liệu', visualType: 'intro',
+        id: 'l10_s1', title: 'Khởi Động: Một Mình Có Làm Được Một Sản Phẩm AI Không?', visualType: 'intro',
         content: [
-          '🔁 Nhắc lại khái niệm overfitting và cách cải thiện mô hình bằng dữ liệu bổ sung.',
-          '📊 1-2 nhóm chia sẻ kết quả so sánh trước - sau khi bổ sung dữ liệu ở Tiết 9.'
+          '🔁 Ôn nhanh: nhắc lại 5 thành phần của hệ thống AI và phương án thiết kế nhóm đã chọn ở Tiết 9.',
+          '❓ Theo các em, một mình một người có làm được một sản phẩm AI hoàn chỉnh không? Cần những ai tham gia?',
+          '💬 Học sinh nêu ý kiến trước khi vào bài mới.'
         ],
-        visualUrl: svgVisual('Ôn Tập Nhanh', 'Overfitting và cải thiện dữ liệu mô hình AI', '#134e4a', '#0d9488', '🔁'),
-        speakerNotes: 'Ôn lại nhanh kiến thức Tiết 9 trước khi chuyển sang xác định nền tảng/công cụ phát triển tiếp theo.'
+        visualUrl: svgVisual('Vai Trò Trong Nhóm Phát Triển AI', 'Ý tưởng - Lập trình - Huấn luyện - Kiểm thử', '#312e81', '#6d28d9', '🤝'),
+        speakerNotes: 'Khơi gợi nhận thức: làm sản phẩm AI cần nhiều người với chuyên môn khác nhau, dẫn vào 4 vai trò chính trong phát triển sản phẩm AI.'
       },
       {
-        id: 'l10_s2', title: 'Xác Định Nền Tảng, Công Cụ Phát Triển AI Phù Hợp', visualType: 'concepts',
+        id: 'l10_s2', title: '4 Vai Trò Khi Phát Triển Sản Phẩm AI', visualType: 'concepts',
         content: [
-          '🧭 Dựa trên ý tưởng công cụ AI đã đề xuất ở Buổi 4, mỗi nhóm xác định nền tảng/công cụ phù hợp để tiếp tục phát triển.',
-          '🔧 Có thể tiếp tục dùng Teachable Machine, hoặc chuyển sang MIT App Inventor/Google AI Studio tuỳ mục tiêu.',
-          '📈 Đánh giá khả năng tối ưu hệ thống AI thông qua cập nhật công nghệ, kĩ thuật mới (ví dụ: dùng mô hình có sẵn, dùng thêm cảm biến...).'
+          '💡 Đề xuất ý tưởng: xác định vấn đề, mục tiêu, đối tượng dùng → Sản phẩm: bản mô tả ý tưởng.',
+          '💻 Lập trình / cấu hình: dựng hệ thống, kết nối các thành phần bằng công cụ → Sản phẩm: sản phẩm chạy được (bản đầu).',
+          '🎓 Huấn luyện: thu thập, chuẩn bị dữ liệu, "dạy" mô hình → Sản phẩm: mô hình đã huấn luyện + bộ dữ liệu.',
+          '🧪 Kiểm thử: thử sản phẩm, tìm lỗi, đánh giá, đề xuất sửa → Sản phẩm: báo cáo lỗi + đề xuất cải thiện.',
+          '🔑 Ghi nhớ: một sản phẩm AI tốt cần NHIỀU vai trò hợp tác - mỗi vai trò có chuyên môn riêng, phối hợp ăn ý thì sản phẩm mới thành công.'
         ],
-        visualUrl: svgVisual('Chọn Nền Tảng Phù Hợp', 'Teachable Machine • MIT App Inventor • Google AI Studio', '#0c4a6e', '#0d9488', '🧭'),
-        speakerNotes: 'Nội dung này giúp học sinh biết lựa chọn công cụ và nền tảng phù hợp với mục tiêu cụ thể của dự án nhóm.'
+        visualUrl: svgVisual('4 Vai Trò Phát Triển Sản Phẩm AI', 'Ý tưởng - Lập trình - Huấn luyện - Kiểm thử', '#3730a3', '#7c3aed', '👥'),
+        speakerNotes: 'Giảng 4 vai trò, liên hệ với công việc thật trong một công ty công nghệ (product manager, developer, data scientist, tester) để học sinh liên hệ dễ hơn.'
       },
       {
-        id: 'l10_s3', title: 'Thực Hành: Kế Hoạch Hoàn Thiện Sản Phẩm', visualType: 'activity',
+        id: 'l10_s3', title: 'Luyện Tập Nhóm: Phân Công Vai Trò Cho Dự Án', visualType: 'interactive',
         content: [
-          '📋 Mỗi nhóm lập kế hoạch hoàn thiện sản phẩm/ý tưởng công cụ AI của mình.',
-          '🗓️ Chuẩn bị cho buổi báo cáo tổng kết chuyên đề ở Tiết 11-12 (dùng Google AI Studio).'
-        ],
-        activity: {
-          title: 'Lập kế hoạch hoàn thiện sản phẩm nhóm',
-          duration: 'Thảo luận nhóm tại lớp',
-          instructions: [
-            'Xác định nền tảng/công cụ nhóm sẽ dùng để hoàn thiện ý tưởng công cụ AI.',
-            'Phân công nhiệm vụ cụ thể cho từng thành viên (thu thập dữ liệu, thiết kế, thuyết trình...).',
-            'Ghi lại kế hoạch để chuẩn bị cho buổi báo cáo tổng kết (Tiết 11-12).'
-          ],
-          tips: 'Phân công rõ vai trò giống như trong thực tế phát triển sản phẩm AI: người đề xuất ý tưởng, người huấn luyện mô hình, người kiểm thử, người thuyết trình.',
-          hint: 'Liên hệ với ý tưởng công cụ AI đã đề xuất ở Buổi 4 (Tiết 7-8).',
-          suggestedAnswer: 'Kế hoạch cần nêu rõ: nền tảng sẽ dùng, phân công nhiệm vụ, thời hạn hoàn thành trước Tiết 11-12.'
-        },
-        speakerNotes: 'Đây là bước chuẩn bị quan trọng để các nhóm sẵn sàng cho hoạt động dựng thử AI agent bằng Google AI Studio ở Buổi 6.'
-      },
-      {
-        id: 'l10_s4', title: 'Luyện Tập: Đánh Giá Khả Năng Tối Ưu', visualType: 'interactive',
-        content: [
-          '🔧 Xác định giải pháp tối ưu phù hợp cho một hệ thống AI cụ thể.'
+          '📋 Nhóm phân công 4 vai trò cho các thành viên cho dự án đã chọn → lập BẢNG PHÂN CÔNG (ai làm gì, sản phẩm cần nộp).',
+          '✅ Sản phẩm: Bảng phân công vai trò của nhóm (Phiếu học tập số 10).'
         ],
         interactiveQuiz: {
-          question: 'Mô hình phân loại rác của một nhóm đã khá chính xác nhưng chạy chậm khi dùng trên điện thoại. Giải pháp tối ưu nào phù hợp nhất?',
+          question: 'Một nhóm dự án chỉ có 3 thành viên nhưng cần đảm nhận đủ 4 vai trò (đề xuất ý tưởng, lập trình, huấn luyện, kiểm thử). Cách xử lí hợp lí nhất là gì?',
           options: [
-            'Bỏ hẳn dự án vì không thể tối ưu được',
-            'Cập nhật, điều chỉnh kĩ thuật (ví dụ giảm kích thước ảnh đầu vào) để tăng tốc độ xử lý',
-            'Thêm thật nhiều nhãn phân loại không liên quan',
-            'Không cần làm gì, tốc độ chậm không ảnh hưởng gì'
+            'Bỏ qua 1 vai trò vì không đủ người',
+            'Để 1 người kiêm 2 vai trò gần nhau (ví dụ huấn luyện kiêm kiểm thử), miễn là mọi vai trò đều có người phụ trách',
+            'Giải tán nhóm vì không đủ điều kiện làm dự án',
+            'Chỉ 1 người làm hết cả 4 vai trò, các bạn khác không tham gia'
           ],
           answerIndex: 1,
-          explanation: 'Tối ưu hệ thống AI có thể thực hiện bằng cách cập nhật công nghệ, kĩ thuật mới (như giảm kích thước dữ liệu đầu vào) để cải thiện tốc độ mà vẫn giữ độ chính xác chấp nhận được.',
-          hint: 'Nhớ lại 3 tiêu chí đánh giá hiệu quả hệ thống AI: độ chính xác, tốc độ, mức độ phù hợp.',
-          suggestedAnswer: 'Nên điều chỉnh kỹ thuật để cân bằng giữa tốc độ xử lý và độ chính xác, phù hợp với thiết bị sử dụng thực tế.'
+          explanation: 'Với nhóm ít người, có thể để 1 người kiêm 2 vai trò gần nhau, quan trọng là đảm bảo MỌI vai trò đều có người phụ trách và mọi thành viên đều có việc để làm.',
+          hint: 'Nguyên tắc trong KHBD: đảm bảo MỌI học sinh đều có vai trò, không ai đứng ngoài; nhóm ít người có thể 1 người kiêm 2 vai trò.',
+          suggestedAnswer: 'Nhóm nên phân công linh hoạt, cho phép 1 thành viên kiêm 2 vai trò liên quan, đảm bảo đủ 4 vai trò được thực hiện và không ai đứng ngoài dự án.'
         },
-        speakerNotes: 'Củng cố kĩ năng đánh giá và đề xuất giải pháp tối ưu hệ thống AI phù hợp với điều kiện thực tế.'
+        speakerNotes: 'Đảm bảo MỌI học sinh đều có vai trò, không ai đứng ngoài. Nhóm ít người có thể 1 người kiêm 2 vai trò.'
       },
       {
-        id: 'l10_s5', title: 'Vận Dụng: Xác Định Công Cụ Cho Buổi Tổng Kết', visualType: 'activity',
+        id: 'l10_s4', title: 'Vận Dụng: Nhiệm Vụ Cụ Thể Của Em Ở Tiết Thực Hành', visualType: 'activity',
         content: [
-          '🛠️ Mỗi nhóm xác định nền tảng/công cụ sẽ tiếp tục sử dụng để phát triển ý tưởng công cụ AI.',
-          '📤 Nộp bản xác định công cụ, kế hoạch hoàn thiện sản phẩm.'
+          '🗣️ Mỗi em cho biết mình nhận vai trò gì và 1 việc cụ thể mình sẽ làm ở tiết thực hành sau.',
+          '📌 Bài tập về nhà: chuẩn bị phần việc theo vai trò của em cho tiết thực hành (thu thập dữ liệu / ý tưởng giao diện / danh sách thử...); nêu 1 khó khăn có thể gặp khi làm nhóm và cách khắc phục.'
         ],
         activity: {
-          title: 'Xác định công cụ và kế hoạch cho buổi tổng kết',
-          duration: 'Hoàn thiện cuối tiết, chuẩn bị cho Tiết 11-12',
+          title: 'Bài tập vận dụng: Chuẩn bị cho tiết thực hành',
+          duration: 'Ghi nhận vai trò tại lớp + chuẩn bị nguyên liệu ở nhà',
           instructions: [
-            'Ghi rõ nền tảng/công cụ nhóm sẽ dùng ở buổi tổng kết (ví dụ: Google AI Studio).',
-            'Tóm tắt lại ý tưởng công cụ AI của nhóm để chuẩn bị thuyết trình.',
-            'Nộp bản xác định công cụ, kế hoạch hoàn thiện sản phẩm.'
+            '1. Chuẩn bị phần việc theo vai trò của em cho tiết thực hành (thu thập dữ liệu / ý tưởng giao diện / danh sách thử...).',
+            '2. Nêu 1 khó khăn có thể gặp khi làm nhóm và cách khắc phục.'
           ],
-          tips: 'Chuẩn bị trước một vài câu mô tả ý tưởng bằng ngôn ngữ tự nhiên, vì buổi sau sẽ dùng Google AI Studio để mô tả ý tưởng tạo AI agent.',
-          hint: 'Nghĩ theo cấu trúc: mục tiêu - đầu vào - các bước xử lí - đầu ra - người giám sát (sẽ học ở buổi sau).',
-          suggestedAnswer: 'Bản xác định công cụ cần nêu: tên nền tảng sẽ dùng (Google AI Studio), tóm tắt ý tưởng, và những việc còn cần hoàn thiện.'
+          tips: 'Chuẩn bị kỹ nguyên liệu (ảnh mẫu, dữ liệu, ý tưởng) trước Tiết 11 sẽ giúp tiết thực hành hiệu quả hơn.',
+          hint: 'Xem lại bảng phân công vai trò của nhóm vừa lập để biết chính xác việc mình cần chuẩn bị.',
+          suggestedAnswer: 'Câu trả lời tuỳ vai trò mỗi học sinh đảm nhận; khó khăn thường gặp là phân bổ thời gian hoặc bất đồng ý tưởng, cách khắc phục là trao đổi, thống nhất trước khi bắt tay thực hành.'
         },
-        speakerNotes: 'GV thu bản xác định công cụ và kế hoạch, chuẩn bị dữ liệu đầu vào cho hoạt động dựng thử AI agent ở Buổi 6.'
+        speakerNotes: 'GV chốt bài, dặn dò Tiết 11 là tiết thực hành - các nhóm sẽ bắt tay xây dựng bản đầu của sản phẩm AI theo vai trò đã phân công.'
       },
       {
-        id: 'l10_s6', title: 'Tổng Kết Buổi 5', visualType: 'summary',
+        id: 'l10_s5', title: 'Tổng Kết Buổi 5', visualType: 'summary',
         content: [
-          '✅ Các em đã đạt được: nêu cách đánh giá hiệu quả hệ thống AI; hiểu hàm mục tiêu và hiện tượng overfitting; thu thập, tổ chức, cải thiện dữ liệu để phát triển hệ thống AI.',
-          '🧠 Ghi nhớ: đánh giá hiệu quả AI, overfitting, cách cải thiện dữ liệu và tối ưu hệ thống.',
-          '➡️ Buổi cuối cùng (Tiết 11-12): Giải pháp hệ thống AI - Phát triển hệ thống tác nhân AI (AI Agent) và tổng kết chuyên đề.'
+          '✅ Các em đã đạt được: nêu được 5 thành phần của hệ thống AI và tiêu chí chọn phương án thiết kế; nêu được 4 vai trò trong phát triển sản phẩm AI và phân công vai trò cho dự án nhóm.',
+          '🧠 Ghi nhớ: một sản phẩm AI tốt cần thiết kế phù hợp (5 thành phần) và sự hợp tác của nhiều vai trò chuyên môn khác nhau.',
+          '➡️ Buổi tiếp theo (Tiết 11-12): Bắt tay xây dựng sản phẩm AI (thực hành hợp tác) - Dự án AI & tổng kết chuyên đề.'
         ],
-        visualUrl: svgVisual('Hoàn Thành Buổi 5', 'Sẵn sàng cho Buổi 6: AI Agent & Tổng kết chuyên đề', '#065f46', '#0d9488', '🏁'),
-        speakerNotes: 'Chốt kiến thức trọng tâm buổi 5, tạo tâm thế sẵn sàng cho buổi tổng kết chuyên đề với hoạt động dựng thử AI agent.'
+        visualUrl: svgVisual('Hoàn Thành Buổi 5', 'Sẵn sàng cho Buổi 6: Thực hành và dự án AI', '#3730a3', '#7c3aed', '🏁'),
+        speakerNotes: 'Chốt lại kiến thức trọng tâm buổi học (5 thành phần hệ thống AI, 4 vai trò phát triển sản phẩm), kết nối sang buổi thực hành và tổng kết dự án cuối chuyên đề.'
       }
     ]
   }

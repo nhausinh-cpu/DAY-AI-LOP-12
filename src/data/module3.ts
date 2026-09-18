@@ -2,220 +2,204 @@ import { Lesson } from '../types';
 import { svgVisual } from './visual';
 
 // BUỔI 3 - TIẾT 5-6
-// Chủ đề: VẤN ĐỀ ĐẠO ĐỨC CỦA AI - MỨC ĐỘ RỦI RO - TRÁCH NHIỆM TRONG HỆ SINH THÁI AI
-// Yêu cầu cần đạt: 12.B1.MR1; 12.B2.1; 12.B3.1
+// Chuyên đề 2: Đạo đức & pháp luật khi dùng/tạo AI
+// Yêu cầu cần đạt: 12.A3.1 + 12.B2.1 (Tiết 5); 12.B3.1 (Tiết 6)
 export const module3: Lesson[] = [
   {
     period: 5,
-    title: 'Vấn Đề Đạo Đức Và Mức Độ Rủi Ro Của AI (Phần 1)',
-    description: 'Phân tích nguyên nhân sai lệch đạo đức của hệ thống AI và cách phân loại mức độ rủi ro.',
+    title: 'Trách Nhiệm Công Dân & Rủi Ro Pháp Lý Khi Dùng AI',
+    description: 'Phân tích 4 nội dung của trách nhiệm công dân trong xã hội AI, phân loại 3 mức độ rủi ro khi dùng AI và làm quen các thuật ngữ thiên kiến, ảo giác AI, deepfake.',
     objectives: [
-      'Phân tích nguyên nhân dẫn đến các vấn đề đạo đức hoặc sai lệch trong hoạt động của hệ thống AI.',
-      'Xác định mức độ rủi ro khi sử dụng AI có thể dẫn đến vi phạm quy định nhà trường hoặc pháp luật.',
-      'Trình bày quyền và trách nhiệm của các bên trong hệ sinh thái AI.'
+      '12.A3.1 · 12.B2.1: Phân tích được nội hàm "trách nhiệm công dân trong xã hội AI"; xác định được mức độ rủi ro khi dùng AI có thể dẫn đến vi phạm quy định nhà trường hoặc pháp luật.',
+      'Phân tích được 4 nội dung của "trách nhiệm công dân trong xã hội AI"; xác định và phân loại được mức độ rủi ro (thấp - trung bình - cao) khi dùng AI.',
+      'Hiểu các thuật ngữ: thiên kiến (bias), ảo giác AI (hallucination), giả mạo (deepfake); xếp được tình huống vào đúng mức rủi ro.'
     ],
     slides: [
       {
-        id: 'l5_s1', title: 'Vấn Đề Đạo Đức Và Rủi Ro Của AI', visualType: 'title',
+        id: 'l5_s1', title: 'Khởi Động: Dùng AI Viết Hộ Bài Luận - Chuyện Nhỏ Hay Vi Phạm?', visualType: 'intro',
         content: [
-          '📘 Tiết 5-6: Vấn đề đạo đức của AI - Mức độ rủi ro - Trách nhiệm trong hệ sinh thái AI',
-          '🎯 Học xong buổi này, các em sẽ: phân tích được nguyên nhân gây ra vấn đề đạo đức hoặc sai lệch của hệ thống AI; xác định được mức độ rủi ro khi dùng AI có thể vi phạm quy định; trình bày được quyền và trách nhiệm của người phát triển, người sử dụng AI.'
+          '📘 Tiết 5: Trách nhiệm công dân & rủi ro pháp lý khi dùng AI.',
+          '💭 Tình huống: Một bạn dùng AI viết hộ toàn bộ bài luận rồi nộp như của mình.',
+          '❓ Theo các em, đây là chuyện nhỏ hay là vi phạm?',
+          '⏱️ Tranh luận nhanh 2 phút.'
         ],
-        visualUrl: svgVisual('Rủi Ro & Đạo Đức Của Hệ Thống AI', 'Nguyên nhân sai lệch - Phân loại rủi ro - Hệ sinh thái AI', '#b91c1c', '#ea580c', '⚠️'),
-        speakerNotes: 'Giới thiệu buổi 3, trọng tâm là hiểu nguyên nhân sai lệch của AI, phân loại mức độ rủi ro và trách nhiệm các bên trong hệ sinh thái AI.'
+        visualUrl: svgVisual('Trách Nhiệm Công Dân Trong Xã Hội AI', 'Ranh giới giữa trung thực và gian lận khi dùng AI', '#164e63', '#0e7490', '❓'),
+        speakerNotes: 'GV nêu tình huống gây tranh cãi để khơi vấn đề trung thực khi dùng AI, dẫn vào nội dung trách nhiệm công dân số và các mức độ rủi ro.'
       },
       {
-        id: 'l5_s2', title: 'Khởi Động: Vì Sao Có Sự Chênh Lệch?', visualType: 'intro',
+        id: 'l5_s2', title: '4 Nội Dung Của Trách Nhiệm Công Dân Trong Xã Hội AI', visualType: 'concepts',
         content: [
-          '📊 Case study: một hệ thống nhận diện khuôn mặt có tỉ lệ nhận diện sai cao hơn với một số nhóm người dùng.',
-          '❓ Câu hỏi: "Vì sao lại có sự chênh lệch độ chính xác này?"',
-          '💭 Học sinh suy nghĩ cá nhân 2 phút, 3-4 học sinh nêu dự đoán.'
+          '1️⃣ Dùng AI một cách an toàn, trung thực, có đạo đức.',
+          '2️⃣ Tôn trọng quyền riêng tư và dữ liệu của người khác.',
+          '3️⃣ Không dùng AI để lan truyền tin sai, gian lận hay gây hại.',
+          '4️⃣ Góp phần xây dựng môi trường số tích cực, công bằng, nhân văn.',
+          '📚 Thuật ngữ cần biết: thiên kiến (bias) - AI học phải dữ liệu lệch/thiếu cân bằng nên đưa ra kết quả không công bằng; ảo giác AI (hallucination) - AI "bịa" ra thông tin nghe hợp lí nhưng sai; deepfake - hình/tiếng/video giả do AI tạo để giả mạo người thật.'
         ],
-        visualUrl: svgVisual('Vì Sao AI Nhận Diện Sai?', 'Case study: nhận diện khuôn mặt kém chính xác với một số nhóm', '#7c2d12', '#b91c1c', '📊'),
-        answerHint: 'Gợi ý: có thể do dữ liệu huấn luyện chưa đại diện đầy đủ cho các nhóm người dùng khác nhau.',
-        speakerNotes: 'Dẫn dắt vào nội dung nguyên nhân sai lệch đạo đức của AI - chủ yếu xuất phát từ dữ liệu huấn luyện thiếu đa dạng, cân bằng.'
+        visualUrl: svgVisual('4 Trách Nhiệm Công Dân Số', 'An toàn - Riêng tư - Không lan tin sai - Vì cộng đồng', '#155e75', '#0e7490', '🧑‍💻'),
+        speakerNotes: 'Giảng 4 nội dung trách nhiệm công dân số, giải thích 3 thuật ngữ quan trọng: bias, hallucination, deepfake - nhấn mạnh ảo giác AI nghĩa là AI có thể tự tin nói sai, nên dùng AI phải luôn kiểm chứng.'
       },
       {
-        id: 'l5_s3', title: 'Nguyên Nhân Sai Lệch Của Hệ Thống AI', visualType: 'diagram',
+        id: 'l5_s3', title: '3 Mức Độ Rủi Ro Khi Dùng AI', visualType: 'comparison',
         content: [
-          '📉 Thiên lệch dữ liệu: dữ liệu huấn luyện không đại diện đầy đủ cho các nhóm đối tượng.',
-          '🛠️ Thiên lệch thiết kế: thuật toán/mô hình được thiết kế chưa tính đến các trường hợp đặc biệt.',
-          '🌐 Bối cảnh sử dụng: hệ thống được dùng sai mục đích hoặc sai môi trường so với lúc huấn luyện.'
+          '🟢 Thấp: dùng AI hỗ trợ có kiểm chứng, không gây hại. Ví dụ: nhờ AI gợi ý dàn ý rồi tự viết và kiểm tra lại.',
+          '🟡 Trung bình: có thể vi phạm quy định trường, thiếu trung thực. Ví dụ: nộp bài do AI viết mà không khai báo.',
+          '🔴 Cao: có thể vi phạm pháp luật, gây hại nghiêm trọng. Ví dụ: tạo deepfake bôi nhọ bạn; phát tán tin giả do AI viết.',
+          '🔑 Ghi nhớ: rủi ro càng cao → hậu quả pháp lí càng lớn.'
         ],
-        diagramData: {
-          nodes: [
-            { id: 'd1', label: 'Thiên lệch dữ liệu', x: 20, y: 30, color: '#dc2626' },
-            { id: 'd2', label: 'Thiên lệch thiết kế', x: 50, y: 15, color: '#ea580c' },
-            { id: 'd3', label: 'Bối cảnh sử dụng sai', x: 80, y: 30, color: '#d97706' },
-            { id: 'd4', label: 'Hệ thống AI sai lệch / thiếu đạo đức', x: 50, y: 70, color: '#7c2d12' }
+        comparisonData: {
+          leftTitle: '🟢🟡 Rủi ro thấp - trung bình',
+          leftItems: [
+            'Thấp: nhờ AI gợi ý dàn ý rồi tự viết và kiểm tra lại',
+            'Thấp: dùng AI hỗ trợ nhưng luôn kiểm chứng thông tin',
+            'Trung bình: nộp bài do AI viết mà không khai báo',
+            'Trung bình: thiếu trung thực nhưng chưa gây hại nghiêm trọng'
           ],
-          links: [
-            { source: 'd1', target: 'd4' },
-            { source: 'd2', target: 'd4' },
-            { source: 'd3', target: 'd4' }
+          rightTitle: '🔴 Rủi ro cao',
+          rightItems: [
+            'Tạo deepfake bôi nhọ, giả mạo bạn bè, người khác',
+            'Phát tán tin giả do AI viết ra',
+            'Dùng AI để lừa đảo, thao túng người khác',
+            'Có thể vi phạm pháp luật, gây hại nghiêm trọng cho người khác'
           ]
         },
-        speakerNotes: 'Giải thích 3 nhóm nguyên nhân chính dẫn đến vấn đề đạo đức/sai lệch của hệ thống AI.'
+        speakerNotes: 'Trình bày bảng phân mức rủi ro, cho học sinh xếp thử vài tình huống vào 3 mức trước khi chuyển sang hoạt động tranh biện.'
       },
       {
-        id: 'l5_s4', title: 'Phân Loại Rủi Ro Và Hệ Sinh Thái AI', visualType: 'concepts',
+        id: 'l5_s4', title: 'Luyện Tập Nhóm: Tranh Biện Trung Thực Hay Gian Lận?', visualType: 'interactive',
         content: [
-          '🗂️ Phân loại rủi ro: rủi ro dữ liệu, rủi ro thuật toán, rủi ro lừa đảo/giả mạo.',
-          '🧩 Hệ sinh thái AI gồm: người phát triển, nhà cung cấp, người sử dụng, cơ quan quản lí.',
-          '📄 Mỗi bên có quyền và trách nhiệm riêng, kể cả vai trò góp ý xây dựng chính sách, quy định về AI.',
-          '📋 Sản phẩm: Phiếu học tập số 3 - sơ đồ nguyên nhân, bảng phân loại rủi ro, sơ đồ quyền - trách nhiệm.'
-        ],
-        visualUrl: svgVisual('Hệ Sinh Thái AI', 'Người phát triển - Nhà cung cấp - Người sử dụng - Cơ quan quản lí', '#9a3412', '#c2410c', '🧩'),
-        speakerNotes: 'Hướng dẫn học sinh hoàn thành Phiếu học tập số 3, giải thích rõ 3 nhóm rủi ro và vai trò từng bên trong hệ sinh thái AI.'
-      },
-      {
-        id: 'l5_s5', title: 'Luyện Tập: Xếp Loại Mức Độ Rủi Ro', visualType: 'interactive',
-        content: [
-          '📊 4 tình huống sử dụng AI trong học tập - xác định mức độ rủi ro (thấp/trung bình/cao).',
-          '👥 Làm việc cặp đôi 8 phút, giải thích ngắn cho lựa chọn của mình.'
+          '🗣️ Nhóm tranh biện: "Dùng AI trong học tập - đâu là trung thực, đâu là gian lận?" → cùng lập DANH SÁCH TIÊU CHÍ "dùng AI trung thực" của lớp.',
+          '✅ Sản phẩm: Danh sách tiêu chí "dùng AI trung thực" + bảng xếp tình huống theo mức rủi ro (Phiếu học tập số 5).'
         ],
         interactiveQuiz: {
-          question: 'Một học sinh dùng AI để tóm tắt nội dung một bài báo khoa học rồi tự đọc, ghi chú lại bằng lời văn của mình. Đây thuộc mức độ rủi ro nào?',
+          question: 'Một bạn hỏi AI trợ giúp gợi ý dàn ý cho bài văn, sau đó tự viết hoàn chỉnh và kiểm tra lại thông tin trước khi nộp. Hành động này thuộc mức rủi ro nào?',
           options: [
-            'Rủi ro cao - vi phạm liêm chính học thuật',
-            'Rủi ro thấp - AI chỉ hỗ trợ, học sinh vẫn tự xử lý và ghi chú lại',
-            'Rủi ro trung bình vì chưa xin phép giáo viên',
-            'Không thể xác định được mức độ rủi ro'
+            'Rủi ro cao, vì đã dùng AI',
+            'Rủi ro trung bình, vì AI luôn không đáng tin',
+            'Rủi ro thấp, vì có kiểm chứng và không gây hại, không thay thế hoàn toàn công sức bản thân',
+            'Không thể xác định được mức rủi ro'
           ],
-          answerIndex: 1,
-          explanation: 'Dùng AI để hỗ trợ tóm tắt rồi tự đọc, tự ghi chú lại là cách sử dụng AI có trách nhiệm, thuộc mức độ rủi ro thấp vì học sinh vẫn chủ động tư duy.',
-          hint: 'So sánh với hành vi sao chép nguyên văn sản phẩm AI - đó mới là rủi ro cao.',
-          suggestedAnswer: 'Rủi ro thấp vì học sinh chỉ dùng AI hỗ trợ, không thay thế hoàn toàn quá trình tư duy của mình.'
+          answerIndex: 2,
+          explanation: 'Đây là ví dụ điển hình của mức rủi ro thấp: dùng AI hỗ trợ (gợi ý dàn ý) nhưng có kiểm chứng lại và tự mình hoàn thành bài viết.',
+          hint: 'So sánh với ví dụ mức thấp trong bảng: "nhờ AI gợi ý dàn ý rồi tự viết và kiểm tra lại".',
+          suggestedAnswer: 'Đây là mức rủi ro thấp vì học sinh chỉ dùng AI để hỗ trợ ý tưởng ban đầu, có kiểm chứng lại thông tin và tự thực hiện phần lớn công việc.'
         },
-        speakerNotes: 'Củng cố kĩ năng xác định mức độ rủi ro AI - giúp học sinh phân biệt rõ ràng giữa sử dụng AI hỗ trợ hợp lý và lạm dụng AI có rủi ro cao.'
+        speakerNotes: 'Tổ chức tranh biện cả lớp, GV tổng hợp thành danh sách tiêu chí chung về "dùng AI trung thực" của lớp, giữ không khí cởi mở để học sinh dám nói thật về việc mình dùng AI.'
       },
       {
-        id: 'l5_s6', title: 'Vận Dụng: Góp Ý Quy Tắc Sử Dụng AI', visualType: 'activity',
+        id: 'l5_s5', title: 'Vận Dụng: Cam Kết Dùng AI Có Trách Nhiệm', visualType: 'activity',
         content: [
-          '📝 Đề xuất 1-2 ý kiến góp ý cho "Quy tắc sử dụng AI trong nhà trường".',
-          '📤 Bản góp ý sẽ được GV tổng hợp gửi bộ phận phụ trách xây dựng Quy tắc sử dụng AI của trường.'
+          '✍️ Mỗi em viết "Cam kết dùng AI có trách nhiệm" của bản thân, 3-5 dòng. Vài em đọc trước lớp.',
+          '📌 Bài tập về nhà: nêu 3 việc NÊN và 3 việc KHÔNG NÊN khi dùng AI trong học tập; giải thích bằng 1 ví dụ vì sao phải kiểm chứng thông tin do AI cung cấp (ảo giác AI).'
         ],
         activity: {
-          title: 'Góp ý xây dựng Quy tắc sử dụng AI trong nhà trường',
-          duration: 'Hoàn thành và nộp cuối tiết',
+          title: 'Bài tập vận dụng: Cam kết và nguyên tắc dùng AI có trách nhiệm',
+          duration: 'Viết cam kết tại lớp + hoàn thiện bài tập ở nhà',
           instructions: [
-            'Đọc lại các nội dung về rủi ro và trách nhiệm đã học trong buổi.',
-            'Đề xuất 1-2 ý kiến góp ý cụ thể cho việc xây dựng quy tắc sử dụng AI tại trường.',
-            'Nộp bản góp ý ngắn (cá nhân hoặc nhóm).'
+            '1. Nêu 3 việc NÊN và 3 việc KHÔNG NÊN khi dùng AI trong học tập.',
+            '2. Giải thích bằng 1 ví dụ: vì sao phải kiểm chứng thông tin do AI cung cấp (ảo giác AI - hallucination).'
           ],
-          tips: 'Ý kiến góp ý nên thiết thực, ví dụ: quy định rõ việc trích dẫn khi dùng AI hỗ trợ làm bài, hoặc quy định về bảo mật dữ liệu học sinh khi dùng phần mềm AI.',
-          hint: 'Liên hệ vai trò "cá nhân góp ý xây dựng chính sách AI" đã học ở phần hệ sinh thái AI.',
-          suggestedAnswer: 'Ví dụ góp ý: cần quy định rõ việc học sinh phải ghi chú khi bài làm có sự hỗ trợ của AI; cần tập huấn giáo viên về nhận diện rủi ro khi ứng dụng AI trong dạy học.'
+          tips: 'Liên hệ với nội quy nhà trường về liêm chính học thuật (nếu có) và 4 nội dung trách nhiệm công dân đã học.',
+          hint: 'Nhớ lại khái niệm "ảo giác AI": AI có thể tự tin nói ra thông tin sai mà nghe rất hợp lí.',
+          suggestedAnswer: 'Câu trả lời cần nêu cụ thể việc nên/không nên (ví dụ: nên kiểm chứng lại thông tin, không nên nộp bài AI viết hộ mà không khai báo) và giải thích được vì sao hallucination khiến việc kiểm chứng là bắt buộc.'
         },
-        speakerNotes: 'GV tổng hợp gửi bộ phận phụ trách xây dựng Quy tắc sử dụng AI của trường - đây cũng là minh chứng cho năng lực NLb, vai trò công dân góp ý chính sách.'
+        speakerNotes: 'GV chốt bài, dặn dò Tiết 6 sẽ học về quyền, trách nhiệm của người phát triển và người sử dụng AI, cùng vai trò góp ý chính sách.'
       }
     ]
   },
   {
     period: 6,
-    title: 'Trách Nhiệm Trong Hệ Sinh Thái AI (Phần 2)',
-    description: 'Củng cố phân loại rủi ro AI và trách nhiệm của các bên trong hệ sinh thái AI.',
+    title: 'Quyền, Trách Nhiệm & Góp Ý Chính Sách AI',
+    description: 'Trình bày quyền và trách nhiệm của người phát triển, người sử dụng AI; vai trò của công dân trong việc góp ý, đề xuất chính sách, quy định liên quan đến AI.',
     objectives: [
-      'Củng cố khả năng xác định mức độ rủi ro khi sử dụng AI.',
-      'Trình bày quyền và trách nhiệm của người phát triển, người sử dụng AI.',
-      'Rèn năng lực phân tích, đánh giá thông tin và hợp tác nhóm.'
+      '12.B3.1: Trình bày được quyền và trách nhiệm của người phát triển, người sử dụng AI; vai trò của cá nhân trong việc góp ý, đề xuất xây dựng chính sách, quy định liên quan đến AI.',
+      'Trình bày được quyền & trách nhiệm của người PHÁT TRIỂN và người SỬ DỤNG AI; nêu được vai trò của công dân trong việc góp ý, đề xuất chính sách về AI.',
+      'Soạn được một bộ quy tắc dùng AI cho trường học; viết đề xuất chính sách.'
     ],
     slides: [
       {
-        id: 'l6_s1', title: 'Ôn Lại: Nguyên Nhân Sai Lệch & Rủi Ro AI', visualType: 'intro',
+        id: 'l6_s1', title: 'Khởi Động: Em Có Quyền Góp Ý Nội Quy AI Của Trường Không?', visualType: 'intro',
         content: [
-          '🔁 Nhắc lại 3 nguyên nhân sai lệch AI: thiên lệch dữ liệu, thiết kế, bối cảnh sử dụng.',
-          '🗂️ Nhắc lại 3 nhóm rủi ro: dữ liệu, thuật toán, lừa đảo/giả mạo.',
-          '💬 1-2 nhóm chia sẻ lại kết quả Phiếu học tập số 3 đã hoàn thành ở Tiết 5.'
+          '🔁 Ôn nhanh: nhắc lại 4 nội dung trách nhiệm công dân trong xã hội AI và 3 mức rủi ro đã học ở Tiết 5.',
+          '❓ Nếu ngày mai trường ta ra một nội quy về việc dùng AI trong học tập, các em có quyền góp ý không? Nếu có, em muốn góp điều gì?',
+          '💬 Nêu ý kiến nhanh trước lớp.'
         ],
-        visualUrl: svgVisual('Ôn Tập Nhanh', 'Nguyên nhân sai lệch & phân loại rủi ro AI', '#7c2d12', '#c2410c', '🔁'),
-        speakerNotes: 'Ôn lại nhanh kiến thức Tiết 5 trước khi đi sâu vào quyền và trách nhiệm của các bên trong hệ sinh thái AI.'
+        visualUrl: svgVisual('Quyền Góp Ý Chính Sách AI', 'Vai trò công dân trong xây dựng quy định về AI', '#0c4a6e', '#0369a1', '📜'),
+        speakerNotes: 'Khơi gợi vai trò góp ý của học sinh, dẫn vào nội dung quyền - trách nhiệm của người phát triển và người sử dụng AI.'
       },
       {
-        id: 'l6_s2', title: 'Quyền Và Trách Nhiệm Trong Hệ Sinh Thái AI', visualType: 'comparison',
+        id: 'l6_s2', title: 'Quyền & Trách Nhiệm: Người Phát Triển - Người Sử Dụng AI', visualType: 'comparison',
         content: [
-          '🧑‍💻 Người phát triển: đảm bảo chất lượng, an toàn, đạo đức của sản phẩm AI trước khi phát hành.',
-          '🏢 Nhà cung cấp: minh bạch thông tin, hỗ trợ khắc phục sự cố cho người dùng.',
-          '👤 Người sử dụng: dùng đúng mục đích, có trách nhiệm, báo cáo khi phát hiện sai sót.',
-          '🏛️ Cơ quan quản lí: ban hành quy định, giám sát việc tuân thủ pháp luật về AI.'
+          '👨‍💻 Người PHÁT TRIỂN AI - Quyền: được sáng tạo, kinh doanh sản phẩm hợp pháp; được bảo hộ sở hữu trí tuệ. Trách nhiệm: minh bạch cách hoạt động; dùng dữ liệu hợp pháp; kiểm thử; chịu trách nhiệm về sản phẩm.',
+          '🧑‍🎓 Người SỬ DỤNG AI - Quyền: được biết mình đang dùng AI; được từ chối; được yêu cầu xoá dữ liệu của mình. Trách nhiệm: dùng đúng mục đích; kiểm chứng kết quả; khai báo khi dùng AI; không dùng để gây hại.',
+          '🔑 Ghi nhớ: cả người tạo và người dùng AI đều có quyền VÀ trách nhiệm.'
         ],
         comparisonData: {
-          leftTitle: '⚙️ Bên phát triển & cung cấp',
+          leftTitle: '👨‍💻 Người phát triển AI',
           leftItems: [
-            'Kiểm tra chất lượng, an toàn trước khi phát hành',
-            'Công khai minh bạch cách hệ thống hoạt động',
-            'Hỗ trợ khắc phục sự cố kịp thời',
-            'Chịu trách nhiệm về lỗi kỹ thuật, thiết kế'
+            'Quyền: sáng tạo, kinh doanh sản phẩm hợp pháp; được bảo hộ sở hữu trí tuệ',
+            'Trách nhiệm: minh bạch cách hoạt động',
+            'Trách nhiệm: dùng dữ liệu hợp pháp, kiểm thử kỹ',
+            'Trách nhiệm: chịu trách nhiệm về sản phẩm mình tạo ra'
           ],
-          rightTitle: '👥 Bên sử dụng & quản lí',
+          rightTitle: '🧑‍🎓 Người sử dụng AI',
           rightItems: [
-            'Sử dụng đúng mục đích, có trách nhiệm',
-            'Báo cáo khi phát hiện sai sót, rủi ro',
-            'Góp ý xây dựng chính sách, quy định về AI',
-            'Giám sát, ban hành quy định pháp luật phù hợp'
+            'Quyền: được biết mình đang dùng AI, được từ chối',
+            'Quyền: được yêu cầu xoá dữ liệu cá nhân của mình',
+            'Trách nhiệm: dùng đúng mục đích, kiểm chứng kết quả',
+            'Trách nhiệm: khai báo khi dùng AI, không dùng để gây hại'
           ]
         },
-        speakerNotes: 'Trình bày đầy đủ quyền và trách nhiệm của từng bên trong hệ sinh thái AI.'
+        speakerNotes: 'Trình bày bảng quyền - trách nhiệm của 2 nhóm chủ thể, học sinh bổ sung ví dụ. Nhấn mạnh: công dân còn có vai trò góp ý xây dựng chính sách để AI công bằng, an toàn hơn.'
       },
       {
-        id: 'l6_s3', title: 'Case Study: Ứng Dụng Điểm Danh Bằng Khuôn Mặt', visualType: 'concepts',
+        id: 'l6_s3', title: 'Luyện Tập Nhóm: Soạn Bộ Quy Tắc Dùng AI Trong Trường Học', visualType: 'interactive',
         content: [
-          '📷 Ví dụ cụ thể: ứng dụng điểm danh học sinh bằng nhận diện khuôn mặt tại trường.',
-          '❓ Nêu quyền và trách nhiệm của: nhà trường (người triển khai), công ty cung cấp phần mềm, học sinh/phụ huynh (người sử dụng/bị ảnh hưởng).',
-          '🔒 Lưu ý đặc biệt về bảo vệ dữ liệu sinh trắc học của học sinh.'
-        ],
-        visualUrl: svgVisual('Case Study: Điểm Danh Khuôn Mặt', 'Quyền và trách nhiệm của từng bên liên quan', '#9a3412', '#ea580c', '📷'),
-        speakerNotes: 'Đây là nội dung Câu 2 của Phiếu học tập số 3 - vận dụng phân tích quyền, trách nhiệm cho một sản phẩm AI cụ thể, gần gũi với môi trường học đường.'
-      },
-      {
-        id: 'l6_s4', title: 'Luyện Tập: Rủi Ro Cao Hay Thấp?', visualType: 'interactive',
-        content: [
-          '⚖️ Xác định mức độ rủi ro cho tình huống sử dụng dữ liệu điểm danh khuôn mặt.'
+          '👥 Nhóm soạn "Bộ quy tắc dùng AI trong trường học" gồm 5-7 điều; phân vai Học sinh / Giáo viên / Ban Giám hiệu để cân nhắc nhiều góc nhìn.',
+          '✅ Sản phẩm: Bản "Bộ quy tắc dùng AI trong trường học" của nhóm (Phiếu học tập số 6).'
         ],
         interactiveQuiz: {
-          question: 'Một phần mềm điểm danh bằng khuôn mặt lưu trữ dữ liệu sinh trắc học của học sinh mà không có biện pháp bảo mật rõ ràng. Mức độ rủi ro của tình huống này là gì?',
+          question: 'Khi soạn "Bộ quy tắc dùng AI trong trường học", vì sao nhóm nên phân vai Học sinh - Giáo viên - Ban Giám hiệu để cùng góp ý?',
           options: [
-            'Thấp, vì chỉ dùng để điểm danh',
-            'Cao, vì dữ liệu sinh trắc học là dữ liệu cá nhân nhạy cảm cần được bảo mật chặt chẽ',
-            'Không có rủi ro vì đây là công nghệ hiện đại',
-            'Trung bình, không cần quan tâm thêm'
+            'Để làm cho bài tập dài hơn, phức tạp hơn',
+            'Để mỗi vai trò có góc nhìn, quyền lợi và trách nhiệm khác nhau, giúp bộ quy tắc cân bằng và khả thi hơn',
+            'Vì chỉ Ban Giám hiệu mới có quyền quyết định, các vai trò khác không cần thiết',
+            'Không có lý do đặc biệt, chỉ là hình thức'
           ],
           answerIndex: 1,
-          explanation: 'Dữ liệu sinh trắc học (khuôn mặt) là dữ liệu cá nhân nhạy cảm; nếu không được bảo mật chặt chẽ, rủi ro rò rỉ, lạm dụng dữ liệu là rất cao.',
-          hint: 'Nghĩ đến nguyên tắc Tôn trọng quyền riêng tư đã học ở Buổi 2.',
-          suggestedAnswer: 'Rủi ro cao vì liên quan đến dữ liệu cá nhân nhạy cảm của học sinh.'
+          explanation: 'Phân vai nhiều bên giúp nhóm cân nhắc đầy đủ góc nhìn, quyền lợi và trách nhiệm của từng chủ thể liên quan, từ đó bộ quy tắc trở nên công bằng và thực tế hơn - đúng với vai trò công dân được góp ý chính sách.',
+          hint: 'Liên hệ với nội dung: mỗi công dân có vai trò góp ý xây dựng chính sách AI công bằng hơn.',
+          suggestedAnswer: 'Phân vai giúp bộ quy tắc phản ánh đầy đủ lợi ích và trách nhiệm của học sinh, giáo viên và nhà trường, tránh thiên lệch về một phía.'
         },
-        speakerNotes: 'Kết nối kiến thức về nguyên tắc đạo đức (Buổi 2) với phân loại rủi ro (Buổi 3) để học sinh thấy được tính hệ thống của chuyên đề.'
+        speakerNotes: 'Các nhóm soạn bộ quy tắc 5-7 điều, GV có thể gửi bộ quy tắc hay nhất cho GVCN/BGH tham khảo thật để tăng tính thực tiễn cho học sinh.'
       },
       {
-        id: 'l6_s5', title: 'Vận Dụng: Hoàn Thiện Bản Góp Ý', visualType: 'activity',
+        id: 'l6_s4', title: 'Vận Dụng: Đề Xuất Chính Sách Về AI', visualType: 'activity',
         content: [
-          '📝 Hoàn thiện bản góp ý cho "Quy tắc sử dụng AI trong nhà trường" đã bắt đầu ở Tiết 5.',
-          '📤 Nộp bản góp ý hoàn chỉnh để GV tổng hợp gửi bộ phận phụ trách.'
+          '🗣️ Mỗi em viết 1 đề xuất chính sách về AI mà em muốn gửi nhà trường hoặc cơ quan quản lí. Vài em chia sẻ.',
+          '📌 Bài tập về nhà: viết 1 đề xuất (5-7 câu) về quy định dùng AI trong lớp/trường em, kèm lí do; nêu 1 quyền và 1 trách nhiệm của em khi là người sử dụng AI.'
         ],
         activity: {
-          title: 'Hoàn thiện bản góp ý quy tắc sử dụng AI',
-          duration: 'Cuối tiết học',
+          title: 'Bài tập vận dụng: Đề xuất chính sách AI của em',
+          duration: 'Viết đề xuất tại lớp + hoàn thiện ở nhà',
           instructions: [
-            'Xem lại ý kiến góp ý đã viết ở Tiết 5.',
-            'Bổ sung thêm ý kiến dựa trên kiến thức về quyền - trách nhiệm các bên vừa học.',
-            'Nộp bản góp ý hoàn chỉnh.'
+            '1. Viết 1 đề xuất (5-7 câu) về quy định dùng AI trong lớp/trường em, kèm lí do.',
+            '2. Nêu 1 quyền và 1 trách nhiệm của em khi là người sử dụng AI.'
           ],
-          tips: 'Có thể góp ý theo từng vai trò: học sinh, giáo viên, nhà trường nên làm gì để sử dụng AI an toàn, có trách nhiệm.',
-          hint: 'Liên hệ với case study điểm danh khuôn mặt vừa phân tích.',
-          suggestedAnswer: 'Bản góp ý hoàn chỉnh nên có ít nhất 2 ý kiến cụ thể, thiết thực, liên quan đến bảo mật dữ liệu và trách nhiệm sử dụng AI trong trường học.'
+          tips: 'Có thể dựa vào bộ quy tắc nhóm đã soạn ở hoạt động luyện tập để phát triển thành đề xuất cá nhân.',
+          hint: 'Nhớ lại bảng quyền - trách nhiệm của người sử dụng AI đã học.',
+          suggestedAnswer: 'Đề xuất cần nêu rõ quy định cụ thể, lí do hợp lí, và xác định đúng 1 quyền + 1 trách nhiệm của người sử dụng AI theo bảng đã học.'
         },
-        speakerNotes: 'GV tổng hợp toàn bộ ý kiến gửi bộ phận phụ trách xây dựng Quy tắc sử dụng AI của trường, dùng làm minh chứng đánh giá năng lực NLb.'
+        speakerNotes: 'GV chốt bài, dặn dò Tiết 7 sẽ chuyển sang Chuyên đề 3 - Công cụ & kĩ thuật làm AI, bắt đầu làm quen các công cụ mã nguồn mở/miễn phí để tạo AI.'
       },
       {
-        id: 'l6_s6', title: 'Tổng Kết Buổi 3', visualType: 'summary',
+        id: 'l6_s5', title: 'Tổng Kết Buổi 3', visualType: 'summary',
         content: [
-          '✅ Các em đã đạt được: phân tích nguyên nhân gây sai lệch, vấn đề đạo đức của hệ thống AI; xác định mức độ rủi ro khi dùng AI; trình bày quyền và trách nhiệm của người phát triển, người sử dụng AI.',
-          '🧠 Ghi nhớ: nguyên nhân sai lệch AI, phân loại rủi ro, quyền - trách nhiệm trong hệ sinh thái AI.',
-          '➡️ Buổi tiếp theo (Tiết 7-8): thực hành với công cụ thiết kế AI mã nguồn mở - Teachable Machine.'
+          '✅ Các em đã đạt được: phân tích 4 nội dung trách nhiệm công dân trong xã hội AI và phân loại 3 mức rủi ro; trình bày quyền - trách nhiệm của người phát triển và người sử dụng AI; soạn được bộ quy tắc và đề xuất chính sách về AI.',
+          '🧠 Ghi nhớ: là công dân số có trách nhiệm - dùng AI trung thực, tôn trọng người khác, không lan tin sai, và có quyền góp ý xây dựng chính sách AI.',
+          '➡️ Buổi tiếp theo (Tiết 7-8): Chọn ý tưởng & làm quen công cụ tạo AI - Đánh giá hiệu quả hệ thống AI.'
         ],
-        visualUrl: svgVisual('Hoàn Thành Buổi 3', 'Sẵn sàng cho Buổi 4: Thực hành công cụ AI', '#065f46', '#0d9488', '🏁'),
-        speakerNotes: 'Chốt kiến thức trọng tâm buổi 3, chuyển tiếp sang phần thực hành công cụ AI ở buổi 4 - học sinh sẽ được làm quen với phòng máy và Teachable Machine.'
+        visualUrl: svgVisual('Hoàn Thành Buổi 3', 'Sẵn sàng cho Buổi 4: Công cụ và kĩ thuật làm AI', '#0c4a6e', '#0369a1', '🏁'),
+        speakerNotes: 'Chốt lại kiến thức trọng tâm buổi học (trách nhiệm công dân, mức rủi ro, quyền và trách nhiệm, góp ý chính sách), kết nối sang Chuyên đề 3 về công cụ và kĩ thuật làm AI ở buổi tiếp theo.'
       }
     ]
   }

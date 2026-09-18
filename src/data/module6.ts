@@ -2,217 +2,221 @@ import { Lesson } from '../types';
 import { svgVisual } from './visual';
 
 // BUỔI 6 - TIẾT 11-12
-// Chủ đề: GIẢI PHÁP HỆ THỐNG AI - PHÁT TRIỂN HỆ THỐNG AI (TÁC NHÂN AI - AI AGENT)
-// Yêu cầu cần đạt: 12.D1.1; 12.D1.MR1; 12.D2.1; 12.D2.MR1; 12.D2.MR2; 12.D2.MR3
+// Chuyên đề 4 (Tiết 11) + Chuyên đề 5 (Tiết 12): Thực hành xây dựng sản phẩm AI - Dự án AI & tổng kết
+// Yêu cầu cần đạt: 12.D2.1 phần 2 (Tiết 11); Vận dụng tổng hợp 4 mạch A+B+C+D (Tiết 12)
 export const module6: Lesson[] = [
   {
     period: 11,
-    title: 'Giải Pháp Hệ Thống AI - Tác Nhân AI (AI Agent) (Phần 1)',
-    description: 'Tìm hiểu khái niệm, cấu trúc AI agent và thực hành dựng thử trên Google AI Studio.',
+    title: 'Bắt Tay Xây Dựng Sản Phẩm AI (Hợp Tác)',
+    description: 'Thực hành sự hợp tác nhiều vai trò để tạo ra bản đầu tiên của một sản phẩm AI đơn giản theo kế hoạch đã xây dựng, tuân thủ kỉ luật số.',
     objectives: [
-      'Nhận biết, phân tích một số phương án thiết kế và vận hành hệ thống AI phù hợp.',
-      'Nhận biết các vai trò khác nhau trong quá trình phát triển sản phẩm AI.',
-      'Trình bày khái niệm, cấu trúc cơ bản của một hệ thống tác nhân AI (AI agent).'
+      '12.D2.1 (phần 2): Thực hành sự hợp tác nhiều vai trò để tạo ra một sản phẩm AI đơn giản theo kế hoạch đã xây dựng.',
+      'Vận dụng quy trình đã học để tạo bản đầu tiên của một sản phẩm AI đơn giản; thu thập dữ liệu, huấn luyện, thử nghiệm mô hình theo vai trò.',
+      'Ghi lại nguồn dữ liệu và câu lệnh đã dùng (kỉ luật số); phối hợp nhóm, phát hiện và ghi lại lỗi cần sửa.'
     ],
     slides: [
       {
-        id: 'l11_s1', title: 'Giải Pháp Hệ Thống AI - AI Agent', visualType: 'title',
+        id: 'l11_s1', title: 'Chuyên Đề Giáo Dục AI - Lớp 12', visualType: 'title',
         content: [
-          '📘 Tiết 11-12: Giải pháp hệ thống AI - Phát triển hệ thống AI (Tác nhân AI - AI Agent)',
-          '🎯 Học xong buổi này, các em sẽ: phân tích được phương án thiết kế, vận hành hệ thống AI hiệu quả; hiểu vai trò hợp tác đa chuyên môn trong phát triển sản phẩm AI; xây dựng và kiểm thử được một AI Agent đơn giản.',
-          '🏁 Buổi tổng kết chuyên đề Giáo dục AI - Lớp 12'
+          '📘 Tiết 11: Bắt tay xây dựng sản phẩm AI (hợp tác) - tiết thực hành.',
+          '🎯 Học xong tiết này, các em sẽ: dựng được bản đầu tiên của sản phẩm AI theo vai trò đã phân công; ghi lại nguồn dữ liệu, câu lệnh và kết quả thử theo đúng kỉ luật số.',
+          '🏫 Trường THPT Tân Lược - Chuyên đề 4: Thiết kế & phát triển hệ thống AI'
         ],
-        visualUrl: svgVisual('AI Agent - Tác Nhân Trí Tuệ Nhân Tạo', 'Buổi tổng kết chuyên đề Giáo dục AI - Lớp 12', '#4338ca', '#7c3aed', '🧠'),
-        speakerNotes: 'Giới thiệu buổi tổng kết chuyên đề - buổi học cuối cùng, tập trung vào khái niệm AI agent và hoạt động dựng thử sản phẩm bằng Google AI Studio.'
+        visualUrl: svgVisual('Bắt Tay Xây Dựng Sản Phẩm AI', 'Thực hành hợp tác theo vai trò đã phân công', '#4338ca', '#0ea5e9', '🛠️'),
+        speakerNotes: 'Giới thiệu đây là tiết thực hành - các nhóm sẽ bắt tay dựng bản đầu của sản phẩm AI theo phương án và phân công vai trò đã có từ Tiết 9-10.'
       },
       {
-        id: 'l11_s2', title: 'Khởi Động: AI Agent Khác Gì Các Công Cụ Đã Học?', visualType: 'intro',
+        id: 'l11_s2', title: 'Khởi Động: Chốt Mục Tiêu Buổi Thực Hành', visualType: 'intro',
         content: [
-          '🤖 Ví dụ: một trợ lí ảo tự động lên lịch học, tự nhắc việc, tự trả lời câu hỏi thường gặp.',
-          '❓ Câu hỏi: điểm khác giữa "AI agent" và các công cụ AI đã học ở các buổi trước (Teachable Machine...)?',
-          '💭 Học sinh quan sát, suy nghĩ 3 phút, 3-4 học sinh chia sẻ.'
+          '🗣️ Hôm nay mỗi nhóm bắt tay dựng BẢN ĐẦU của sản phẩm theo phương án và phân công đã có.',
+          '🎯 Mục tiêu: cuối tiết sản phẩm chạy được ở mức cơ bản - chưa cần hoàn hảo.',
+          '✋ Học sinh kiểm tra lại phân công vai trò + nguyên liệu (dữ liệu, ý tưởng) đã chuẩn bị.'
         ],
-        visualUrl: svgVisual('AI Agent Là Gì?', 'Trợ lí ảo tự lên lịch, tự nhắc việc, tự trả lời câu hỏi', '#3730a3', '#6d28d9', '🤖'),
-        answerHint: 'Gợi ý: Teachable Machine chỉ phân loại một lần theo yêu cầu; AI agent tự lập kế hoạch và thực hiện CHUỖI hành động liên tục.',
-        speakerNotes: 'GV dẫn dắt: AI agent là hệ thống có khả năng tự lập kế hoạch và thực hiện chuỗi hành động để đạt mục tiêu do con người đặt ra, dưới sự giám sát của con người.'
+        visualUrl: svgVisual('Mục Tiêu: Ra Bản Đầu Sản Phẩm', 'Chạy được ở mức cơ bản - hoàn thiện ở Tiết 12', '#3730a3', '#0891b2', '🎯'),
+        speakerNotes: 'Nhắc lại mục tiêu tiết học: ra bản đầu chạy được ở mức cơ bản. Sản phẩm sẽ hoàn thiện & trình bày ở Tiết 12. Kiểm tra nhanh phân công vai trò và nguyên liệu của từng nhóm.'
       },
       {
-        id: 'l11_s3', title: 'Cấu Trúc Cơ Bản Của Một AI Agent', visualType: 'diagram',
+        id: 'l11_s3', title: 'Quy Trình Dựng Bản Đầu Sản Phẩm', visualType: 'diagram',
         content: [
-          '🎯 Mục tiêu: nhiệm vụ mà AI agent cần đạt được (do con người đặt ra).',
-          '📥 Đầu vào: dữ liệu, thông tin agent tiếp nhận từ môi trường/người dùng.',
-          '⚙️ Các bước xử lí: chuỗi hành động agent tự lập kế hoạch và thực hiện.',
-          '📤 Đầu ra: kết quả, hành động agent trả về.',
-          '👁️ Người giám sát: con người luôn giám sát để đảm bảo agent hoạt động đúng, an toàn.'
+          '1️⃣ Thu thập & chuẩn bị dữ liệu → 2️⃣ Huấn luyện mô hình → 3️⃣ Kết nối/hoàn thiện → 4️⃣ Thử nghiệm & ghi lỗi.',
+          '👥 Mỗi vai trò (Tiết 10) đảm nhận phần của mình và phối hợp: người huấn luyện thu thập & nạp dữ liệu, huấn luyện mô hình; người lập trình kết nối/hoàn thiện; cả nhóm phối hợp.',
+          '💡 Kỉ luật số (bắt buộc): ghi lại NGUỒN dữ liệu, CÂU LỆNH (prompt) đã dùng và KẾT QUẢ thử - để kiểm chứng và khai báo trung thực.'
         ],
         diagramData: {
           nodes: [
-            { id: 'a1', label: 'Mục tiêu', x: 15, y: 20, color: '#4338ca' },
-            { id: 'a2', label: 'Đầu vào', x: 35, y: 45, color: '#4f46e5' },
-            { id: 'a3', label: 'Các bước xử lí (AI Agent)', x: 55, y: 25, color: '#7c3aed' },
-            { id: 'a4', label: 'Đầu ra', x: 80, y: 45, color: '#a21caf' },
-            { id: 'a5', label: 'Người giám sát', x: 55, y: 75, color: '#0891b2' }
+            { id: 'q1', label: '1. Thu thập & chuẩn bị dữ liệu', x: 12, y: 25, color: '#4338ca' },
+            { id: 'q2', label: '2. Huấn luyện mô hình', x: 38, y: 12, color: '#4f46e5' },
+            { id: 'q3', label: '3. Kết nối / hoàn thiện', x: 65, y: 25, color: '#0891b2' },
+            { id: 'q4', label: '4. Thử nghiệm & ghi lỗi', x: 45, y: 55, color: '#0d9488' }
           ],
           links: [
-            { source: 'a1', target: 'a3' },
-            { source: 'a2', target: 'a3' },
-            { source: 'a3', target: 'a4' },
-            { source: 'a5', target: 'a3', label: 'giám sát' }
+            { source: 'q1', target: 'q2' },
+            { source: 'q2', target: 'q3' },
+            { source: 'q3', target: 'q4' },
+            { source: 'q4', target: 'q1', label: 'ghi chú để cải tiến' }
           ]
         },
-        speakerNotes: 'Trình bày cấu trúc AI agent theo đúng nội dung KHBD (mục tiêu, đầu vào, các bước xử lí, đầu ra, người giám sát).'
+        speakerNotes: 'GV đi từng nhóm hỗ trợ trong 25 phút thực hành, nhắc kỉ luật số: học sinh phải ghi lại nguồn dữ liệu, câu lệnh/thao tác chính và kết quả thử để đảm bảo trung thực, kiểm chứng được.'
       },
       {
-        id: 'l11_s4', title: 'Các Vai Trò Trong Phát Triển Sản Phẩm AI', visualType: 'concepts',
+        id: 'l11_s4', title: 'Thực Hành: Dựng Bản Đầu Sản Phẩm AI Của Nhóm', visualType: 'activity',
         content: [
-          '💡 Người đề xuất ý tưởng: xác định vấn đề, mục tiêu của sản phẩm AI.',
-          '💻 Người lập trình: xây dựng hệ thống, kết nối các thành phần kỹ thuật.',
-          '🎓 Người huấn luyện: chuẩn bị dữ liệu, huấn luyện mô hình.',
-          '🧪 Người kiểm thử: kiểm tra, đánh giá chất lượng trước khi đưa vào sử dụng.',
-          '🤝 Việc tạo ra sản phẩm AI cần có sự hợp tác giữa nhiều người với chuyên môn khác nhau.'
-        ],
-        visualUrl: svgVisual('Vai Trò Phát Triển Sản Phẩm AI', 'Ý tưởng - Lập trình - Huấn luyện - Kiểm thử', '#312e81', '#6d28d9', '🤝'),
-        speakerNotes: 'Trình bày các vai trò trong quá trình phát triển sản phẩm AI, nhấn mạnh tính hợp tác đa chuyên môn.'
-      },
-      {
-        id: 'l11_s5', title: 'Thực Hành: Dựng Thử AI Agent Với Google AI Studio', visualType: 'activity',
-        content: [
-          '🖥️ Dùng tài khoản Google AI Studio do giáo viên/nhà trường quản lý (không cần đăng ký tài khoản cá nhân).',
-          '💬 Mô tả ý tưởng của nhóm bằng ngôn ngữ tự nhiên để dựng thử một AI agent/ứng dụng đơn giản phục vụ trường/lớp.',
-          '📄 Hoàn thành Phiếu học tập số 6 theo cấu trúc AI agent: mục tiêu, đầu vào, các bước xử lí, đầu ra, người giám sát.'
+          '🛠️ Các nhóm làm theo vai trò: người huấn luyện thu thập & nạp dữ liệu, huấn luyện mô hình; người lập trình kết nối/hoàn thiện; cả nhóm phối hợp.',
+          '✅ Sản phẩm: Bản sản phẩm AI phiên bản đầu tiên (chạy được ở mức cơ bản).'
         ],
         activity: {
-          title: 'Dựng thử AI agent đơn giản trên Google AI Studio',
-          duration: 'Thực hành nhóm, dựa trên ý tưởng đã chuẩn bị từ Buổi 4-5',
+          title: 'Thực hành nhóm: Dựng bản đầu sản phẩm AI',
+          duration: '25 phút thực hành trên lớp (phòng máy hoặc mô phỏng trên giấy nếu thiếu máy)',
           instructions: [
-            'Sử dụng ý tưởng công cụ AI đã đề xuất và hoàn thiện kế hoạch ở Buổi 4, 5.',
-            'Mô tả ý tưởng bằng ngôn ngữ tự nhiên trên Google AI Studio (tài khoản do GV/nhà trường quản lý).',
-            'Dựng thử một AI agent/ứng dụng đơn giản phục vụ trường/lớp.',
-            'Chụp ảnh màn hình hoặc lưu đường liên kết sản phẩm, mô tả theo cấu trúc AI agent trong Phiếu học tập số 6.',
-            'Chuẩn bị phần thuyết trình ngắn cho nhóm.'
+            'Người huấn luyện: thu thập, nạp dữ liệu và huấn luyện mô hình bằng công cụ đã chọn ở Tiết 7.',
+            'Người lập trình/cấu hình: kết nối các thành phần, hoàn thiện sản phẩm theo phương án đã chọn ở Tiết 9.',
+            'Cả nhóm phối hợp, hỗ trợ lẫn nhau theo bảng phân công vai trò (Tiết 10).',
+            'Ghi lại đầy đủ vào Phiếu theo dõi số 11: nguồn dữ liệu đã dùng, câu lệnh/thao tác chính, lỗi/điểm cần sửa.'
           ],
-          tips: 'Mô tả ý tưởng càng rõ ràng, cụ thể (mục tiêu, đầu vào, đầu ra mong muốn) thì AI Studio càng dựng thử chính xác.',
-          hint: 'Liên hệ với ý tưởng công cụ AI nhóm đã đề xuất ở Buổi 4 (Tiết 7-8): mục tiêu, đối tượng sử dụng, dữ liệu cần có.',
-          suggestedAnswer: 'Sản phẩm là một prototype/ứng dụng đơn giản trên Google AI Studio, kèm bản mô tả đầy đủ theo cấu trúc AI agent.'
+          tips: 'Không cần hoàn hảo - mục tiêu là có bản chạy được ở mức cơ bản để tiếp tục hoàn thiện.',
+          hint: 'Nếu thiếu máy, có thể luân phiên dùng máy hoặc làm sản phẩm dạng mô phỏng trên giấy kèm 1 lần chạy thử.',
+          suggestedAnswer: 'Sản phẩm là bản đầu tiên của mô hình/ứng dụng AI, có thể còn lỗi, kèm theo Phiếu theo dõi ghi rõ nguồn dữ liệu, thao tác chính đã thực hiện.'
         },
-        speakerNotes: 'Hoạt động Hình thành kiến thức trọng tâm của buổi tổng kết - thể hiện đầy đủ kĩ năng thiết kế phương án vận hành AI và xây dựng, kiểm thử AI agent.'
+        speakerNotes: 'GV đi từng nhóm hỗ trợ, nhắc kỉ luật số. Nhóm yếu có thể dùng sản phẩm mẫu tối giản để bám theo; nhóm khá khuyến khích thêm tính năng.'
       },
       {
-        id: 'l11_s6', title: 'Luyện Tập: Rủi Ro Khi Vận Hành AI Agent', visualType: 'interactive',
+        id: 'l11_s5', title: 'Luyện Tập: Tự Thử Và Ghi Lỗi', visualType: 'interactive',
         content: [
-          '🔍 Đề xuất 1 rủi ro có thể phát sinh khi vận hành AI agent của nhóm bạn và cách khắc phục (nhận xét chéo giữa các nhóm).'
+          '🔍 Nhóm thử sản phẩm của mình, ghi lại các lỗi/điểm cần sửa (dùng cách đánh giá đã học ở Tiết 8: dữ liệu mới, độ chính xác, loại lỗi).'
         ],
         interactiveQuiz: {
-          question: 'Một AI agent tự động trả lời câu hỏi thường gặp của học sinh nhưng đôi khi trả lời sai thông tin. Cách khắc phục phù hợp nhất là gì?',
+          question: 'Sau khi dựng bản đầu sản phẩm AI, nhóm nên làm gì trước khi chuyển sang bước lập kế hoạch hoàn thiện?',
           options: [
-            'Ngừng sử dụng AI agent vĩnh viễn, không tìm cách khắc phục',
-            'Bổ sung, cập nhật lại nguồn dữ liệu/thông tin đúng và tăng cường kiểm thử trước khi dùng chính thức',
-            'Kệ vậy vì AI agent không thể sai',
-            'Để học sinh tự phát hiện và tự sửa lỗi cho AI agent'
+            'Bỏ qua bước kiểm thử, chuyển thẳng sang trình bày ở Tiết 12',
+            'Tự thử sản phẩm với vài trường hợp mới, ghi lại lỗi/điểm cần sửa như cách đánh giá đã học ở Tiết 8',
+            'Xoá bỏ sản phẩm và làm lại từ đầu nếu có 1 lỗi nhỏ',
+            'Chỉ cần hỏi ý kiến giáo viên mà không tự kiểm thử'
           ],
           answerIndex: 1,
-          explanation: 'Cần bổ sung, cập nhật dữ liệu/thông tin chính xác và tăng cường kiểm thử trước khi đưa AI agent vào sử dụng chính thức - đây là vai trò kiểm thử quan trọng đã học.',
-          hint: 'Nhớ lại vai trò "người kiểm thử" trong quá trình phát triển sản phẩm AI.',
-          suggestedAnswer: 'Cần kiểm thử kỹ và cập nhật dữ liệu trước khi đưa AI agent vào sử dụng thực tế, nhấn mạnh vai trò giám sát của con người.'
+          explanation: 'Trước khi lập kế hoạch hoàn thiện, nhóm cần tự thử sản phẩm và ghi lại lỗi/điểm cần sửa - áp dụng đúng cách đánh giá hiệu quả hệ thống AI đã học ở Tiết 8.',
+          hint: 'Liên hệ lại bài học Tiết 8: đánh giá AI = thử với dữ liệu mới → xem AI sai ở đâu → đề xuất cải thiện.',
+          suggestedAnswer: 'Nhóm cần tự thử sản phẩm, ghi lại lỗi cụ thể, từ đó mới lập được kế hoạch hoàn thiện hợp lí cho Tiết 12.'
         },
-        speakerNotes: 'Củng cố kĩ năng phân tích và xử lí vấn đề phát sinh trong hệ thống AI, GV tổng hợp và nhấn mạnh vai trò kiểm thử trước khi đưa AI agent vào sử dụng thực tế.'
+        speakerNotes: 'Học sinh vận dụng lại kĩ năng đánh giá hiệu quả hệ thống AI đã học ở Tiết 8 để tự kiểm thử sản phẩm của nhóm mình.'
+      },
+      {
+        id: 'l11_s6', title: 'Vận Dụng: Lập Kế Hoạch Hoàn Thiện Sản Phẩm', visualType: 'activity',
+        content: [
+          '🗣️ Nhóm lập kế hoạch: còn thiếu gì, ai làm, chuẩn bị gì để TRÌNH BÀY ở Tiết 12.',
+          '📌 Bài tập về nhà: hoàn thiện phần việc theo vai trò; chuẩn bị nội dung trình bày của mình cho Tiết 12; viết phần "Khai báo sử dụng AI" cho sản phẩm.'
+        ],
+        activity: {
+          title: 'Bài tập vận dụng: Kế hoạch hoàn thiện & khai báo sử dụng AI',
+          duration: 'Lập kế hoạch tại lớp + hoàn thiện ở nhà',
+          instructions: [
+            '1. Hoàn thiện phần việc theo vai trò; chuẩn bị nội dung trình bày của mình cho Tiết 12.',
+            '2. Viết phần "Khai báo sử dụng AI" cho sản phẩm: đã dùng công cụ gì, AI hỗ trợ phần nào, nhóm tự làm phần nào.'
+          ],
+          tips: 'Khai báo trung thực không làm giảm điểm - đây là minh chứng cho phẩm chất trung thực theo Khung giáo dục AI.',
+          hint: 'Dùng Phiếu theo dõi số 11 đã ghi trong tiết để viết phần khai báo sử dụng AI đầy đủ, chính xác.',
+          suggestedAnswer: 'Kế hoạch cần nêu rõ: phần còn thiếu, ai phụ trách, thời hạn hoàn thành; phần khai báo sử dụng AI cần trung thực và cụ thể.'
+        },
+        speakerNotes: 'GV chốt bài, dặn dò chuẩn bị trình bày ở Tiết 12 - tiết cuối cùng của chuyên đề, gồm trình bày sản phẩm, đánh giá chéo và tổng kết.'
       }
     ]
   },
   {
     period: 12,
-    title: 'Tổng Kết Chuyên Đề Giáo Dục AI - Lớp 12',
-    description: 'Thuyết trình sản phẩm AI agent của nhóm và tự đánh giá năng lực AI cuối chuyên đề.',
+    title: 'Dự Án AI & Tổng Kết Chuyên Đề',
+    description: 'Hoàn thiện, trình bày và đánh giá chéo một sản phẩm/dự án AI đơn giản thể hiện đủ 4 mạch năng lực; khai báo trung thực việc sử dụng AI và tự nhìn lại quá trình học tập.',
     objectives: [
-      'Phân tích nguyên nhân vấn đề phát sinh trong hệ thống AI và lựa chọn cách khắc phục phù hợp.',
-      'Xây dựng và kiểm thử được một AI agent đơn giản phục vụ nhiệm vụ học tập/cộng đồng.',
-      'Tự đánh giá mức độ đạt được của bản thân ở 4 thành phần năng lực AI (NLa, NLb, NLc, NLd).'
+      'Vận dụng tổng hợp: hoàn thiện, trình bày và đánh giá được một sản phẩm/dự án AI đơn giản thể hiện đủ 4 mạch năng lực; khai báo trung thực việc sử dụng AI.',
+      'Trình bày được sản phẩm AI của nhóm: vấn đề, cách làm, kết quả, hạn chế; hệ thống hoá được các nội dung đã học của cả chuyên đề.',
+      'Thuyết trình, đánh giá chéo theo tiêu chí (rubric), tự nhìn lại quá trình học và định hướng bản thân.'
     ],
     slides: [
       {
-        id: 'l12_s1', title: 'Thuyết Trình Sản Phẩm AI Agent', visualType: 'intro',
+        id: 'l12_s1', title: 'Khởi Động: Luật Trình Bày & Chấm Chéo', visualType: 'intro',
         content: [
-          '🎤 Mỗi nhóm thuyết trình ngắn gọn về AI agent/ứng dụng đã dựng thử trên Google AI Studio.',
-          '📋 Nội dung thuyết trình: mục tiêu, đầu vào, các bước xử lí, đầu ra, người giám sát.',
-          '👥 Các nhóm khác nhận xét, đặt câu hỏi phản biện.'
+          '📘 Tiết 12: Dự án AI & tổng kết - tiết cuối của chuyên đề, chốt lại toàn bộ 4 mạch năng lực đã học.',
+          '🗣️ Mỗi nhóm trình bày 4-5 phút theo 5 phần, có phần khai báo dùng AI.',
+          '📋 Các nhóm khác chấm theo rubric và ghi 1 điểm khen + 1 điểm góp ý.'
         ],
-        visualUrl: svgVisual('Thuyết Trình Sản Phẩm Nhóm', 'AI Agent phục vụ học tập / cộng đồng', '#4338ca', '#9333ea', '🎤'),
-        speakerNotes: 'Tổ chức cho từng nhóm thuyết trình ngắn (3-5 phút/nhóm) sản phẩm AI agent, các nhóm khác lắng nghe và chuẩn bị nhận xét chéo ở hoạt động luyện tập.'
+        visualUrl: svgVisual('Dự Án AI & Tổng Kết', 'Trình bày sản phẩm - Đánh giá chéo - Tổng kết chuyên đề', '#4338ca', '#9333ea', '🎤'),
+        speakerNotes: 'Nêu rõ luật chơi: mỗi nhóm trình bày 4-5 phút theo 5 phần (vấn đề & mục tiêu; cách làm; kết quả & đánh giá; con người kiểm soát & đạo đức; khai báo dùng AI), các nhóm khác chấm theo rubric.'
       },
       {
-        id: 'l12_s2', title: 'Luyện Tập: Nhận Xét Chéo Giữa Các Nhóm', visualType: 'interactive',
+        id: 'l12_s2', title: 'Trình Bày Sản Phẩm: Dàn Ý 5 Phần', visualType: 'concepts',
         content: [
-          '🔄 Học sinh nhận xét chéo giữa các nhóm về rủi ro có thể phát sinh và cách khắc phục.',
-          '📣 Một số học sinh chia sẻ trước lớp.'
+          '1️⃣ Vấn đề & mục tiêu - giải quyết chuyện gì? (mạch D - thiết kế hệ thống AI)',
+          '2️⃣ Cách làm - dùng công cụ gì, dữ liệu gì, huấn luyện ra sao? (mạch C - kĩ thuật & ứng dụng AI)',
+          '3️⃣ Kết quả & đánh giá - độ chính xác, chỗ còn sai (mạch C)',
+          '4️⃣ Con người kiểm soát ở đâu + vấn đề đạo đức đã lưu ý (mạch A, B - con người làm chủ AI, đạo đức & pháp luật)',
+          '5️⃣ Khai báo dùng AI - phần AI hỗ trợ, phần nhóm tự làm, cách kiểm chứng.'
+        ],
+        visualUrl: svgVisual('Dàn Ý Trình Bày 5 Phần', 'Vấn đề - Cách làm - Kết quả - Con người kiểm soát - Khai báo AI', '#3730a3', '#7c3aed', '📋'),
+        speakerNotes: 'Lần lượt các nhóm trình bày theo dàn ý 5 phần + demo sản phẩm. GV điều phối thời gian (khoảng 4-5 phút/nhóm), đảm bảo mỗi nhóm đều thể hiện đủ 4 mạch năng lực đã học.'
+      },
+      {
+        id: 'l12_s3', title: 'Luyện Tập: Đánh Giá Chéo Theo Rubric', visualType: 'interactive',
+        content: [
+          '📏 Rubric đánh giá dự án gồm 4 mức: Xác định vấn đề (D), Kĩ thuật & công cụ (C), Con người kiểm soát (A), Đạo đức & trách nhiệm (B), Hợp tác & trình bày.',
+          '🔄 Các nhóm chấm chéo theo rubric; nêu 1 điểm khen + 1 điểm góp ý cho nhóm bạn.',
+          '📌 Nguyên tắc chấm: chỉ nhận xét + mức độ đạt, KHÔNG lấy điểm số làm chính; khai báo dùng AI là minh chứng trung thực, KHÔNG dùng để tăng/giảm điểm.'
         ],
         interactiveQuiz: {
-          question: 'Khi nhận xét chéo sản phẩm AI agent của nhóm bạn, điều quan trọng nhất cần góp ý là gì?',
+          question: 'Theo nguyên tắc chấm dự án AI cuối chuyên đề (Quyết định 2422/QĐ-BGDĐT), việc khai báo trung thực đã dùng AI hỗ trợ một phần sản phẩm sẽ được xử lí như thế nào?',
           options: [
-            'Chỉ khen mà không góp ý gì để giữ hoà khí',
-            'Chỉ ra rủi ro có thể phát sinh khi vận hành và đề xuất cách khắc phục cụ thể, mang tính xây dựng',
-            'Chê bai sản phẩm của nhóm bạn mà không giải thích lý do',
-            'Không cần nhận xét gì vì đã là buổi cuối cùng'
+            'Bị trừ điểm vì đã dùng AI thay vì tự làm hoàn toàn',
+            'Không dùng để tăng/giảm điểm - đây là minh chứng cho sự trung thực, được đánh giá bằng nhận xét',
+            'Được cộng thêm điểm vì biết sử dụng công nghệ hiện đại',
+            'Không cần khai báo vì không ảnh hưởng đến kết quả'
           ],
           answerIndex: 1,
-          explanation: 'Nhận xét chéo cần mang tính xây dựng: chỉ ra rủi ro cụ thể và đề xuất cách khắc phục, giúp nhóm bạn hoàn thiện sản phẩm tốt hơn.',
-          hint: 'Đây là hoạt động rèn năng lực giao tiếp - hợp tác và tư duy phản biện.',
-          suggestedAnswer: 'Góp ý cần cụ thể, mang tính xây dựng, tập trung vào rủi ro vận hành và giải pháp khắc phục khả thi.'
+          explanation: 'Theo nguyên tắc chấm dự án, khai báo dùng AI là minh chứng trung thực của học sinh, KHÔNG được dùng để tăng hay giảm điểm số - việc đánh giá chuyên đề chủ yếu bằng nhận xét, không lấy điểm số làm chính.',
+          hint: 'Nhớ nguyên tắc: chỉ nhận xét + mức độ đạt, không lấy điểm số làm chính; khai báo AI là minh chứng trung thực.',
+          suggestedAnswer: 'Khai báo dùng AI không ảnh hưởng đến việc tăng/giảm điểm - đây là minh chứng cho phẩm chất trung thực của học sinh, được ghi nhận bằng nhận xét.'
         },
-        speakerNotes: 'GV tổng hợp các nhận xét, nhấn mạnh lại vai trò kiểm thử và tinh thần hợp tác, phản biện xây dựng trước khi đưa sản phẩm AI vào sử dụng thực tế.'
+        speakerNotes: 'Các nhóm chấm chéo theo rubric 5 tiêu chí, nêu điểm khen và điểm góp ý mang tính xây dựng, không chê bai. GV tổng hợp nhận xét chung cho cả lớp.'
       },
       {
-        id: 'l12_s3', title: 'Vận Dụng: Tự Đánh Giá Năng Lực AI', visualType: 'concepts',
+        id: 'l12_s4', title: 'Vận Dụng: Nhìn Lại & Định Hướng', visualType: 'activity',
         content: [
-          '📊 4 thành phần năng lực AI đã học qua 6 buổi:',
-          '🅰️ NLa - Quyền kiểm soát & trách nhiệm con người (Buổi 1).',
-          '🅱️ NLb - Đạo đức, rủi ro & hệ sinh thái AI (Buổi 2, 3).',
-          '🅲 NLc - Công cụ, tối ưu hệ thống & dữ liệu AI (Buổi 4, 5).',
-          '🅳 NLd - Giải pháp hệ thống & AI Agent (Buổi 6).'
-        ],
-        visualUrl: svgVisual('4 Thành Phần Năng Lực AI', 'NLa - NLb - NLc - NLd', '#1e3a8a', '#7c3aed', '📊'),
-        speakerNotes: 'Tổng hợp lại 4 thành phần năng lực AI đã học xuyên suốt 6 buổi, chuẩn bị cho hoạt động tự đánh giá cuối chuyên đề.'
-      },
-      {
-        id: 'l12_s4', title: 'Vận Dụng: Phiếu Tự Đánh Giá Cuối Chuyên Đề', visualType: 'activity',
-        content: [
-          '📝 Mỗi học sinh tự nhận xét ngắn về mức độ đạt được của bản thân ở 4 thành phần năng lực AI qua 12 tiết đã học.',
-          '📚 GV tổng hợp toàn bộ minh chứng (phiếu học tập, sản phẩm, bài viết vận dụng, bản cam kết, phiếu tự đánh giá) của cả 6 buổi để nhận xét, đánh giá kết quả chuyên đề.'
+          '🗣️ Sau khi học AI lớp 12, em thấy mình có thể làm gì với AI? Nghề nghiệp nào liên quan đến AI khiến em hứng thú?',
+          '✍️ Viết 3 dòng; vài em chia sẻ.',
+          '📌 Tổng kết: viết đoạn 5-7 câu tự đánh giá em đã tiến bộ gì về AI trong năm học; nêu 1 dự định em muốn làm với AI trong tương lai (học tập/nghề nghiệp).'
         ],
         activity: {
-          title: 'Phiếu tự đánh giá cá nhân cuối chuyên đề',
-          duration: 'Hoàn thành tại lớp, nộp lại cuối tiết',
+          title: 'Bài tập tổng kết: Nhìn lại & định hướng bản thân với AI',
+          duration: 'Viết 3 dòng tại lớp + hoàn thiện đoạn tổng kết ở nhà',
           instructions: [
-            'Tự nhận xét mức độ đạt được của bản thân ở từng thành phần năng lực: NLa, NLb, NLc, NLd.',
-            'Đánh dấu (X) mức độ đạt được qua 12 tiết học theo mẫu Phiếu tự đánh giá.',
-            'Nộp lại phiếu để GV tổng hợp minh chứng đánh giá kết quả chuyên đề.'
+            '1. Viết đoạn 5-7 câu tự đánh giá: em đã tiến bộ gì về AI trong năm học?',
+            '2. Nêu 1 dự định em muốn làm với AI trong tương lai (học tập/nghề nghiệp).'
           ],
-          tips: 'Tự đánh giá trung thực, không cần lo lắng vì chuyên đề không tổ chức kiểm tra định kì hay lập đầu điểm riêng, chỉ đánh giá bằng nhận xét.',
-          hint: 'Xem lại toàn bộ Phiếu học tập số 1-6 và các sản phẩm đã hoàn thành trong 6 buổi để tự đánh giá chính xác.',
-          suggestedAnswer: 'Phiếu tự đánh giá là minh chứng cá nhân, không có đáp án đúng/sai cố định - quan trọng là sự trung thực và tự nhận thức của mỗi học sinh.'
+          tips: 'Nhìn lại toàn bộ 12 tiết đã học: từ quyền kiểm soát con người, đạo đức AI, công cụ tạo AI, đến thiết kế và dự án sản phẩm.',
+          hint: 'Có thể liên hệ tới 4 mạch năng lực: A (con người làm chủ AI), B (đạo đức & pháp luật), C (công cụ & kĩ thuật), D (thiết kế hệ thống AI).',
+          suggestedAnswer: 'Câu trả lời mang tính cá nhân, không có đáp án cố định - quan trọng là sự trung thực và tự nhận thức về sự tiến bộ cũng như định hướng của mỗi học sinh.'
         },
-        speakerNotes: 'Đây là hoạt động Vận dụng cuối cùng của chuyên đề - GV phát Phiếu tự đánh giá cuối tiết, thu lại làm một trong các minh chứng tổng hợp đánh giá cuối chuyên đề trước khi kết thúc Học kỳ I.'
+        speakerNotes: 'GV tổng kết cả chuyên đề, nhấn mạnh thông điệp: CON NGƯỜI LÀM CHỦ AI - dùng AI có đạo đức, có trách nhiệm, vì cộng đồng.'
       },
       {
-        id: 'l12_s5', title: 'Rubric Đánh Giá Chung 4 Thành Phần Năng Lực AI', visualType: 'concepts',
+        id: 'l12_s5', title: 'Rubric Đánh Giá Chung Dự Án AI', visualType: 'concepts',
         content: [
-          '📏 Rubric gồm 3 mức: Đạt tốt - Đạt - Cần cố gắng thêm, áp dụng cho cả 4 thành phần NLa, NLb, NLc, NLd.',
-          '📌 GV dùng Rubric cùng Bảng kiểm nhanh tổng hợp minh chứng để nhận xét, đánh giá kết quả chuyên đề cho từng học sinh.',
+          '📏 Rubric 4 mức cho từng tiêu chí: Xác định vấn đề (D): Mơ hồ → Nêu được → Rõ, thực tế → Rõ, gắn cộng đồng.',
+          '🛠️ Kĩ thuật & công cụ (C): Chưa dựng được → Còn lỗi nhiều → Chạy cơ bản → Chạy tốt, đánh giá được.',
+          '🧑‍💼 Con người kiểm soát (A): Không đề cập → Chung chung → Chỉ rõ 1-2 chỗ → Phân tích rõ.',
+          '⚖️ Đạo đức & trách nhiệm (B): Bỏ qua → Nhắc sơ → Nêu rủi ro → Lưu ý + khai báo AI đủ.',
           'ℹ️ Lưu ý: theo Khung giáo dục AI, không tổ chức kiểm tra định kì, không lập đầu điểm riêng - chỉ đánh giá bằng nhận xét dựa trên minh chứng thu thập qua các buổi học.'
         ],
-        visualUrl: svgVisual('Rubric Đánh Giá Chuyên Đề', 'Đạt tốt - Đạt - Cần cố gắng thêm', '#164e63', '#0e7490', '📏'),
-        speakerNotes: 'Giải thích rõ cách đánh giá của chuyên đề để học sinh và phụ huynh hiểu: đánh giá bằng nhận xét, không phải bằng điểm số, dựa trên minh chứng thu thập xuyên suốt 6 buổi học.'
+        visualUrl: svgVisual('Rubric Đánh Giá Dự Án AI', '4 mức - 5 tiêu chí - Đủ 4 mạch năng lực A, B, C, D', '#164e63', '#0e7490', '📏'),
+        speakerNotes: 'Giải thích rõ cách đánh giá của chuyên đề để học sinh và phụ huynh hiểu: đánh giá bằng nhận xét, không phải bằng điểm số, dựa trên minh chứng thu thập xuyên suốt 12 tiết học và thể hiện đủ 4 mạch năng lực A, B, C, D.'
       },
       {
         id: 'l12_s6', title: 'Tổng Kết Toàn Bộ Chuyên Đề', visualType: 'summary',
         content: [
           '🎉 Hoàn thành 12 tiết (6 buổi) Chuyên đề Giáo dục Trí tuệ nhân tạo (AI) - Lớp 12!',
-          '✅ Các em đã đạt được: phân tích phương án thiết kế, vận hành hệ thống AI hiệu quả; hiểu vai trò hợp tác trong phát triển sản phẩm AI; xây dựng và kiểm thử được một AI Agent đơn giản.',
-          '🏆 Cảm ơn các em học sinh Trường THPT Tân Lược đã tích cực tham gia chuyên đề!',
-          '📌 GV tổng hợp toàn bộ minh chứng để hoàn thành đánh giá, nhận xét trước khi kết thúc Học kỳ I.'
+          '✅ Các em đã đạt được: phân tích quyền kiểm soát và trách nhiệm của con người trong hệ thống AI; hiểu 6 nguyên tắc đạo đức và trách nhiệm công dân số; làm quen công cụ tạo AI và cách đánh giá hiệu quả; thiết kế, hợp tác xây dựng và trình bày được một sản phẩm/dự án AI đơn giản.',
+          '🏆 Thông điệp cốt lõi xuyên suốt chuyên đề: CON NGƯỜI LÀM CHỦ AI - dùng AI có đạo đức, có trách nhiệm, vì cộng đồng.',
+          '📌 GV tổng hợp toàn bộ minh chứng (phiếu học tập, sản phẩm, phiếu đánh giá chéo) để hoàn thành đánh giá, nhận xét trước khi kết thúc Học kỳ I.'
         ],
         visualUrl: `${import.meta.env.BASE_URL}trophy-tot-nghiep.png`,
         visualLabel: 'Vinh danh học sinh hoàn thành chuyên đề AI Lớp 12',
-        speakerNotes: 'Chúc mừng học sinh đã hoàn thành toàn bộ chuyên đề. Nhắc lại mạch kiến thức xuyên suốt 6 buổi: quyền kiểm soát và trách nhiệm (Buổi 1) → đạo đức và trách nhiệm công dân (Buổi 2) → rủi ro và hệ sinh thái AI (Buổi 3) → công cụ thiết kế AI (Buổi 4) → tối ưu hệ thống và dữ liệu (Buổi 5) → giải pháp hệ thống và AI agent (Buổi 6).'
+        speakerNotes: 'Chúc mừng học sinh đã hoàn thành toàn bộ chuyên đề. Nhắc lại mạch kiến thức xuyên suốt 4 mạch năng lực: A - Con người làm chủ AI (Tiết 1-3) → B - Đạo đức & pháp luật khi dùng/tạo AI (Tiết 4-6) → C - Công cụ & kĩ thuật làm AI (Tiết 7-8) → D - Thiết kế, phát triển và dự án hệ thống AI (Tiết 9-12). Nhấn mạnh thông điệp "Con người làm chủ AI" xuyên suốt toàn chuyên đề.'
       }
     ]
   }

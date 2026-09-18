@@ -42,86 +42,86 @@ export const lessonVideos: Record<number, SlideVideo> = {
   1: {
     id: 'vid_lesson_1',
     title: 'AI Agent là gì? Hệ thống AI tự ra quyết định',
-    description: 'Video mở rộng giới thiệu khái niệm hệ thống AI có khả năng tự động ra quyết định - giúp học sinh liên hệ với câu hỏi "ai giữ quyền kiểm soát, ai chịu trách nhiệm" trong vòng đời một hệ thống AI.',
+    description: 'Video mở rộng giới thiệu khái niệm hệ thống AI có khả năng tự động ra quyết định - giúp học sinh liên hệ với 7 bước trong vòng đời hệ thống AI và nguyên tắc "con người trong vòng lặp".',
     ...AI_AGENT_VIDEO,
-    discussionQuestion: 'Nếu một hệ thống AI như trong video tự đưa ra quyết định sai, theo em ai là người phải chịu trách nhiệm giải trình: người lập trình, người triển khai hay người giám sát sử dụng?'
+    discussionQuestion: 'Nếu một hệ thống AI như trong video tự đưa ra quyết định sai, theo em ở bước nào trong vòng đời AI con người lẽ ra phải kiểm soát chặt hơn để tránh sai sót đó?'
   },
   2: {
     id: 'vid_lesson_2',
-    title: 'AI Agent và ranh giới kiểm soát của con người',
-    description: 'Video mở rộng giúp học sinh hình dung một hệ thống AI hoạt động tự động đến mức nào, từ đó phân tích những bước trong vòng đời AI mà con người bắt buộc phải trực tiếp quyết định.',
+    title: 'AI Agent và ranh giới giữa gợi ý và quyết định',
+    description: 'Video mở rộng giúp học sinh hình dung một hệ thống AI hoạt động tự động đến mức nào, từ đó phân biệt phần việc AI có thể gợi ý và phần việc con người bắt buộc phải tự quyết định.',
     ...AI_AGENT_VIDEO,
-    discussionQuestion: 'Ở bước "triển khai" và "giám sát - xử lí sự cố" trong vòng đời AI, con người cần giữ quyền kiểm soát như thế nào để hệ thống AI không vượt tầm kiểm soát?'
+    discussionQuestion: 'Trong 5 bước ra quyết định có AI hỗ trợ, ở bước nào AI trong video chỉ nên "gợi ý" chứ không được tự ý "quyết định thay" con người?'
   },
   3: {
     id: 'vid_lesson_3',
     title: 'Trí tuệ nhân tạo: Công cụ hay mối đe dọa? Tất cả phụ thuộc vào đạo đức phát triển',
-    description: 'Video mở rộng (VTV24) bàn về vai trò của đạo đức trong phát triển AI, dùng làm ví dụ liên hệ tới 6 nguyên tắc đạo đức khi thiết kế và phát triển sản phẩm AI.',
+    description: 'Video mở rộng (VTV24) bàn về vai trò của đạo đức trong phát triển AI, dùng làm ví dụ liên hệ tới khái niệm trách nhiệm giải trình và việc không thể "đổ lỗi cho máy" khi AI gây hại.',
     ...AI_ETHICS_VIDEO,
-    discussionQuestion: 'Theo nội dung video, nguyên tắc đạo đức nào (an toàn, công bằng, minh bạch, riêng tư, trách nhiệm, lợi ích xã hội) cần được ưu tiên hàng đầu khi phát triển một sản phẩm AI? Vì sao?'
+    discussionQuestion: 'Theo nội dung video, khi một hệ thống AI gây hậu quả xấu, ai là người phải đứng ra giải trình và chịu trách nhiệm - máy móc hay con người vận hành nó?'
   },
   4: {
     id: 'vid_lesson_4',
-    title: 'Đạo đức phát triển AI và trách nhiệm công dân số',
-    description: 'Video mở rộng (VTV24) về ranh giới giữa AI là công cụ hữu ích hay mối đe dọa, làm cơ sở để học sinh viết bản cam kết cá nhân về sử dụng AI có trách nhiệm.',
+    title: 'Đạo đức phát triển AI và 6 nguyên tắc thiết kế AI có trách nhiệm',
+    description: 'Video mở rộng (VTV24) về ranh giới giữa AI là công cụ hữu ích hay mối đe dọa, làm cơ sở liên hệ tới 6 nguyên tắc đạo đức khi thiết kế AI: an toàn, công bằng, minh bạch, riêng tư, trách nhiệm, lợi ích xã hội.',
     ...AI_ETHICS_VIDEO,
-    discussionQuestion: 'Là một công dân số, em cần làm gì để sử dụng AI một cách an toàn, trung thực và có đạo đức như nội dung video đã nêu?'
+    discussionQuestion: 'Theo nội dung video, nguyên tắc đạo đức nào (an toàn, công bằng, minh bạch, riêng tư, trách nhiệm, lợi ích xã hội) đang bị vi phạm rõ nhất, và cần sửa như thế nào?'
   },
   5: {
     id: 'vid_lesson_5',
     title: 'Hạn chế rủi ro và ảnh hưởng tiêu cực của trí tuệ nhân tạo',
-    description: 'Video mở rộng (Truyền hình Quốc hội Việt Nam) về các rủi ro của AI trong thực tế, giúp liên hệ tới nguyên nhân sai lệch dữ liệu, thuật toán và bối cảnh sử dụng.',
+    description: 'Video mở rộng (Truyền hình Quốc hội Việt Nam) về các rủi ro của AI trong thực tế, giúp liên hệ tới 3 mức độ rủi ro (thấp - trung bình - cao) và trách nhiệm công dân khi dùng AI.',
     ...AI_RISK_VIDEO,
-    discussionQuestion: 'Theo nội dung video, một hệ thống AI có thể gây ra những rủi ro gì nếu dữ liệu huấn luyện không đầy đủ hoặc bị lạm dụng?'
+    discussionQuestion: 'Theo nội dung video, những rủi ro được nêu ra thuộc mức độ nào (thấp, trung bình hay cao) trong thang phân loại rủi ro đã học? Vì sao?'
   },
   6: {
     id: 'vid_lesson_6',
     title: 'Quyền và trách nhiệm của các bên khi hạn chế rủi ro AI',
-    description: 'Video mở rộng (Truyền hình Quốc hội Việt Nam) giúp học sinh hình dung vai trò của người phát triển, người sử dụng và cơ quan quản lí trong việc hạn chế rủi ro AI.',
+    description: 'Video mở rộng (Truyền hình Quốc hội Việt Nam) giúp học sinh hình dung quyền và trách nhiệm của người phát triển, người sử dụng AI, cũng như vai trò công dân trong việc góp ý chính sách AI.',
     ...AI_RISK_VIDEO,
     discussionQuestion: 'Trong hệ sinh thái AI, ai là người có quyền và trách nhiệm góp ý xây dựng quy định sử dụng AI tại trường học của em?'
   },
   7: {
     id: 'vid_lesson_7',
     title: 'Hướng dẫn thực hành Teachable Machine',
-    description: 'Video hướng dẫn từng bước sử dụng công cụ mã nguồn mở Teachable Machine (teachablemachine.withgoogle.com) để huấn luyện một mô hình phân loại đơn giản - đúng công cụ thực hành của buổi học.',
+    description: 'Video hướng dẫn từng bước sử dụng công cụ mã nguồn mở Teachable Machine (teachablemachine.withgoogle.com) để huấn luyện một mô hình phân loại đơn giản - một trong các công cụ tạo AI miễn phí vừa học.',
     ...TEACHABLE_MACHINE_VIDEO,
-    discussionQuestion: 'Sau khi xem video, nhóm em dự định huấn luyện mô hình Teachable Machine để phân loại đối tượng gì phục vụ học tập hoặc hoạt động xã hội ở trường?'
+    discussionQuestion: 'Sau khi xem video, nhóm em dự định dùng Teachable Machine cho ý tưởng dự án nào trong 3 ý tưởng nhóm vừa đề xuất?'
   },
   8: {
     id: 'vid_lesson_8',
     title: 'Thao tác huấn luyện mô hình phân loại với Teachable Machine',
-    description: 'Video hướng dẫn thực hành các bước tải ảnh mẫu, gắn nhãn (label) và huấn luyện mô hình bằng Teachable Machine.',
+    description: 'Video hướng dẫn thực hành các bước tải ảnh mẫu, gắn nhãn (label) và huấn luyện mô hình bằng Teachable Machine - dùng để thực hành kiểm thử và tính độ chính xác của mô hình.',
     ...TEACHABLE_MACHINE_VIDEO,
-    discussionQuestion: 'Khi kiểm tra mô hình vừa huấn luyện bằng ảnh mới, nếu mô hình dự đoán sai thì nguyên nhân có thể do đâu?'
+    discussionQuestion: 'Khi kiểm tra mô hình vừa huấn luyện bằng 10 mẫu ảnh mới, nếu mô hình dự đoán sai thì nguyên nhân thường do đâu và nên cải thiện thế nào?'
   },
   9: {
     id: 'vid_lesson_9',
     title: 'Cải thiện dữ liệu để tối ưu mô hình Teachable Machine',
-    description: 'Video hướng dẫn thao tác Teachable Machine, dùng làm cơ sở thực hành bổ sung dữ liệu, huấn luyện lại và so sánh kết quả trước - sau.',
+    description: 'Video hướng dẫn thao tác Teachable Machine, dùng làm ví dụ minh hoạ cho thành phần "Dữ liệu" và "Phản hồi (cải tiến)" trong 5 thành phần của một hệ thống AI.',
     ...TEACHABLE_MACHINE_VIDEO,
-    discussionQuestion: 'Em dự định bổ sung thêm những dữ liệu (ảnh) nào để mô hình Teachable Machine của nhóm dự đoán chính xác hơn?'
+    discussionQuestion: 'Trong 5 thành phần của hệ thống AI (Dữ liệu - Thuật toán - Mô hình - Đầu ra - Phản hồi), video vừa xem minh hoạ rõ nhất cho thành phần nào?'
   },
   10: {
     id: 'vid_lesson_10',
     title: 'Từ dữ liệu đến hiệu quả mô hình AI',
-    description: 'Video hướng dẫn Teachable Machine, liên hệ tới khái niệm hàm mục tiêu, tối ưu hoá hệ thống và hiện tượng quá khớp dữ liệu (overfitting).',
+    description: 'Video hướng dẫn Teachable Machine, liên hệ tới các vai trò trong nhóm phát triển AI: ai là người thu thập dữ liệu, ai huấn luyện mô hình, ai kiểm thử kết quả.',
     ...TEACHABLE_MACHINE_VIDEO,
-    discussionQuestion: 'Nếu mô hình học "quá kỹ" dữ liệu huấn luyện nhưng dự đoán sai với dữ liệu mới (overfitting), nhóm em nên xử lí như thế nào?'
+    discussionQuestion: 'Trong quy trình huấn luyện mô hình ở video, công việc nào ứng với vai trò "huấn luyện" và công việc nào ứng với vai trò "kiểm thử" đã học?'
   },
   11: {
     id: 'vid_lesson_11',
     title: 'AI Agent là gì? 15 phút hiểu hết về AI Agent',
-    description: 'Video giải thích khái niệm, cấu trúc và cách hoạt động của một hệ thống tác nhân AI (AI agent) - đúng nội dung trọng tâm của buổi tổng kết chuyên đề.',
+    description: 'Video giải thích khái niệm, cấu trúc và cách hoạt động của một hệ thống tác nhân AI (AI agent) - liên hệ với quy trình thực hành dựng bản đầu sản phẩm AI của nhóm.',
     ...AI_AGENT_VIDEO,
-    discussionQuestion: 'Theo cấu trúc AI agent trong video (mục tiêu - đầu vào - các bước xử lí - đầu ra - người giám sát), hãy mô tả AI agent nhóm em dự định dựng thử trên Google AI Studio.'
+    discussionQuestion: 'So với sản phẩm AI đơn giản nhóm em đang dựng, AI agent trong video có gì phức tạp hơn về mục tiêu, đầu vào và các bước xử lí?'
   },
   12: {
     id: 'vid_lesson_12',
     title: 'Ứng dụng AI Agent phục vụ học tập và cộng đồng',
-    description: 'Video giải thích AI Agent, làm nền tảng để học sinh thuyết trình sản phẩm/ý tưởng AI agent của nhóm và tự đánh giá cuối chuyên đề.',
+    description: 'Video giải thích AI Agent, làm nền tảng để học sinh thuyết trình sản phẩm/dự án AI của nhóm theo dàn ý 5 phần và tự nhìn lại quá trình học tập cuối chuyên đề.',
     ...AI_AGENT_VIDEO,
-    discussionQuestion: 'Sau 12 tiết học chuyên đề, em tự đánh giá bản thân đã đạt được năng lực AI nào rõ nhất trong 4 thành phần NLa, NLb, NLc, NLd?'
+    discussionQuestion: 'Sau 12 tiết học chuyên đề "Con người làm chủ AI", em thấy mình có thể ứng dụng AI vào việc học tập hoặc định hướng nghề nghiệp nào trong tương lai?'
   }
 };
 
