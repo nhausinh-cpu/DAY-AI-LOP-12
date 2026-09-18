@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/day-ai-lop-12-thpt-tan-luoc/',
+    base: '/DAY-AI-LOP-12/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
