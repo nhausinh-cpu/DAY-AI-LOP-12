@@ -210,7 +210,8 @@ export const module6: Lesson[] = [
           '🏆 Cảm ơn các em học sinh Trường THPT Tân Lược đã tích cực tham gia chuyên đề!',
           '📌 GV tổng hợp toàn bộ minh chứng để hoàn thành đánh giá, nhận xét trước khi kết thúc Học kỳ I.'
         ],
-        visualUrl: svgVisual('Hoàn Thành Chuyên Đề AI Lớp 12', 'Chúc mừng các em - THPT Tân Lược', '#4338ca', '#0ea5e9', '🎓'),
+        visualUrl: '/trophy-tot-nghiep.png',
+        visualLabel: 'Vinh danh học sinh hoàn thành chuyên đề AI Lớp 12',
         speakerNotes: 'Chúc mừng học sinh đã hoàn thành toàn bộ chuyên đề. Nhắc lại mạch kiến thức xuyên suốt 6 buổi: quyền kiểm soát và trách nhiệm (Buổi 1) → đạo đức và trách nhiệm công dân (Buổi 2) → rủi ro và hệ sinh thái AI (Buổi 3) → công cụ thiết kế AI (Buổi 4) → tối ưu hệ thống và dữ liệu (Buổi 5) → giải pháp hệ thống và AI agent (Buổi 6).'
       }
     ]
