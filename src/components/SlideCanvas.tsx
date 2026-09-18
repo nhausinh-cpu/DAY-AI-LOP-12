@@ -49,6 +49,7 @@ export const getSlideStepCount = (slide?: Slide): number => {
   if (!slide?.elements?.length) return 1;
   return slide.elements.reduce((acc, el) => {
     if (el.type === 'steps' && Array.isArray(el.data)) return acc + el.data.length;
+    if (el.type === 'cards' && Array.isArray(el.data)) return acc + el.data.length;
     if (el.type === 'table' && Array.isArray(el.data?.rows)) return acc + el.data.rows.length;
     return acc + 1;
   }, 0);
@@ -150,11 +151,6 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             <h2 className={`font-bold tracking-tight text-white leading-tight ${fullscreen ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-2xl sm:text-3xl md:text-4xl'}`}>
               {slide.title}
             </h2>
-            {slide.subtitle && (
-              <p className={`mt-1.5 text-slate-300 font-normal leading-relaxed max-w-4xl ${fullscreen ? 'text-lg sm:text-xl md:text-2xl' : 'text-sm sm:text-base md:text-lg'}`}>
-                {slide.subtitle}
-              </p>
-            )}
           </motion.div>
 
           {/* Dynamic Content Based on Slide Elements (hỗ trợ hiện từng đối tượng/từng bước khi click) */}
@@ -162,17 +158,19 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             let unitCursor = 0; // đếm dồn "đơn vị hiển thị" qua các phần tử để hỗ trợ hiện từng bước
             return slide.elements.map((el) => {
               const isSteps = el.type === 'steps' && Array.isArray(el.data);
+              const isCards = el.type === 'cards' && Array.isArray(el.data);
               const isTableRows = el.type === 'table' && Array.isArray(el.data?.rows);
-              const elUnitCount = isSteps ? el.data.length : isTableRows ? el.data.rows.length : 1;
+              const elUnitCount = isSteps || isCards ? el.data.length : isTableRows ? el.data.rows.length : 1;
               const elStartUnit = unitCursor;
               unitCursor += elUnitCount;
 
               // Cả khối chưa xuất hiện chút nào -> ẩn hẳn
               if (isClickToReveal && revealStep < elStartUnit) return null;
 
-              const cardTitleCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
-              const cardDescCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
-              const bodyCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
+              // Chữ phần nội dung (thẻ/bước/bảng...) to hơn chữ phần tình huống gợi mở bên dưới
+              const cardTitleCls = fullscreen ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl';
+              const cardDescCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
+              const bodyCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
 
               if (el.type === 'cards' && Array.isArray(el.data)) {
                 return (
@@ -190,10 +188,15 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                     }`}
                   >
                     {el.data.map((card: any, idx: number) => {
+                      // Thẻ mục tiêu/nội dung: mỗi thẻ là 1 đơn vị hiện riêng khi bật Hiện Từng Bước
+                      if (isClickToReveal && revealStep < elStartUnit + idx) return null;
                       const palette = CARD_COLOR_PALETTE[idx % CARD_COLOR_PALETTE.length];
                       return (
-                        <div
+                        <motion.div
                           key={card.id || idx}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3 }}
                           className={`p-3.5 sm:p-4 rounded-xl border transition-all flex flex-col justify-between ${palette.bg} ${palette.border}`}
                         >
                           <div>
@@ -215,7 +218,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                               <span>{card.badge}</span>
                             </div>
                           )}
-                        </div>
+                        </motion.div>
                       );
                     })}
                   </motion.div>
@@ -428,14 +431,14 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                 {slide.teacherNotes?.teacherScript && (
                   <button
                     onClick={() => setShowTeacherQuestion((v) => !v)}
-                    className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border transition-all cursor-pointer ${
+                    className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 border transition-all cursor-pointer ${
                       showTeacherQuestion
                         ? 'bg-amber-500 border-amber-400 text-slate-900'
                         : 'bg-amber-500/20 border-amber-500/50 text-amber-300 hover:bg-amber-500/40'
                     }`}
                     title="Tình huống / câu hỏi đặt vấn đề cho học sinh"
                   >
-                    <HelpCircle className="w-3.5 h-3.5" />
+                    <HelpCircle className="w-4 h-4" />
                   </button>
                 )}
                 {slide.illustration && (
@@ -458,7 +461,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
               className={`mt-1.5 p-3 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-100 italic leading-relaxed ${
-                fullscreen ? 'text-lg sm:text-xl md:text-2xl' : 'text-sm sm:text-base md:text-lg'
+                fullscreen ? 'text-base sm:text-lg' : 'text-xs sm:text-sm md:text-base'
               }`}
             >
               💬 "{slide.teacherNotes.teacherScript}"
