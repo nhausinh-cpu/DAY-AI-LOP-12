@@ -22,6 +22,17 @@ export const InteractiveActivitiesHub: React.FC<InteractiveActivitiesHubProps> =
 
   return (
     <div className="space-y-6">
+      {/* Teacher instruction banner */}
+      <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3">
+        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-500/30">
+          <BookOpen className="w-4 h-4" />
+        </div>
+        <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
+          <span className="font-bold text-white">Dành cho giáo viên tổ chức hoạt động nhóm trên lớp:</span>{' '}
+          chọn hoạt động đúng tiết học, hướng dẫn cả lớp thực hiện theo nhóm hoặc cả lớp cùng thảo luận, giáo viên quan sát và nhận xét trực tiếp.
+        </p>
+      </div>
+
       {/* Activity Navigation Tabs */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <button

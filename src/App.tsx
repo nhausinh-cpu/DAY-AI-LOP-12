@@ -127,7 +127,7 @@ export default function App() {
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                12 Tiết Học Cốt Lõi · 110 Slide Bài Giảng · Trò Chơi Tương Tác & Hoạt Động Nhóm · GDPT 2018 · QĐ 2422
+                12 Tiết Học Cốt Lõi · 110 Slide Bài Giảng · Trò Chơi & Hoạt Động GV Tổ Chức Trên Lớp · GDPT 2018 · QĐ 2422
               </p>
             </div>
           </div>
@@ -137,9 +137,9 @@ export default function App() {
             {/* Progress Ring: Huy hiệu đã mở khóa */}
             <div className="flex items-center gap-2">
               <div className="text-right hidden sm:block">
-                <span className="text-[10px] font-bold text-slate-400 block tracking-wider uppercase">Tiến Độ</span>
+                <span className="text-[10px] font-bold text-slate-400 block tracking-wider uppercase">Tiến Độ Lớp</span>
                 <span className="text-xs font-extrabold text-slate-200">
-                  {unlockedBadgeIds.length} / 6 Huy Hiệu
+                  {unlockedBadgeIds.length} / 6 Mục Tiêu
                 </span>
               </div>
               <div className="w-11 h-11 rounded-full border-4 border-slate-800 flex items-center justify-center relative shrink-0">
@@ -165,7 +165,7 @@ export default function App() {
             {/* Score & Badges Chip */}
             <div className="px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-bold text-amber-400 flex items-center gap-1.5">
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-              <span>{totalScore} Điểm</span>
+              <span>{totalScore} Điểm Lớp</span>
             </div>
 
             {activeTab === 'slides' && (
@@ -228,7 +228,7 @@ export default function App() {
               }`}
             >
               <Gamepad2 className="w-3.5 h-3.5" />
-              <span>Trò Chơi Tương Tác</span>
+              <span>Trò Chơi GV Tổ Chức</span>
               <span className="px-1.5 py-0.2 rounded-full bg-emerald-400/20 text-emerald-300 text-[10px]">
                 5 Game
               </span>
@@ -243,7 +243,7 @@ export default function App() {
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>Hoạt Động Học Tập</span>
+              <span>Hoạt Động Nhóm Trên Lớp</span>
               <span className="px-1.5 py-0.2 rounded-full bg-blue-400/20 text-blue-300 text-[10px]">
                 3 Hoạt Động
               </span>

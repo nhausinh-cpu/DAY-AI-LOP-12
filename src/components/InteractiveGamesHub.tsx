@@ -80,6 +80,17 @@ export const InteractiveGamesHub: React.FC<InteractiveGamesHubProps> = ({
 
   return (
     <div className="space-y-6">
+      {/* Teacher instruction banner */}
+      <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3">
+        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-500/30">
+          <Sparkles className="w-4 h-4" />
+        </div>
+        <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
+          <span className="font-bold text-white">Dành cho giáo viên trình chiếu trên lớp:</span>{' '}
+          chọn trò chơi phù hợp với tiết đang dạy, chiếu lên màn hình/máy chiếu, rồi gọi học sinh xung phong lên bảng hoặc trả lời tại chỗ. Giáo viên điều khiển tiến trình và chốt kiến thức sau mỗi lượt chơi.
+        </p>
+      </div>
+
       {/* Game Selection Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         {games.map((g) => {
