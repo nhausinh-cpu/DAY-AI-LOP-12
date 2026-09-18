@@ -453,17 +453,22 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             });
           })()}
 
-          {/* Ảnh minh hoạ trực tiếp trên slide (vd. cúp chúc mừng ở slide bế mạc) */}
+          {/* Ảnh minh hoạ trực tiếp trên slide (vd. cúp chúc mừng ở slide bế mạc) + câu chúc canh giữa ngay dưới ảnh */}
           {slide.illustration?.imageUrl && (
             <motion.div
               variants={showAnimation ? itemVariants : undefined}
-              className="flex justify-center my-2"
+              className="flex flex-col items-center justify-center gap-3 my-2"
             >
               <img
                 src={`${import.meta.env.BASE_URL}${slide.illustration.imageUrl}`}
                 alt={slide.illustration.caption || 'Ảnh minh hoạ'}
-                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-64 sm:h-80' : 'h-44 sm:h-56'}`}
+                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-80 sm:h-[26rem]' : 'h-56 sm:h-72'}`}
               />
+              {slide.illustration.caption && (
+                <p className={`text-center font-bold text-amber-200 max-w-3xl leading-relaxed ${fullscreen ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'}`}>
+                  {slide.illustration.caption}
+                </p>
+              )}
             </motion.div>
           )}
 
@@ -483,8 +488,8 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             </motion.div>
           )}
 
-          {/* Dòng ghi chú minh hoạ + Icon câu hỏi đặt vấn đề cho học sinh */}
-          {(slide.illustration || slide.teacherNotes?.teacherScript) && (
+          {/* Dòng ghi chú minh hoạ + Icon câu hỏi đặt vấn đề cho học sinh (bỏ qua với slide có ảnh lớn như slide bế mạc, vì câu chúc đã hiện ngay dưới ảnh) */}
+          {!slide.illustration?.imageUrl && (slide.illustration || slide.teacherNotes?.teacherScript) && (
             <motion.div
               variants={showAnimation ? itemVariants : undefined}
               className="mt-3 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 gap-2"
@@ -518,7 +523,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             </motion.div>
           )}
 
-          {showTeacherQuestion && slide.teacherNotes?.teacherScript && (
+          {!slide.illustration?.imageUrl && showTeacherQuestion && slide.teacherNotes?.teacherScript && (
             <motion.div
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}

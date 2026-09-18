@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import type { Slide } from '../types';
 import { SlideCanvas, getSlideStepCount, FONT_SIZE_OPTIONS, type FontSizeOption } from './SlideCanvas';
-import { MousePointerClick, Eye, Type } from 'lucide-react';
+import { MousePointerClick, Eye, Type, Gamepad2, FileText } from 'lucide-react';
+import { GAME_PERIODS, ACTIVITY_PERIODS } from '../utils/gameActivityPeriods';
 
 interface PresentationModeModalProps {
   isOpen: boolean;
@@ -36,6 +37,9 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
 
   const currentSlide = slides[currentIndex];
   const maxSteps = Math.max(getSlideStepCount(currentSlide), 1);
+  const showShortcut = !!currentSlide.worksheetNumber;
+  const isGameSlide = showShortcut && GAME_PERIODS.has(currentSlide.period);
+  const isActivitySlide = showShortcut && ACTIVITY_PERIODS.has(currentSlide.period);
 
   // Reset bước hiển thị mỗi khi chuyển slide
   useEffect(() => {
@@ -91,8 +95,16 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black flex flex-col justify-between p-4 select-none">
-      {/* Thanh điều khiển hiệu ứng: Hiện Từng Bước / Hiện Tất Cả / Ghi chú */}
-      <div className="flex items-center justify-center gap-2 flex-wrap pb-2">
+      {/* Thanh điều khiển: Tiết + tiêu đề slide, Hiện Từng Bước / Hiện Tất Cả / Cỡ chữ / Trò Chơi-Hoạt Động */}
+      <div className="flex items-center gap-2 flex-wrap pb-2">
+        <span className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold shrink-0">
+          Tiết {currentSlide.period}
+        </span>
+        <span className="text-xs font-semibold text-slate-200 truncate max-w-[220px] hidden sm:inline">
+          {currentSlide.title}
+        </span>
+
+        <div className="flex items-center gap-2 ml-auto flex-wrap justify-end">
         <button
           onClick={() => setIsClickToReveal(!isClickToReveal)}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
@@ -140,6 +152,23 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
             ))}
           </div>
         )}
+
+        {/* Lối tắt Trò Chơi/Hoạt Động nếu Tiết này có gắn Phiếu học tập */}
+        {(isGameSlide || isActivitySlide) && (
+          <button
+            onClick={isGameSlide ? onOpenGame : onOpenActivity}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
+              isGameSlide
+                ? 'bg-indigo-600 hover:bg-indigo-500 border-indigo-400 text-white'
+                : 'bg-teal-600 hover:bg-teal-500 border-teal-400 text-white'
+            }`}
+            title={isGameSlide ? `Mở Trò Chơi của Tiết ${currentSlide.period}` : `Mở Hoạt Động của Tiết ${currentSlide.period}`}
+          >
+            {isGameSlide ? <Gamepad2 className="w-3.5 h-3.5" /> : <FileText className="w-3.5 h-3.5" />}
+            <span>{isGameSlide ? 'Trò Chơi Tiết' : 'Hoạt Động Tiết'} {currentSlide.period}</span>
+          </button>
+        )}
+        </div>
       </div>
 
       {/* Main Slide Presentation Stage */}
