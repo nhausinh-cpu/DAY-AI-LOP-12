@@ -21,17 +21,30 @@ import {
   Award,
 } from 'lucide-react';
 
+export type FontSizeOption = '20pt' | '22pt' | '24pt' | '28pt' | '32pt';
+
+const FONT_SCALE_MAP: Record<FontSizeOption, number> = {
+  '20pt': 0.85,
+  '22pt': 0.92,
+  '24pt': 1,
+  '28pt': 1.12,
+  '32pt': 1.25,
+};
+
 interface SlideCanvasProps {
   slide: Slide;
   totalSlides: number;
   showAnimation?: boolean;
+  fontSize?: FontSizeOption;
 }
 
 export const SlideCanvas: React.FC<SlideCanvasProps> = ({
   slide,
   totalSlides,
   showAnimation = true,
+  fontSize = '24pt',
 }) => {
+  const fontScale = FONT_SCALE_MAP[fontSize];
   // Animation variants
   const containerVariants: any = {
     hidden: { opacity: 0 },
@@ -53,6 +66,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
     <div
       id={`slide-canvas-${slide.id}`}
       className="relative w-full aspect-[16/9] max-w-5xl mx-auto bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden flex flex-col justify-between p-6 sm:p-8 select-none"
+      style={{ zoom: fontScale } as React.CSSProperties}
     >
       {/* Background Subtle Gradient & Accents */}
       <div className="absolute inset-0 bg-radial from-slate-800/40 via-transparent to-transparent pointer-events-none" />

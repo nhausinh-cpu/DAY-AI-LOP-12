@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { Slide } from '../types';
-import { SlideCanvas } from './SlideCanvas';
+import { SlideCanvas, type FontSizeOption } from './SlideCanvas';
 import {
   X,
   ChevronLeft,
@@ -15,6 +15,7 @@ interface PresentationModeModalProps {
   onClose: () => void;
   slides: Slide[];
   initialSlideIndex: number;
+  fontSize?: FontSizeOption;
 }
 
 export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
@@ -22,6 +23,7 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
   onClose,
   slides,
   initialSlideIndex,
+  fontSize = '24pt',
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(initialSlideIndex);
   const [showNotes, setShowNotes] = useState<boolean>(false);
@@ -106,7 +108,7 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
 
         {/* Slide Canvas */}
         <div className="w-full max-w-5xl transition-all">
-          <SlideCanvas slide={currentSlide} totalSlides={slides.length} showAnimation={true} />
+          <SlideCanvas slide={currentSlide} totalSlides={slides.length} showAnimation={true} fontSize={fontSize} />
         </div>
 
         {/* Next Button */}

@@ -10,6 +10,7 @@ import { PresentationModeModal } from './components/PresentationModeModal';
 import { InteractiveGamesHub } from './components/InteractiveGamesHub';
 import { InteractiveActivitiesHub } from './components/InteractiveActivitiesHub';
 import { StudentBadgesBar } from './components/StudentBadgesBar';
+import type { FontSizeOption } from './components/SlideCanvas';
 import {
   Sparkles,
   Play,
@@ -27,16 +28,19 @@ import {
   FileText,
   Star,
   Trophy,
+  Type,
 } from 'lucide-react';
+
+const FONT_SIZE_OPTIONS: FontSizeOption[] = ['20pt', '22pt', '24pt', '28pt', '32pt'];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'slides' | 'games' | 'activities'>('slides');
   const [activeSlideId, setActiveSlideId] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number | 'all'>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
   const [isPresentationOpen, setIsPresentationOpen] = useState<boolean>(false);
   const [showTeacherNotes, setShowTeacherNotes] = useState<boolean>(true);
+  const [fontSize, setFontSize] = useState<FontSizeOption>('24pt');
 
   // Student Gamification State
   const [unlockedBadgeIds, setUnlockedBadgeIds] = useState<string[]>([
@@ -54,24 +58,10 @@ export default function App() {
     setTotalScore((prev) => prev + points);
   };
 
-  // Filter slides by period and search query
+  // Filter slides by period
   const filteredSlides = useMemo(() => {
-    return ALL_SLIDES.filter((s) => {
-      const matchPeriod = selectedPeriod === 'all' || s.period === selectedPeriod;
-      if (!matchPeriod) return false;
-
-      if (!searchQuery.trim()) return true;
-
-      const q = searchQuery.toLowerCase();
-      return (
-        s.title.toLowerCase().includes(q) ||
-        (s.subtitle && s.subtitle.toLowerCase().includes(q)) ||
-        s.periodTitle.toLowerCase().includes(q) ||
-        s.competencyStandard.toLowerCase().includes(q) ||
-        s.categoryLabel.toLowerCase().includes(q)
-      );
-    });
-  }, [selectedPeriod, searchQuery]);
+    return ALL_SLIDES.filter((s) => selectedPeriod === 'all' || s.period === selectedPeriod);
+  }, [selectedPeriod]);
 
   // Current active slide object
   const currentSlide = useMemo(() => {
@@ -121,30 +111,61 @@ export default function App() {
               <GraduationCap className="w-6 h-6" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-base sm:text-lg font-bold text-white tracking-tight">
-                  Ứng Dụng Dạy Học AI THPT
+                  Chuyên Đề Trí Tuệ Nhân Tạo (AI)
                 </h1>
-                <span className="hidden md:inline-flex px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold text-[10px] border border-emerald-500/30">
-                  GDPT 2018 · QĐ 2422
+                <span className="text-[11px] font-black bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2.5 py-0.5 rounded-lg">
+                  Trường THPT Tân Lược
+                </span>
+                <span className="text-[11px] font-extrabold bg-violet-500/20 text-violet-300 border border-violet-500/30 px-2 py-0.5 rounded-lg">
+                  Design by: Nguyễn Phước Hậu
+                </span>
+                <span className="text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <Trophy className="w-3 h-3 fill-current text-amber-400" />
+                  Dành Cho Khối 12
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                12 Tiết Học Cốt Lõi · 110 Slide Bài Giảng · Trò Chơi Tương Tác & Hoạt Động Nhóm
+                12 Tiết Học Cốt Lõi · 110 Slide Bài Giảng · Trò Chơi Tương Tác & Hoạt Động Nhóm · GDPT 2018 · QĐ 2422
               </p>
             </div>
           </div>
 
           {/* Action Buttons & Quick Badges */}
           <div className="flex items-center gap-2 w-full md:w-auto justify-end flex-wrap">
+            {/* Progress Ring: Huy hiệu đã mở khóa */}
+            <div className="flex items-center gap-2">
+              <div className="text-right hidden sm:block">
+                <span className="text-[10px] font-bold text-slate-400 block tracking-wider uppercase">Tiến Độ</span>
+                <span className="text-xs font-extrabold text-slate-200">
+                  {unlockedBadgeIds.length} / 6 Huy Hiệu
+                </span>
+              </div>
+              <div className="w-11 h-11 rounded-full border-4 border-slate-800 flex items-center justify-center relative shrink-0">
+                <span className="text-[10px] font-extrabold text-indigo-300">
+                  {Math.round((unlockedBadgeIds.length / 6) * 100)}%
+                </span>
+                <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+                  <circle
+                    cx="22"
+                    cy="22"
+                    r="18"
+                    fill="transparent"
+                    stroke="#6366f1"
+                    strokeWidth="4"
+                    strokeDasharray={`${2 * Math.PI * 18}`}
+                    strokeDashoffset={`${2 * Math.PI * 18 * (1 - unlockedBadgeIds.length / 6)}`}
+                    className="transition-all duration-500"
+                  />
+                </svg>
+              </div>
+            </div>
+
             {/* Score & Badges Chip */}
             <div className="px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-bold text-amber-400 flex items-center gap-1.5">
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
               <span>{totalScore} Điểm</span>
-              <span className="text-slate-500">·</span>
-              <span className="text-amber-300 font-sans font-medium text-[11px]">
-                {unlockedBadgeIds.length} huy hiệu
-              </span>
             </div>
 
             {activeTab === 'slides' && (
@@ -184,7 +205,7 @@ export default function App() {
         </div>
 
         {/* Navigation Tabs Bar */}
-        <div className="max-w-7xl mx-auto mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-1.5 p-1 bg-slate-950/80 rounded-xl border border-slate-800 text-xs font-semibold">
             <button
               onClick={() => setActiveTab('slides')}
@@ -229,6 +250,30 @@ export default function App() {
             </button>
           </div>
 
+          {/* Cỡ Chữ Linh Hoạt 20pt, 22pt, 24pt, 28pt, 32pt Selector - giống lớp 11 */}
+          {activeTab === 'slides' && (
+            <div className="hidden md:flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800">
+              <span className="text-[11px] font-bold text-slate-500 px-2 flex items-center gap-1">
+                <Type className="w-3.5 h-3.5" />
+                Cỡ chữ:
+              </span>
+              {FONT_SIZE_OPTIONS.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setFontSize(size)}
+                  className={`px-2 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    fontSize === size
+                      ? 'bg-indigo-600 text-white shadow-xs'
+                      : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  }`}
+                  title={`Đặt cỡ chữ slide là ${size} (Chuẩn trình chiếu lớp học)`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          )}
+
           <div className="hidden lg:flex items-center gap-3 text-xs text-slate-400 font-mono">
             <span>Bám sát 4 mạch: <strong>A (Làm chủ)</strong> · <strong>B (Đạo đức)</strong> · <strong>C (Đo lường)</strong> · <strong>D (Dự án)</strong></span>
           </div>
@@ -246,12 +291,10 @@ export default function App() {
         {/* TAB 1: 110 SLIDES PRESENTATION DECK */}
         {activeTab === 'slides' && (
           <div className="space-y-6">
-            {/* Period Filter and Search Bar */}
+            {/* Period Filter Bar */}
             <PeriodFilterBar
               selectedPeriod={selectedPeriod}
               onSelectPeriod={setSelectedPeriod}
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
               totalSlidesCount={filteredSlides.length}
             />
 
@@ -308,7 +351,7 @@ export default function App() {
 
                 {/* Main Interactive Slide Canvas */}
                 <div className="w-full">
-                  <SlideCanvas slide={currentSlide} totalSlides={TOTAL_SLIDES_COUNT} showAnimation={true} />
+                  <SlideCanvas slide={currentSlide} totalSlides={TOTAL_SLIDES_COUNT} showAnimation={true} fontSize={fontSize} />
                 </div>
 
                 {/* Teacher Notes Drawer */}
@@ -345,10 +388,18 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800 py-4 px-6 text-center text-xs text-slate-500">
-        <p>
-          Ứng Dụng Dạy Học Trí Tuệ Nhân Tạo THPT · Bám sát Kế hoạch bài dạy 12 tiết chuẩn Chương trình GDPT 2018 & Quyết định 2422/QĐ-BGDĐT.
-        </p>
+      <footer className="bg-slate-900 border-t border-slate-800 py-3 px-6 flex flex-wrap items-center justify-center gap-2 text-xs">
+        <span className="text-indigo-300 font-black bg-indigo-500/20 px-2 py-0.5 rounded">
+          Trường THPT Tân Lược
+        </span>
+        <span className="text-slate-600">•</span>
+        <span className="text-violet-300 font-bold bg-violet-500/20 px-2 py-0.5 rounded">
+          Design by: Nguyễn Phước Hậu
+        </span>
+        <span className="text-slate-600">•</span>
+        <span className="text-slate-500 font-medium">
+          Chuyên đề Ứng dụng AI (GDPT 2018 · QĐ 2422/QĐ-BGDĐT)
+        </span>
       </footer>
 
       {/* Modals */}
@@ -363,6 +414,7 @@ export default function App() {
         onClose={() => setIsPresentationOpen(false)}
         slides={ALL_SLIDES}
         initialSlideIndex={currentIndexInAll}
+        fontSize={fontSize}
       />
     </div>
   );
