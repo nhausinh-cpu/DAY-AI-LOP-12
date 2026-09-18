@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { Slide } from '../types';
-import { SlideCanvas, type FontSizeOption } from './SlideCanvas';
-import { BookOpen, MousePointerClick, Eye } from 'lucide-react';
+import { SlideCanvas, getSlideStepCount, type FontSizeOption } from './SlideCanvas';
+import { MousePointerClick, Eye } from 'lucide-react';
 
 interface PresentationModeModalProps {
   isOpen: boolean;
@@ -19,9 +19,8 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
   fontSize = '24pt',
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(initialSlideIndex);
-  const [showNotes, setShowNotes] = useState<boolean>(false);
 
-  // Chế độ hiển thị từng đối tượng khi click (giống Khối 11)
+  // Chế độ hiển thị từng đối tượng/từng bước khi click (giống Khối 11)
   const [isClickToReveal, setIsClickToReveal] = useState<boolean>(false);
   const [revealStep, setRevealStep] = useState<number>(0);
 
@@ -30,7 +29,7 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
   }, [initialSlideIndex]);
 
   const currentSlide = slides[currentIndex];
-  const maxSteps = Math.max(currentSlide?.elements?.length || 1, 1);
+  const maxSteps = Math.max(getSlideStepCount(currentSlide), 1);
 
   // Reset bước hiển thị mỗi khi chuyển slide
   useEffect(() => {
@@ -65,8 +64,6 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         goPrev();
-      } else if (e.key === 'n' || e.key === 'N') {
-        setShowNotes((prev) => !prev);
       } else if (e.key === 'r' || e.key === 'R') {
         setIsClickToReveal((prev) => !prev);
       }
@@ -113,19 +110,6 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
             <span>Hiện Tất Cả</span>
           </button>
         )}
-
-        <button
-          onClick={() => setShowNotes(!showNotes)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-            showNotes
-              ? 'bg-indigo-600 text-white border-indigo-500'
-              : 'bg-slate-900 text-slate-300 border-slate-700 hover:bg-slate-800'
-          }`}
-          title="Bật/Tắt ghi chú giáo viên (phím N)"
-        >
-          <BookOpen className="w-3.5 h-3.5" />
-          <span>Ghi Chú (N)</span>
-        </button>
       </div>
 
       {/* Main Slide Presentation Stage */}
@@ -165,25 +149,9 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
         )}
       </div>
 
-      {/* Floating Speaker Notes Panel at Bottom */}
-      {showNotes && currentSlide.teacherNotes && (
-        <div
-          className="mt-2 p-3 bg-slate-900/90 border border-indigo-500/40 rounded-xl text-xs text-slate-200 max-w-3xl mx-auto w-full backdrop-blur"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="text-indigo-300 font-bold mb-1 flex items-center gap-1.5">
-            <BookOpen className="w-3.5 h-3.5" />
-            Lời thoại giáo viên (Thời lượng: {currentSlide.teacherNotes.activityDuration || 'N/A'}):
-          </div>
-          <p className="italic text-slate-300">
-            "{currentSlide.teacherNotes.teacherScript}"
-          </p>
-        </div>
-      )}
-
       {/* Bottom Hint */}
       <div className="text-center text-[10px] text-slate-500 py-1">
-        Nhấp chuột hoặc phím Mũi tên trái / phải / Phím cách để chuyển tiếp · Phím N bật ghi chú · Phím R bật/tắt hiện từng bước · Esc để thoát
+        Nhấp chuột hoặc phím Mũi tên trái / phải / Phím cách để chuyển tiếp · Icon 💬 dưới slide để xem tình huống/câu hỏi · Phím R bật/tắt hiện từng bước · Esc để thoát
       </div>
     </div>
   );

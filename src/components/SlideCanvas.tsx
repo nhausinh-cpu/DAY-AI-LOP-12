@@ -1,24 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import type { Slide } from '../types';
 import {
   Sparkles,
-  BookOpen,
   CheckCircle2,
-  AlertTriangle,
-  Users,
-  Cpu,
-  Layers,
-  ShieldCheck,
-  Scale,
-  Brain,
   Lightbulb,
-  ExternalLink,
   ChevronRight,
-  Database,
-  SearchCheck,
-  Activity,
   Award,
+  HelpCircle,
 } from 'lucide-react';
 
 export type FontSizeOption = '20pt' | '22pt' | '24pt' | '28pt' | '32pt';
@@ -29,6 +18,27 @@ const FONT_SCALE_MAP: Record<FontSizeOption, number> = {
   '24pt': 1.1,
   '28pt': 1.3,
   '32pt': 1.5,
+};
+
+// Bảng màu để làm nổi bật từng thẻ (Card/Bước) khác nhau trên cùng 1 slide
+const CARD_COLOR_PALETTE = [
+  { bg: 'bg-indigo-950/40', border: 'border-indigo-500/40 hover:border-indigo-400/70', title: 'text-indigo-200', tag: 'bg-indigo-500/25 text-indigo-200', badge: 'bg-indigo-600' },
+  { bg: 'bg-emerald-950/40', border: 'border-emerald-500/40 hover:border-emerald-400/70', title: 'text-emerald-200', tag: 'bg-emerald-500/25 text-emerald-200', badge: 'bg-emerald-600' },
+  { bg: 'bg-amber-950/40', border: 'border-amber-500/40 hover:border-amber-400/70', title: 'text-amber-200', tag: 'bg-amber-500/25 text-amber-200', badge: 'bg-amber-600' },
+  { bg: 'bg-rose-950/40', border: 'border-rose-500/40 hover:border-rose-400/70', title: 'text-rose-200', tag: 'bg-rose-500/25 text-rose-200', badge: 'bg-rose-600' },
+  { bg: 'bg-sky-950/40', border: 'border-sky-500/40 hover:border-sky-400/70', title: 'text-sky-200', tag: 'bg-sky-500/25 text-sky-200', badge: 'bg-sky-600' },
+  { bg: 'bg-purple-950/40', border: 'border-purple-500/40 hover:border-purple-400/70', title: 'text-purple-200', tag: 'bg-purple-500/25 text-purple-200', badge: 'bg-purple-600' },
+];
+
+// Đếm tổng số "đơn vị hiển thị" của 1 slide khi bật Hiện Từng Bước:
+// Với khối "steps" (sơ đồ quy trình các bước), mỗi bước tính là 1 đơn vị riêng
+// để khi click sẽ lần lượt xuất hiện từng bước một, thay vì hiện cả khối cùng lúc.
+export const getSlideStepCount = (slide?: Slide): number => {
+  if (!slide?.elements?.length) return 1;
+  return slide.elements.reduce((acc, el) => {
+    if (el.type === 'steps' && Array.isArray(el.data)) return acc + el.data.length;
+    return acc + 1;
+  }, 0);
 };
 
 interface SlideCanvasProps {
@@ -56,7 +66,13 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
 }) => {
   const fontScale = FONT_SCALE_MAP[fontSize];
   const maxWidthClass = fullscreen ? 'max-w-[1800px]' : 'max-w-5xl';
-  const isStepVisible = (idx: number) => !isClickToReveal || revealStep >= idx;
+
+  // Icon câu hỏi đặt vấn đề cho học sinh (thay cho bảng Ghi Chú riêng trước đây)
+  const [showTeacherQuestion, setShowTeacherQuestion] = useState(false);
+  useEffect(() => {
+    setShowTeacherQuestion(false);
+  }, [slide.id]);
+
   // Animation variants
   const containerVariants: any = {
     hidden: { opacity: 0 },
@@ -128,129 +144,148 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
             )}
           </motion.div>
 
-          {/* Dynamic Content Based on Slide Elements (hỗ trợ hiện từng đối tượng khi click) */}
-          {slide.elements.map((el, elIdx) => {
-            if (!isStepVisible(elIdx)) return null;
+          {/* Dynamic Content Based on Slide Elements (hỗ trợ hiện từng đối tượng/từng bước khi click) */}
+          {(() => {
+            let unitCursor = 0; // đếm dồn "đơn vị hiển thị" qua các phần tử để hỗ trợ hiện từng bước
+            return slide.elements.map((el) => {
+              const isSteps = el.type === 'steps' && Array.isArray(el.data);
+              const elUnitCount = isSteps ? el.data.length : 1;
+              const elStartUnit = unitCursor;
+              unitCursor += elUnitCount;
 
-            const cardTitleCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
-            const cardDescCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
-            const bodyCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
+              // Cả khối chưa xuất hiện chút nào -> ẩn hẳn
+              if (isClickToReveal && revealStep < elStartUnit) return null;
 
-            if (el.type === 'cards' && Array.isArray(el.data)) {
-              return (
-                <motion.div
-                  key={el.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35 }}
-                  className={`grid gap-3 ${
-                    el.data.length === 2
-                      ? 'grid-cols-1 sm:grid-cols-2'
-                      : el.data.length === 3
-                      ? 'grid-cols-1 sm:grid-cols-3'
-                      : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-                  }`}
-                >
-                  {el.data.map((card: any, idx: number) => (
-                    <div
-                      key={card.id || idx}
-                      className="p-3.5 sm:p-4 rounded-xl bg-slate-800/80 border border-slate-700/80 hover:border-indigo-500/60 transition-all flex flex-col justify-between"
-                    >
-                      <div>
-                        {card.tag && (
-                          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-700 text-slate-300 mb-2 inline-block">
-                            {card.tag}
-                          </span>
-                        )}
-                        <h3 className={`font-semibold text-slate-100 mb-1 ${cardTitleCls}`}>
-                          {card.title}
-                        </h3>
-                        <p className={`text-slate-300 leading-relaxed ${cardDescCls}`}>
-                          {card.desc}
-                        </p>
-                      </div>
-                      {card.badge && (
-                        <div className="mt-2 text-[11px] font-medium text-indigo-400 flex items-center gap-1">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>{card.badge}</span>
+              const cardTitleCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
+              const cardDescCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
+              const bodyCls = fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base';
+
+              if (el.type === 'cards' && Array.isArray(el.data)) {
+                return (
+                  <motion.div
+                    key={el.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className={`grid gap-3 ${
+                      el.data.length === 2
+                        ? 'grid-cols-1 sm:grid-cols-2'
+                        : el.data.length === 3
+                        ? 'grid-cols-1 sm:grid-cols-3'
+                        : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+                    }`}
+                  >
+                    {el.data.map((card: any, idx: number) => {
+                      const palette = CARD_COLOR_PALETTE[idx % CARD_COLOR_PALETTE.length];
+                      return (
+                        <div
+                          key={card.id || idx}
+                          className={`p-3.5 sm:p-4 rounded-xl border transition-all flex flex-col justify-between ${palette.bg} ${palette.border}`}
+                        >
+                          <div>
+                            {card.tag && (
+                              <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded mb-2 inline-block ${palette.tag}`}>
+                                {card.tag}
+                              </span>
+                            )}
+                            <h3 className={`font-semibold mb-1 ${palette.title} ${cardTitleCls}`}>
+                              {card.title}
+                            </h3>
+                            <p className={`text-slate-200 leading-relaxed ${cardDescCls}`}>
+                              {card.desc}
+                            </p>
+                          </div>
+                          {card.badge && (
+                            <div className={`mt-2 text-[11px] font-medium flex items-center gap-1 ${palette.title}`}>
+                              <CheckCircle2 className="w-3.5 h-3.5" />
+                              <span>{card.badge}</span>
+                            </div>
+                          )}
                         </div>
-                      )}
+                      );
+                    })}
+                  </motion.div>
+                );
+              }
+
+              if (el.type === 'steps' && Array.isArray(el.data)) {
+                return (
+                  <motion.div
+                    key={el.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="space-y-2"
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+                      {el.data.map((step: any, sIdx: number) => {
+                        // Sơ đồ quy trình: mỗi bước là 1 đơn vị hiện riêng khi bật Hiện Từng Bước
+                        if (isClickToReveal && revealStep < elStartUnit + sIdx) return null;
+                        const palette = CARD_COLOR_PALETTE[sIdx % CARD_COLOR_PALETTE.length];
+                        return (
+                          <motion.div
+                            key={step.stepNumber}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className={`p-3 rounded-lg border flex flex-col justify-between ${palette.bg} ${palette.border}`}
+                          >
+                            <div className="flex items-center justify-between mb-1.5">
+                              <span className={`w-6 h-6 rounded-full text-white text-xs font-bold flex items-center justify-center ${palette.badge}`}>
+                                {step.stepNumber}
+                              </span>
+                              <span className="text-[10px] text-slate-300 font-medium">
+                                {step.role}
+                              </span>
+                            </div>
+                            <div className={`font-semibold mb-1 ${palette.title} ${fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base'}`}>
+                              {step.name}
+                            </div>
+                            <div className={`text-slate-200 leading-snug ${fullscreen ? 'text-sm sm:text-base' : 'text-xs sm:text-[13px]'}`}>
+                              {step.details}
+                            </div>
+                          </motion.div>
+                        );
+                      })}
                     </div>
-                  ))}
-                </motion.div>
-              );
-            }
+                  </motion.div>
+                );
+              }
 
-            if (el.type === 'steps' && Array.isArray(el.data)) {
-              return (
-                <motion.div
-                  key={el.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35 }}
-                  className="space-y-2"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-                    {el.data.map((step: any) => (
-                      <div
-                        key={step.stepNumber}
-                        className="p-3 rounded-lg bg-slate-800/90 border border-slate-700 flex flex-col justify-between"
-                      >
-                        <div className="flex items-center justify-between mb-1.5">
-                          <span className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center">
-                            {step.stepNumber}
-                          </span>
-                          <span className="text-[10px] text-slate-400 font-medium">
-                            {step.role}
-                          </span>
-                        </div>
-                        <div className={`font-semibold text-white mb-1 ${fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base'}`}>
-                          {step.name}
-                        </div>
-                        <div className={`text-slate-300 leading-snug ${fullscreen ? 'text-sm sm:text-base' : 'text-xs sm:text-[13px]'}`}>
-                          {step.details}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            }
-
-            if (el.type === 'table' && el.data?.headers && el.data?.rows) {
-              return (
-                <motion.div
-                  key={el.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35 }}
-                  className="overflow-x-auto rounded-xl border border-slate-700 bg-slate-800/90"
-                >
-                  <table className={`w-full text-left ${bodyCls}`}>
-                    <thead className="bg-slate-900/80 text-indigo-300 font-semibold border-b border-slate-700">
-                      <tr>
-                        {el.data.headers.map((h: string, i: number) => (
-                          <th key={i} className="py-2.5 px-3">
-                            {h}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-700/60">
-                      {el.data.rows.map((row: string[], rIdx: number) => (
-                        <tr key={rIdx} className="hover:bg-slate-700/40">
-                          {row.map((cell: string, cIdx: number) => (
-                            <td key={cIdx} className="py-2 px-3 text-slate-200 whitespace-pre-line">
-                              {cell}
-                            </td>
+              if (el.type === 'table' && el.data?.headers && el.data?.rows) {
+                return (
+                  <motion.div
+                    key={el.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="overflow-x-auto rounded-xl border border-slate-700 bg-slate-800/90"
+                  >
+                    <table className={`w-full text-left border-collapse ${bodyCls}`}>
+                      <thead className="bg-slate-900/80 text-indigo-300 font-semibold">
+                        <tr>
+                          {el.data.headers.map((h: string, i: number) => (
+                            <th key={i} className="py-2.5 px-3 border border-slate-700">
+                              {h}
+                            </th>
                           ))}
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </motion.div>
-              );
-            }
+                      </thead>
+                      <tbody>
+                        {el.data.rows.map((row: string[], rIdx: number) => (
+                          <tr key={rIdx} className="hover:bg-slate-700/40">
+                            {row.map((cell: string, cIdx: number) => (
+                              <td key={cIdx} className="py-2 px-3 text-slate-200 whitespace-pre-line border border-slate-700">
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </motion.div>
+                );
+              }
 
             if (el.type === 'checklist' && el.data) {
               return (
@@ -295,11 +330,6 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                     <p className={`mt-2 text-slate-300 max-w-2xl mx-auto ${bodyCls}`}>
                       {el.data.subtext}
                     </p>
-                  )}
-                  {el.data.author && (
-                    <span className="mt-3 inline-block text-[11px] font-mono text-amber-400/80">
-                      — {el.data.author}
-                    </span>
                   )}
                 </motion.div>
               );
@@ -349,24 +379,52 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               );
             }
 
-            return null;
-          })}
+              return null;
+            });
+          })()}
 
-          {/* Illustration Caption & Source Tag */}
-          {slide.illustration && (
+          {/* Dòng ghi chú minh hoạ + Icon câu hỏi đặt vấn đề cho học sinh */}
+          {(slide.illustration || slide.teacherNotes?.teacherScript) && (
             <motion.div
               variants={showAnimation ? itemVariants : undefined}
-              className="mt-3 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400"
+              className="mt-3 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 gap-2"
             >
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="italic">{slide.illustration.caption}</span>
+              <div className="flex items-center gap-1.5 min-w-0">
+                {slide.teacherNotes?.teacherScript && (
+                  <button
+                    onClick={() => setShowTeacherQuestion((v) => !v)}
+                    className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border transition-all cursor-pointer ${
+                      showTeacherQuestion
+                        ? 'bg-amber-500 border-amber-400 text-slate-900'
+                        : 'bg-amber-500/20 border-amber-500/50 text-amber-300 hover:bg-amber-500/40'
+                    }`}
+                    title="Tình huống / câu hỏi đặt vấn đề cho học sinh"
+                  >
+                    <HelpCircle className="w-3.5 h-3.5" />
+                  </button>
+                )}
+                {slide.illustration && (
+                  <>
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                    <span className="italic truncate">{slide.illustration.caption}</span>
+                  </>
+                )}
               </div>
-              {slide.illustration.source && (
-                <span className="font-mono text-slate-500">
+              {slide.illustration?.source && (
+                <span className="font-mono text-slate-500 shrink-0">
                   Nguồn: {slide.illustration.source}
                 </span>
               )}
+            </motion.div>
+          )}
+
+          {showTeacherQuestion && slide.teacherNotes?.teacherScript && (
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-1.5 p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-100 italic text-xs sm:text-sm"
+            >
+              💬 "{slide.teacherNotes.teacherScript}"
             </motion.div>
           )}
         </motion.div>
