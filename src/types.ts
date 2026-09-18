@@ -1,143 +1,78 @@
-export type InteractiveExerciseType = 'quiz' | 'matching' | 'true_false' | 'prompt_builder' | 'ethical_dilemma' | 'speed_game';
+export interface TeacherNotes {
+  teacherScript: string;
+  activityDuration: string;
+  keyTakeaways: string[];
+  suggestedQuestions?: string[];
+  sampleAnswer?: string;
+  pedagogicalGuidance?: string;
+  questionsToPrompt?: string[];
+}
 
-export type FontSizeOption = '20pt' | '22pt' | '24pt' | '28pt' | '32pt';
+export interface IllustrationInfo {
+  type: string;
+  caption?: string;
+  source?: string;
+  iconName?: string;
+  accentColor?: string;
+}
 
-export interface MatchingPair {
+export interface TableData {
+  headers: string[];
+  rows: string[][];
+  highlightColIndex?: number;
+  highlightRowIndex?: number;
+}
+
+export interface CardItem {
   id: string;
-  concept: string;
-  match: string;
-  category?: string;
-}
-
-export interface TrueFalseItem {
-  id: string;
-  statement: string;
-  isTrue: boolean;
-  explanation: string;
-  hint: string;
-}
-
-export interface PromptBuilderData {
-  goal: string;
-  roleOptions: string[];
-  taskOptions: string[];
-  contextOptions: string[];
-  outputOptions: string[];
-  correctRole: string;
-  correctTask: string;
-  correctContext: string;
-  correctOutput: string;
-  samplePrompt: string;
-  evaluationTip: string;
-}
-
-export interface EthicalDilemmaData {
-  scenario: string;
-  question: string;
-  options: Array<{
-    id: string;
-    text: string;
-    standpoint: string;
-    votesPercent: number;
-  }>;
-  suggestedDebatePoints: string[];
-}
-
-export interface InteractiveExercise {
-  id: string;
-  type: InteractiveExerciseType;
+  tag?: string;
   title: string;
-  description: string;
-  hint: string;
-  suggestedAnswer: string;
-  quizData?: {
-    question: string;
-    options: string[];
-    answerIndex: number;
-    explanation: string;
-  };
-  matchingData?: {
-    instruction: string;
-    pairs: MatchingPair[];
-  };
-  trueFalseData?: {
-    instruction: string;
-    items: TrueFalseItem[];
-  };
-  promptData?: PromptBuilderData;
-  dilemmaData?: EthicalDilemmaData;
-  gameData?: {
-    instruction: string;
-    timeLimitSeconds: number;
-    questions: Array<{
-      id: string;
-      question: string;
-      options: string[];
-      answerIndex: number;
-      explanation: string;
-    }>;
-  };
+  desc: string;
+  icon?: string;
+  badge?: string;
+  color?: string;
+  example?: string;
 }
 
-export interface SlideVideo {
+export interface StepItem {
+  stepNumber: number;
+  name: string;
+  role: string;
+  details: string;
+  example?: string;
+}
+
+export interface SlideElement {
   id: string;
-  title: string;
-  description?: string;
-  duration?: string;
-  youtubeId?: string;
-  videoUrl?: string;
-  thumbnailUrl?: string;
-  sourceLabel?: string;
-  discussionQuestion?: string;
+  type: 'header' | 'cards' | 'steps' | 'table' | 'quote' | 'discussion' | 'bullet_points' | 'checklist' | 'rubric';
+  data?: any;
+  delay?: number;
 }
 
 export interface Slide {
-  id: string;
+  id: number;
+  period: number; // 0: Tổng quan, 1-12: Tiết 1-12
+  periodTitle: string;
+  topic: string; // Chuyên đề & mạch năng lực
+  competencyStandard: string; // Yêu cầu cần đạt theo QĐ 2422
+  category: 'cover' | 'intro' | 'objective' | 'knowledge' | 'diagram' | 'table' | 'case_study' | 'activity' | 'takeaway' | 'worksheet' | 'rubric' | 'summary' | 'cards';
+  categoryLabel: string;
   title: string;
-  visualType: 'title' | 'intro' | 'concepts' | 'diagram' | 'comparison' | 'interactive' | 'quiz' | 'activity' | 'summary';
-  content: string[];
-  visualUrl?: string;
-  visualLabel?: string;
-  video?: SlideVideo;
-  answerHint?: string;
-  suggestedAnswer?: string;
-  diagramData?: {
-    nodes: Array<{ id: string; label: string; x: number; y: number; color?: string }>;
-    links: Array<{ source: string; target: string; label?: string }>;
-  };
-  comparisonData?: {
-    leftTitle: string;
-    leftItems: string[];
-    rightTitle: string;
-    rightItems: string[];
-  };
-  interactiveQuiz?: {
-    question: string;
-    options: string[];
-    answerIndex: number;
-    explanation: string;
-    hint?: string;
-    suggestedAnswer?: string;
-  };
-  activity?: {
-    title: string;
-    duration: string;
-    instructions: string[];
-    tips: string;
-    hint?: string;
-    suggestedAnswer?: string;
-  };
-  interactiveExercise?: InteractiveExercise;
-  speakerNotes: string;
+  subtitle?: string;
+  layout: 'center_hero' | 'split_left_right' | 'cards_3' | 'cards_4' | 'table_view' | 'step_pipeline' | 'activity_box' | 'takeaway_banner' | 'quiz_interactive';
+  elements: SlideElement[];
+  illustration?: IllustrationInfo;
+  teacherNotes: TeacherNotes;
+  worksheetNumber?: number;
 }
 
-export interface Lesson {
+export interface PeriodMeta {
   period: number;
   title: string;
-  description: string;
-  objectives: string[];
-  slides: Slide[];
-  exercises?: InteractiveExercise[];
-  featuredVideo?: SlideVideo;
+  topic: string;
+  standard: string;
+  slideRange: [number, number];
+  themeColor: string;
+  duration: string;
+  keyConcepts: string[];
 }
-

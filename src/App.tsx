@@ -1,195 +1,248 @@
-import React, { useState, useEffect } from 'react';
-import { allLessons } from './data/slidesIndex';
-import { LessonList } from './components/LessonList';
-import { SlidePresenter } from './components/SlidePresenter';
-import { ExportToGoogleSlides } from './components/ExportToGoogleSlides';
-import { Lesson, Slide } from './types';
-import { Sparkles, Award, GraduationCap, CheckCircle, MonitorPlay, Trophy } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { ALL_SLIDES, TOTAL_SLIDES_COUNT } from './data/allSlides';
+import type { Slide } from './types';
+import { SlideCanvas } from './components/SlideCanvas';
+import { SlideThumbnailList } from './components/SlideThumbnailList';
+import { TeacherNotesDrawer } from './components/TeacherNotesDrawer';
+import { PeriodFilterBar } from './components/PeriodFilterBar';
+import { GoogleSlidesExportModal } from './components/GoogleSlidesExportModal';
+import { PresentationModeModal } from './components/PresentationModeModal';
+import {
+  Sparkles,
+  Play,
+  Share2,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  BookOpen,
+  Award,
+  Layers,
+  Cpu,
+  GraduationCap,
+  Download,
+} from 'lucide-react';
 
 export default function App() {
-  // Store lessons in state to allow AI real-time customization to persist during session
-  const [lessons, setLessons] = useState<Lesson[]>(allLessons);
-  const [currentPeriod, setCurrentPeriod] = useState<number>(1);
-  const [slideIndex, setSlideIndex] = useState<number>(0);
-  const [completedLessons, setCompletedLessons] = useState<number[]>([]);
-  const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false);
+  const [activeSlideId, setActiveSlideId] = useState<number>(1);
+  const [selectedPeriod, setSelectedPeriod] = useState<number | 'all'>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
+  const [isPresentationOpen, setIsPresentationOpen] = useState<boolean>(false);
+  const [showTeacherNotes, setShowTeacherNotes] = useState<boolean>(true);
 
-  // Shortcut F5 for presentation mode
+  // Filter slides by period and search query
+  const filteredSlides = useMemo(() => {
+    return ALL_SLIDES.filter((s) => {
+      const matchPeriod = selectedPeriod === 'all' || s.period === selectedPeriod;
+      if (!matchPeriod) return false;
+
+      if (!searchQuery.trim()) return true;
+
+      const q = searchQuery.toLowerCase();
+      return (
+        s.title.toLowerCase().includes(q) ||
+        (s.subtitle && s.subtitle.toLowerCase().includes(q)) ||
+        s.periodTitle.toLowerCase().includes(q) ||
+        s.competencyStandard.toLowerCase().includes(q) ||
+        s.categoryLabel.toLowerCase().includes(q)
+      );
+    });
+  }, [selectedPeriod, searchQuery]);
+
+  // Current active slide object
+  const currentSlide = useMemo(() => {
+    return ALL_SLIDES.find((s) => s.id === activeSlideId) || ALL_SLIDES[0];
+  }, [activeSlideId]);
+
+  // Handle slide index navigation
+  const currentIndexInAll = ALL_SLIDES.findIndex((s) => s.id === activeSlideId);
+
+  const handlePrevSlide = () => {
+    if (currentIndexInAll > 0) {
+      setActiveSlideId(ALL_SLIDES[currentIndexInAll - 1].id);
+    }
+  };
+
+  const handleNextSlide = () => {
+    if (currentIndexInAll < ALL_SLIDES.length - 1) {
+      setActiveSlideId(ALL_SLIDES[currentIndexInAll + 1].id);
+    }
+  };
+
+  // Keyboard navigation for main screen
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) {
-        return;
-      }
-      if (e.key === 'F5') {
+      if (isExportModalOpen || isPresentationOpen) return;
+      if (e.key === 'ArrowRight') {
+        handleNextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        handlePrevSlide();
+      } else if (e.key === 'F5') {
         e.preventDefault();
-        setIsPresentationMode(prev => !prev);
+        setIsPresentationOpen(true);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const currentLesson = lessons.find(l => l.period === currentPeriod) || lessons[0];
-
-  const handleSelectPeriod = (period: number) => {
-    setCurrentPeriod(period);
-    setSlideIndex(0);
-  };
-
-  const handleNavigateSlide = (index: number) => {
-    if (index >= 0 && index < currentLesson.slides.length) {
-      setSlideIndex(index);
-    }
-  };
-
-  const handleLessonComplete = (period: number) => {
-    if (!completedLessons.includes(period)) {
-      setCompletedLessons(prev => [...prev, period]);
-    }
-    
-    // Auto advance to next lesson if available
-    if (period < 12) {
-      setTimeout(() => {
-        setCurrentPeriod(period + 1);
-        setSlideIndex(0);
-      }, 1500);
-    }
-  };
-
-  // Callback when AI customizer rewrites the current slide
-  const handleUpdateCurrentSlide = (updatedSlide: Slide) => {
-    setLessons(prevLessons => 
-      prevLessons.map(lesson => {
-        if (lesson.period === currentPeriod) {
-          return {
-            ...lesson,
-            slides: lesson.slides.map(slide => 
-              slide.id === updatedSlide.id ? updatedSlide : slide
-            )
-          };
-        }
-        return lesson;
-      })
-    );
-  };
+  }, [currentIndexInAll, isExportModalOpen, isPresentationOpen]);
 
   return (
-    <div className="flex flex-col h-screen bg-slate-50 overflow-hidden font-sans text-slate-800" id="main-app-shell">
-      
-      {/* Top Application Header */}
-      <header className="bg-white border-b border-slate-200/80 px-6 py-3.5 flex items-center justify-between shrink-0 select-none shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-100">
-            <GraduationCap className="w-5 h-5" />
-          </div>
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-base font-black text-slate-900 tracking-tight flex items-center gap-1.5">
-                Chuyên Đề Giáo Dục Trí Tuệ Nhân Tạo (AI)
-              </h1>
-              <span className="text-[11px] font-black bg-indigo-100 text-indigo-800 border border-indigo-200 px-2.5 py-0.5 rounded-lg shadow-xs">
-                Trường THPT Tân Lược
-              </span>
-              <span className="text-[11px] font-extrabold bg-violet-100 text-violet-800 border border-violet-200 px-2 py-0.5 rounded-lg">
-                Design by: Nguyễn Phước Hậu
-              </span>
-              <span className="text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-full flex items-center gap-1">
-                <Trophy className="w-3 h-3 fill-current text-amber-500" />
-                Dành Cho Khối 12
-              </span>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+      {/* Top Main Navigation Header */}
+      <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 py-3">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          {/* Logo & Title */}
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+              <GraduationCap className="w-6 h-6" />
             </div>
-            <p className="text-[11px] text-slate-500 font-medium">
-              Bám sát Kế hoạch bài dạy 12 tiết (6 buổi) • Tích hợp trắc nghiệm củng cố, hoạt động trải nghiệm & xuất Google Slides
-            </p>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                  Chuyên Đề Ứng Dụng AI Cho Học Sinh THPT
+                </h1>
+                <span className="hidden md:inline-flex px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold text-[10px] border border-emerald-500/30">
+                  QĐ 2422/QĐ-BGDĐT
+                </span>
+              </div>
+              <p className="text-xs text-slate-400">
+                12 Tiết Học Cốt Lõi (45p/tiết) · 110 Slide Bài Giảng Chuẩn Mực · Đủ 4 Mạch A+B+C+D
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Header Actions & Metrics */}
-        <div className="flex items-center gap-4 sm:gap-6">
-          <div className="flex items-center gap-2">
-            <div className="text-right">
-              <span className="text-[10px] font-bold text-slate-400 block tracking-wider uppercase">Tiến Độ Chuyên Đề</span>
-              <span className="text-xs font-extrabold text-slate-700">
-                Đã học xong: {completedLessons.length} / 12 Tiết
-              </span>
-            </div>
-            <div className="w-12 h-12 rounded-full border-4 border-slate-100 flex items-center justify-center relative">
-              <span className="text-[11px] font-extrabold text-indigo-600">
-                {Math.round((completedLessons.length / 12) * 100)}%
-              </span>
-              <svg className="absolute inset-0 w-full h-full transform -rotate-90">
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="20"
-                  fill="transparent"
-                  stroke="#4f46e5"
-                  strokeWidth="4"
-                  strokeDasharray={`${2 * Math.PI * 20}`}
-                  strokeDashoffset={`${2 * Math.PI * 20 * (1 - completedLessons.length / 12)}`}
-                  className="transition-all duration-500"
-                />
-              </svg>
-            </div>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button
+              onClick={() => setIsPresentationOpen(true)}
+              className="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-2 border border-slate-700 transition-all cursor-pointer"
+              title="Trình chiếu toàn màn hình (Phím tắt: F5)"
+            >
+              <Play className="w-3.5 h-3.5 fill-current text-emerald-400" />
+              <span>Trình Chiếu</span>
+            </button>
+
+            <button
+              onClick={() => setShowTeacherNotes(!showTeacherNotes)}
+              className={`py-2 px-3.5 rounded-xl text-xs font-semibold flex items-center gap-2 border transition-all cursor-pointer ${
+                showTeacherNotes
+                  ? 'bg-indigo-950/60 border-indigo-500/60 text-indigo-200'
+                  : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
+              <span className="hidden sm:inline">Sổ Tay Giáo Viên</span>
+            </button>
+
+            {/* Primary Action Button: Kích Hoạt & Xuất Google Slides */}
+            <button
+              onClick={() => setIsExportModalOpen(true)}
+              className="py-2 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 text-xs font-bold flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4 fill-current" />
+              <span>KÍCH HOẠT XUẤT GOOGLE SLIDES</span>
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Main Core App Workspace split in 3 columns */}
-      <div className="flex-1 flex overflow-hidden min-h-0">
-        
-        {/* Left Column: Lesson Navigation */}
-        <LessonList
-          lessons={lessons}
-          currentPeriod={currentPeriod}
-          onSelectPeriod={handleSelectPeriod}
-          completedLessons={completedLessons}
+      {/* Main Content Layout */}
+      <main className="max-w-7xl mx-auto w-full p-4 sm:p-6 flex-1 flex flex-col gap-6">
+        {/* Period Filter and Search Bar */}
+        <PeriodFilterBar
+          selectedPeriod={selectedPeriod}
+          onSelectPeriod={setSelectedPeriod}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          totalSlidesCount={filteredSlides.length}
         />
 
-        {/* Center Column: Interactive Slide Presenter */}
-        <SlidePresenter
-          lesson={currentLesson}
-          slideIndex={slideIndex}
-          onNavigateSlide={handleNavigateSlide}
-          onLessonComplete={handleLessonComplete}
-          onUpdateCurrentSlide={handleUpdateCurrentSlide}
-          isFullscreen={isPresentationMode}
-          onToggleFullscreen={() => setIsPresentationMode(prev => !prev)}
-        />
+        {/* Central Workspace: Thumbnails List + Interactive Slide Canvas + Teacher Notes */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* Left Column: Thumbnails List (4 cols on lg) */}
+          <div className="lg:col-span-4 h-full">
+            <SlideThumbnailList
+              slides={filteredSlides}
+              activeSlideId={activeSlideId}
+              onSelectSlide={(s) => setActiveSlideId(s.id)}
+            />
+          </div>
 
-        {/* Right Column: Google Slides Export + AI Prompt Helper Customizer */}
-        <div className="w-80 shrink-0 border-l border-slate-200/80 bg-slate-50 p-4 space-y-4 overflow-y-auto select-none" id="export-ai-panel">
-          
-          {/* Section 1: Exporting utility */}
-          <ExportToGoogleSlides
-            currentLesson={currentLesson}
-            allLessons={lessons}
-          />
+          {/* Right Column: Slide Canvas & Controls & Teacher Notes (8 cols on lg) */}
+          <div className="lg:col-span-8 flex flex-col gap-4">
+            {/* Slide Navigation Header above Canvas */}
+            <div className="bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-slate-300">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handlePrevSlide}
+                  disabled={currentIndexInAll === 0}
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 transition-all cursor-pointer text-white"
+                  title="Slide trước (Phím mũi tên trái)"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
 
-          {/* Guidelines / Tips Card */}
-          <div className="bg-gradient-to-br from-indigo-900 to-slate-900 text-white rounded-xl p-4 shadow-sm border border-indigo-950/40">
-            <div className="flex items-center gap-2 mb-2 text-indigo-300 font-extrabold text-xs tracking-wider uppercase">
-              <Award className="w-4 h-4 text-amber-400" />
-              <span>Cẩm Nang Giảng Dạy AI</span>
+                <button
+                  onClick={handleNextSlide}
+                  disabled={currentIndexInAll === ALL_SLIDES.length - 1}
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 transition-all cursor-pointer text-white"
+                  title="Slide kế tiếp (Phím mũi tên phải)"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                <span className="font-mono text-slate-400 ml-1">
+                  Slide <strong className="text-white">{currentSlide.id}</strong> / {TOTAL_SLIDES_COUNT}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setIsPresentationOpen(true)}
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all cursor-pointer flex items-center gap-1 text-xs"
+                  title="Toàn màn hình"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Phóng to</span>
+                </button>
+              </div>
             </div>
-            <ul className="space-y-2 text-[11px] text-indigo-100/90 leading-relaxed font-medium">
-              <li className="flex items-start gap-1.5">
-                <CheckCircle className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
-                <span>Mỗi tiết học bám sát KHBD với slide lý thuyết, phiếu học tập và hoạt động tương tác ngắn gọn.</span>
-              </li>
-              <li className="flex items-start gap-1.5">
-                <CheckCircle className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
-                <span>Sử dụng sơ đồ mạng (Diagram) trực quan để giải thích cấu trúc thuật toán học máy.</span>
-              </li>
-              <li className="flex items-start gap-1.5">
-                <CheckCircle className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
-                <span>Dùng nút <strong>Tinh chỉnh bằng AI</strong> để tự động tái thiết kế slide theo yêu cầu thực tế của học sinh.</span>
-              </li>
-            </ul>
+
+            {/* Main Interactive Slide Canvas */}
+            <div className="w-full">
+              <SlideCanvas slide={currentSlide} totalSlides={TOTAL_SLIDES_COUNT} showAnimation={true} />
+            </div>
+
+            {/* Teacher Notes Drawer */}
+            {showTeacherNotes && (
+              <div className="mt-2">
+                <TeacherNotesDrawer slide={currentSlide} />
+              </div>
+            )}
           </div>
         </div>
+      </main>
 
-      </div>
+      {/* Footer */}
+      <footer className="bg-slate-900 border-t border-slate-800 py-4 px-6 text-center text-xs text-slate-500">
+        <p>
+          Chuyên đề Dạy học Trí tuệ Nhân tạo cho học sinh THPT · Xây dựng theo Kế hoạch bài dạy 12 tiết chuẩn Chương trình GDPT 2018 & Quyết định 2422/QĐ-BGDĐT.
+        </p>
+      </footer>
+
+      {/* Modals */}
+      <GoogleSlidesExportModal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        slides={ALL_SLIDES}
+      />
+
+      <PresentationModeModal
+        isOpen={isPresentationOpen}
+        onClose={() => setIsPresentationOpen(false)}
+        slides={ALL_SLIDES}
+        initialSlideIndex={currentIndexInAll}
+      />
     </div>
   );
 }
