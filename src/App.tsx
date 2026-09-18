@@ -7,9 +7,8 @@ import { TeacherNotesDrawer } from './components/TeacherNotesDrawer';
 import { PresentationModeModal } from './components/PresentationModeModal';
 import { InteractiveGamesHub } from './components/InteractiveGamesHub';
 import { InteractiveActivitiesHub } from './components/InteractiveActivitiesHub';
-import { FONT_SIZE_OPTIONS, type FontSizeOption } from './components/SlideCanvas';
+import { FONT_SIZE_OPTIONS, getSlideStepCount, type FontSizeOption } from './components/SlideCanvas';
 import {
-  Play,
   ChevronLeft,
   ChevronRight,
   BookOpen,
@@ -18,6 +17,9 @@ import {
   FileText,
   Trophy,
   Type,
+  MousePointerClick,
+  Eye,
+  Maximize2,
 } from 'lucide-react';
 
 export default function App() {
@@ -25,6 +27,10 @@ export default function App() {
   const [activeSlideId, setActiveSlideId] = useState<number>(1);
   const [isPresentationOpen, setIsPresentationOpen] = useState<boolean>(false);
   const [fontSize, setFontSize] = useState<FontSizeOption>('24pt');
+
+  // Hiện Từng Bước ngay ở màn hình chính (giống Khối 11), không chỉ trong Trình Chiếu toàn màn hình
+  const [isClickToReveal, setIsClickToReveal] = useState<boolean>(false);
+  const [revealStep, setRevealStep] = useState<number>(0);
 
   // Student Gamification State
   const [unlockedBadgeIds, setUnlockedBadgeIds] = useState<string[]>([
@@ -49,14 +55,28 @@ export default function App() {
 
   // Handle slide index navigation
   const currentIndexInAll = ALL_SLIDES.findIndex((s) => s.id === activeSlideId);
+  const maxSteps = Math.max(getSlideStepCount(currentSlide), 1);
+
+  // Đổi slide thì reset lại tiến trình hiện từng bước
+  useEffect(() => {
+    setRevealStep(0);
+  }, [activeSlideId]);
 
   const handlePrevSlide = () => {
+    if (isClickToReveal && revealStep > 0) {
+      setRevealStep((prev) => prev - 1);
+      return;
+    }
     if (currentIndexInAll > 0) {
       setActiveSlideId(ALL_SLIDES[currentIndexInAll - 1].id);
     }
   };
 
   const handleNextSlide = () => {
+    if (isClickToReveal && revealStep < maxSteps - 1) {
+      setRevealStep((prev) => prev + 1);
+      return;
+    }
     if (currentIndexInAll < ALL_SLIDES.length - 1) {
       setActiveSlideId(ALL_SLIDES[currentIndexInAll + 1].id);
     }
@@ -73,11 +93,13 @@ export default function App() {
       } else if (e.key === 'F5') {
         e.preventDefault();
         setIsPresentationOpen(true);
+      } else if (e.key === 'r' || e.key === 'R') {
+        setIsClickToReveal((prev) => !prev);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndexInAll, isPresentationOpen, activeTab]);
+  }, [currentIndexInAll, isPresentationOpen, activeTab, isClickToReveal, revealStep, maxSteps]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
@@ -143,69 +165,32 @@ export default function App() {
             </button>
           </div>
 
-          {/* Cỡ Chữ Linh Hoạt Selector */}
-          {activeTab === 'slides' && (
-            <div className="hidden md:flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800">
-              <span className="text-[11px] font-bold text-slate-500 px-2 flex items-center gap-1">
-                <Type className="w-3.5 h-3.5" />
-                Cỡ chữ:
-              </span>
-              {FONT_SIZE_OPTIONS.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setFontSize(size)}
-                  className={`px-2 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                    fontSize === size
-                      ? 'bg-indigo-600 text-white shadow-xs'
-                      : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
-                  }`}
-                  title={`Đặt cỡ chữ slide là ${size} (Chuẩn trình chiếu lớp học)`}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Right side: Progress ring + Trình Chiếu, pushed to far right */}
+          {/* Right side: Progress ring, pushed to far right */}
           <div className="flex items-center gap-2 ml-auto shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="text-right hidden sm:block">
-                <span className="text-[10px] font-bold text-slate-400 block tracking-wider uppercase">Tiến Độ Lớp</span>
-                <span className="text-xs font-extrabold text-slate-200">
-                  {unlockedBadgeIds.length} / 6 Mục Tiêu
-                </span>
-              </div>
-              <div className="w-10 h-10 rounded-full border-4 border-slate-800 flex items-center justify-center relative shrink-0">
-                <span className="text-[10px] font-extrabold text-indigo-300">
-                  {Math.round((unlockedBadgeIds.length / 6) * 100)}%
-                </span>
-                <svg className="absolute inset-0 w-full h-full transform -rotate-90">
-                  <circle
-                    cx="20"
-                    cy="20"
-                    r="16"
-                    fill="transparent"
-                    stroke="#6366f1"
-                    strokeWidth="4"
-                    strokeDasharray={`${2 * Math.PI * 16}`}
-                    strokeDashoffset={`${2 * Math.PI * 16 * (1 - unlockedBadgeIds.length / 6)}`}
-                    className="transition-all duration-500"
-                  />
-                </svg>
-              </div>
+            <div className="text-right hidden sm:block">
+              <span className="text-[10px] font-bold text-slate-400 block tracking-wider uppercase">Tiến Độ Lớp</span>
+              <span className="text-xs font-extrabold text-slate-200">
+                {unlockedBadgeIds.length} / 6 Mục Tiêu
+              </span>
             </div>
-
-            {activeTab === 'slides' && (
-              <button
-                onClick={() => setIsPresentationOpen(true)}
-                className="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-2 border border-slate-700 transition-all cursor-pointer"
-                title="Trình chiếu toàn màn hình (Phím tắt: F5)"
-              >
-                <Play className="w-3.5 h-3.5 fill-current text-emerald-400" />
-                <span>Trình Chiếu</span>
-              </button>
-            )}
+            <div className="w-10 h-10 rounded-full border-4 border-slate-800 flex items-center justify-center relative shrink-0">
+              <span className="text-[10px] font-extrabold text-indigo-300">
+                {Math.round((unlockedBadgeIds.length / 6) * 100)}%
+              </span>
+              <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="16"
+                  fill="transparent"
+                  stroke="#6366f1"
+                  strokeWidth="4"
+                  strokeDasharray={`${2 * Math.PI * 16}`}
+                  strokeDashoffset={`${2 * Math.PI * 16 * (1 - unlockedBadgeIds.length / 6)}`}
+                  className="transition-all duration-500"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       </header>
@@ -229,31 +214,74 @@ export default function App() {
               </div>
 
               {/* Right Column: Slide Canvas & Controls & Teacher Notes (fills remaining space) */}
-              <div className="flex-1 min-w-0 flex flex-col gap-4">
-                {/* Slide Navigation Header above Canvas */}
-                <div className="bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs text-slate-300">
-                  <div className="flex items-center gap-2">
+              <div className="flex-1 min-w-0 flex flex-col gap-3">
+                {/* Thanh công cụ gộp 1 hàng phía trên slide, bố trí giống Khối 11 */}
+                <div className="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 flex items-center gap-2 flex-wrap text-xs text-slate-300">
+                  <span className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-bold shrink-0">
+                    Tiết {currentSlide.period}
+                  </span>
+                  <span className="font-semibold text-slate-200 truncate max-w-[220px]">
+                    {currentSlide.title}
+                  </span>
+
+                  <div className="flex items-center gap-2 ml-auto flex-wrap">
+                    {/* Cỡ Chữ */}
+                    <div className="hidden md:flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800">
+                      <span className="text-[11px] font-bold text-slate-500 px-1.5 flex items-center gap-1">
+                        <Type className="w-3.5 h-3.5" />
+                        Cỡ chữ:
+                      </span>
+                      {FONT_SIZE_OPTIONS.map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setFontSize(size)}
+                          className={`px-2 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                            fontSize === size
+                              ? 'bg-indigo-600 text-white shadow-xs'
+                              : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                          }`}
+                          title={`Đặt cỡ chữ slide là ${size}`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Hiện Từng Bước */}
                     <button
-                      onClick={handlePrevSlide}
-                      disabled={currentIndexInAll === 0}
-                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 transition-all cursor-pointer text-white"
-                      title="Slide trước (Phím mũi tên trái)"
+                      onClick={() => setIsClickToReveal((prev) => !prev)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                        isClickToReveal
+                          ? 'bg-indigo-600 text-white border-indigo-500'
+                          : 'bg-slate-950/80 text-slate-300 border-slate-800 hover:bg-slate-800'
+                      }`}
+                      title="Bật/Tắt hiệu ứng xuất hiện tuần tự từng đối tượng khi bấm Slide Tiếp Theo (Phím tắt: R)"
                     >
-                      <ChevronLeft className="w-4 h-4" />
+                      <MousePointerClick className="w-3.5 h-3.5" />
+                      <span>Hiện Từng Bước: {isClickToReveal ? 'BẬT (R)' : 'TẮT (R)'}</span>
                     </button>
 
-                    <button
-                      onClick={handleNextSlide}
-                      disabled={currentIndexInAll === ALL_SLIDES.length - 1}
-                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 transition-all cursor-pointer text-white"
-                      title="Slide kế tiếp (Phím mũi tên phải)"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
+                    {isClickToReveal && revealStep < maxSteps - 1 && (
+                      <button
+                        onClick={() => setRevealStep(maxSteps - 1)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950/80 text-indigo-300 border border-indigo-500/40 hover:bg-slate-800 transition-all cursor-pointer"
+                        title="Hiển thị ngay toàn bộ nội dung của slide này"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>Hiện Tất Cả</span>
+                      </button>
+                    )}
 
-                    <span className="font-mono text-slate-400 ml-1">
-                      Slide <strong className="text-white">{currentSlide.id}</strong> / {TOTAL_SLIDES_COUNT}
-                    </span>
+                    {/* Trình Chiếu Toàn Màn Hình */}
+                    <button
+                      onClick={() => setIsPresentationOpen(true)}
+                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all cursor-pointer shrink-0"
+                      title="Trình chiếu toàn màn hình (Phím tắt: F5)"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                      <span>Trình Chiếu Toàn Màn Hình</span>
+                      <span className="px-1.5 py-0.2 rounded bg-indigo-800/60 text-indigo-200 text-[10px] font-mono">F5</span>
+                    </button>
                   </div>
                 </div>
 
@@ -264,13 +292,56 @@ export default function App() {
                     totalSlides={TOTAL_SLIDES_COUNT}
                     showAnimation={true}
                     fontSize={fontSize}
+                    isClickToReveal={isClickToReveal}
+                    revealStep={revealStep}
                     onOpenGame={() => setActiveTab('games')}
                     onOpenActivity={() => setActiveTab('activities')}
                   />
                 </div>
 
+                {/* Thanh dưới slide: Nhãn trường/tác giả/chuyên đề bên trái + điều hướng Trước/Tiếp Theo bên phải, giống Khối 11 */}
+                <div className="bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 flex items-center justify-between gap-3 flex-wrap text-xs">
+                  <div className="flex items-center gap-2 flex-wrap min-w-0">
+                    <span className="text-indigo-300 font-bold bg-indigo-500/20 px-2 py-0.5 rounded shrink-0">
+                      Trường THPT Tân Lược
+                    </span>
+                    <span className="text-violet-300 font-bold bg-violet-500/20 px-2 py-0.5 rounded shrink-0">
+                      Design by: Nguyễn Phước Hậu
+                    </span>
+                    <span className="text-slate-500 font-medium truncate hidden sm:inline">
+                      Chuyên đề Ứng dụng AI (GDPT 2018)
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={handlePrevSlide}
+                      disabled={currentIndexInAll === 0 && !(isClickToReveal && revealStep > 0)}
+                      className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 transition-all cursor-pointer text-white font-semibold flex items-center gap-1"
+                      title="Slide trước (Phím mũi tên trái)"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      <span>Trước</span>
+                    </button>
+
+                    <span className="font-mono text-slate-400">
+                      <strong className="text-white">{currentIndexInAll + 1}</strong> / {TOTAL_SLIDES_COUNT}
+                    </span>
+
+                    <button
+                      onClick={handleNextSlide}
+                      disabled={currentIndexInAll === ALL_SLIDES.length - 1 && !(isClickToReveal && revealStep < maxSteps - 1)}
+                      className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-30 transition-all cursor-pointer text-white font-semibold flex items-center gap-1"
+                      title="Slide kế tiếp (Phím mũi tên phải)"
+                    >
+                      <span>Slide Tiếp Theo</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
                 {/* Game/Activity Shortcut */}
-                <div className="mt-2">
+                <div className="mt-1">
                   <TeacherNotesDrawer
                     slide={currentSlide}
                     onLaunchGame={() => setActiveTab('games')}

@@ -199,9 +199,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               if (isClickToReveal && revealStep < elStartUnit) return null;
 
               // Chữ phần nội dung (thẻ/bước/bảng...) to hơn chữ phần tình huống gợi mở bên dưới
-              const cardTitleCls = fullscreen ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl';
-              const cardDescCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
-              const bodyCls = fullscreen ? 'text-lg sm:text-xl' : 'text-base sm:text-lg';
+              // Chữ nội dung (thẻ/bước/bảng...) phải to hơn rõ rệt chữ ô tình huống gợi mở bên dưới
+              const cardTitleCls = fullscreen ? 'text-2xl sm:text-3xl' : 'text-xl sm:text-2xl';
+              const cardDescCls = fullscreen ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl';
+              const bodyCls = fullscreen ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl';
 
               if (el.type === 'cards' && Array.isArray(el.data)) {
                 return (
@@ -286,10 +287,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                                 {step.role}
                               </span>
                             </div>
-                            <div className={`font-semibold mb-1 ${palette.title} ${fullscreen ? 'text-base sm:text-lg' : 'text-sm sm:text-base'}`}>
+                            <div className={`font-semibold mb-1 ${palette.title} ${fullscreen ? 'text-xl sm:text-2xl' : 'text-base sm:text-lg'}`}>
                               {step.name}
                             </div>
-                            <div className={`text-slate-200 leading-snug ${fullscreen ? 'text-sm sm:text-base' : 'text-xs sm:text-[13px]'}`}>
+                            <div className={`text-slate-200 leading-snug ${fullscreen ? 'text-lg sm:text-xl' : 'text-sm sm:text-base'}`}>
                               {step.details}
                             </div>
                           </motion.div>
@@ -461,7 +462,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               <img
                 src={`${import.meta.env.BASE_URL}${slide.illustration.imageUrl}`}
                 alt={slide.illustration.caption || 'Ảnh minh hoạ'}
-                className={`object-contain drop-shadow-xl ${fullscreen ? 'h-40 sm:h-52' : 'h-28 sm:h-36'}`}
+                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-64 sm:h-80' : 'h-44 sm:h-56'}`}
               />
             </motion.div>
           )}
