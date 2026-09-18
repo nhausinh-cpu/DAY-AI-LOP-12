@@ -5,28 +5,19 @@ import { SlideCanvas } from './components/SlideCanvas';
 import { SlideThumbnailList } from './components/SlideThumbnailList';
 import { TeacherNotesDrawer } from './components/TeacherNotesDrawer';
 import { PeriodFilterBar } from './components/PeriodFilterBar';
-import { GoogleSlidesExportModal } from './components/GoogleSlidesExportModal';
 import { PresentationModeModal } from './components/PresentationModeModal';
 import { InteractiveGamesHub } from './components/InteractiveGamesHub';
 import { InteractiveActivitiesHub } from './components/InteractiveActivitiesHub';
-import { StudentBadgesBar } from './components/StudentBadgesBar';
 import type { FontSizeOption } from './components/SlideCanvas';
 import {
-  Sparkles,
   Play,
-  Share2,
   ChevronLeft,
   ChevronRight,
   Maximize2,
   BookOpen,
-  Award,
-  Layers,
-  Cpu,
   GraduationCap,
-  Download,
   Gamepad2,
   FileText,
-  Star,
   Trophy,
   Type,
 } from 'lucide-react';
@@ -37,7 +28,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'slides' | 'games' | 'activities'>('slides');
   const [activeSlideId, setActiveSlideId] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number | 'all'>('all');
-  const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
   const [isPresentationOpen, setIsPresentationOpen] = useState<boolean>(false);
   const [fontSize, setFontSize] = useState<FontSizeOption>('24pt');
 
@@ -85,7 +75,7 @@ export default function App() {
   // Keyboard navigation for main screen
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isExportModalOpen || isPresentationOpen || activeTab !== 'slides') return;
+      if (isPresentationOpen || activeTab !== 'slides') return;
       if (e.key === 'ArrowRight') {
         handleNextSlide();
       } else if (e.key === 'ArrowLeft') {
@@ -97,13 +87,13 @@ export default function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndexInAll, isExportModalOpen, isPresentationOpen, activeTab]);
+  }, [currentIndexInAll, isPresentationOpen, activeTab]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
       {/* Top Main Navigation Header */}
-      <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 py-3">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-3 sm:px-5 py-3">
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Logo & Title */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
@@ -162,20 +152,11 @@ export default function App() {
                 <span>Trình Chiếu</span>
               </button>
             )}
-
-            {/* Primary Action Button: Kích Hoạt & Xuất Google Slides */}
-            <button
-              onClick={() => setIsExportModalOpen(true)}
-              className="py-2 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 text-xs font-bold flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
-            >
-              <Sparkles className="w-4 h-4 fill-current" />
-              <span>XUẤT GOOGLE SLIDES</span>
-            </button>
           </div>
         </div>
 
         {/* Navigation Tabs Bar */}
-        <div className="max-w-7xl mx-auto mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between gap-3 flex-wrap">
+        <div className="w-full mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-1.5 p-1 bg-slate-950/80 rounded-xl border border-slate-800 text-xs font-semibold">
             <button
               onClick={() => setActiveTab('slides')}
@@ -247,16 +228,10 @@ export default function App() {
       </header>
 
       {/* Main Content Layout */}
-      <main className="max-w-7xl mx-auto w-full p-4 sm:p-6 flex-1 flex flex-col gap-6">
-        {/* Student Badges & Achievements Bar */}
-        <StudentBadgesBar
-          unlockedBadgeIds={unlockedBadgeIds}
-          totalScore={totalScore}
-        />
-
+      <main className="w-full p-3 sm:p-4 flex-1 flex flex-col gap-4">
         {/* TAB 1: 110 SLIDES PRESENTATION DECK */}
         {activeTab === 'slides' && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Period Filter Bar */}
             <PeriodFilterBar
               selectedPeriod={selectedPeriod}
@@ -265,7 +240,7 @@ export default function App() {
             />
 
             {/* Central Workspace: Thumbnails List + Interactive Slide Canvas + Teacher Notes */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
               {/* Left Column: Thumbnails List (4 cols on lg) */}
               <div className="lg:col-span-4 h-full">
                 <SlideThumbnailList
@@ -367,12 +342,6 @@ export default function App() {
       </footer>
 
       {/* Modals */}
-      <GoogleSlidesExportModal
-        isOpen={isExportModalOpen}
-        onClose={() => setIsExportModalOpen(false)}
-        slides={ALL_SLIDES}
-      />
-
       <PresentationModeModal
         isOpen={isPresentationOpen}
         onClose={() => setIsPresentationOpen(false)}
