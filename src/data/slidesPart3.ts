@@ -1438,7 +1438,7 @@ export const SLIDES_PART_3: Slide[] = [
     ],
     illustration: {
       type: 'robot_learning',
-      caption: '🏆 Thầy/Cô chúc mừng tập thể lớp đã hoàn thành xuất sắc 12 tiết chuyên đề Trí tuệ nhân tạo!',
+      caption: '🏆 Xin chúc mừng tập thể lớp đã hoàn thành xuất sắc 12 tiết chuyên đề Trí tuệ nhân tạo!',
       source: 'Quyết định 2422/QĐ-BGDĐT (18/8/2026) · Chương trình GDPT 2018',
       imageUrl: 'trophy-tot-nghiep.png',
     },

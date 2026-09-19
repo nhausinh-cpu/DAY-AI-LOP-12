@@ -120,7 +120,7 @@ export const HumanVsAIJudgeGame: React.FC<HumanVsAIJudgeGameProps> = ({
 
           {/* Decision Buttons */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+            <h4 className="text-sm sm:text-base font-bold text-slate-200 uppercase tracking-wider">
               Là một trọng tài công nghệ, bạn lựa chọn phương án phân vai nào?
             </h4>
 
@@ -141,9 +141,9 @@ export const HumanVsAIJudgeGame: React.FC<HumanVsAIJudgeGameProps> = ({
               >
                 <div className="flex items-center gap-2 mb-2">
                   <UserCheck className="w-4 h-4 text-amber-400" />
-                  <span className="text-xs font-bold text-amber-300">Con người thủ công</span>
+                  <span className="text-sm font-bold text-amber-300">Con người thủ công</span>
                 </div>
-                <p className="text-xs text-slate-200 font-medium flex-1">
+                <p className="text-sm text-slate-200 font-medium flex-1">
                   {scenario.decisionLabels.human_only}
                 </p>
               </button>
@@ -164,9 +164,9 @@ export const HumanVsAIJudgeGame: React.FC<HumanVsAIJudgeGameProps> = ({
               >
                 <div className="flex items-center gap-2 mb-2">
                   <ShieldAlert className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs font-bold text-emerald-300">AI gợi ý · Người duyệt tối hậu</span>
+                  <span className="text-sm font-bold text-emerald-300">AI gợi ý · Người duyệt tối hậu</span>
                 </div>
-                <p className="text-xs text-slate-200 font-medium flex-1">
+                <p className="text-sm text-slate-200 font-medium flex-1">
                   {scenario.decisionLabels.human_approved}
                 </p>
               </button>
@@ -187,9 +187,9 @@ export const HumanVsAIJudgeGame: React.FC<HumanVsAIJudgeGameProps> = ({
               >
                 <div className="flex items-center gap-2 mb-2">
                   <Bot className="w-4 h-4 text-sky-400" />
-                  <span className="text-xs font-bold text-sky-300">AI tự động hóa 100%</span>
+                  <span className="text-sm font-bold text-sky-300">AI tự động hóa 100%</span>
                 </div>
-                <p className="text-xs text-slate-200 font-medium flex-1">
+                <p className="text-sm text-slate-200 font-medium flex-1">
                   {scenario.decisionLabels.ai_auto}
                 </p>
               </button>
@@ -233,7 +233,7 @@ export const HumanVsAIJudgeGame: React.FC<HumanVsAIJudgeGameProps> = ({
                 </button>
               </div>
 
-              <p className="text-xs text-slate-200 leading-relaxed pl-7">
+              <p className="text-sm text-slate-200 leading-relaxed pl-7">
                 {scenario.explanation}
               </p>
             </div>

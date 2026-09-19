@@ -109,58 +109,60 @@ export const InteractiveGamesHub: React.FC<InteractiveGamesHubProps> = ({
         </button>
       )}
 
-      {/* Teacher instruction banner */}
-      <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3">
-        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-500/30">
-          <Sparkles className="w-4 h-4" />
-        </div>
-        <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
-          <span className="font-bold text-white">Dành cho giáo viên trình chiếu trên lớp:</span>{' '}
-          {filterGameId
-            ? 'đây là trò chơi đúng của tiết đang dạy, chiếu lên màn hình/máy chiếu, rồi gọi học sinh xung phong lên bảng hoặc trả lời tại chỗ. Giáo viên điều khiển tiến trình và chốt kiến thức sau mỗi lượt chơi.'
-            : 'chọn trò chơi phù hợp với tiết đang dạy, chiếu lên màn hình/máy chiếu, rồi gọi học sinh xung phong lên bảng hoặc trả lời tại chỗ. Giáo viên điều khiển tiến trình và chốt kiến thức sau mỗi lượt chơi.'}
-        </p>
-      </div>
+      {/* Teacher instruction banner + Danh sách thẻ chọn trò chơi: chỉ hiện khi mở từ menu Trò Chơi trên cùng (xem tất cả).
+          Khi mở từ nút "Trò Chơi Tiết N" ngay trên slide thì ẩn hẳn phần này vì đã tự động vào đúng trò chơi rồi, tránh trùng lặp. */}
+      {!filterGameId && (
+        <>
+          <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-500/30">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
+              <span className="font-bold text-white">Dành cho giáo viên trình chiếu trên lớp:</span>{' '}
+              chọn trò chơi phù hợp với tiết đang dạy, chiếu lên màn hình/máy chiếu, rồi gọi học sinh xung phong lên bảng hoặc trả lời tại chỗ. Giáo viên điều khiển tiến trình và chốt kiến thức sau mỗi lượt chơi.
+            </p>
+          </div>
 
-      {/* Game Selection Cards: nếu mở từ 1 Tiết cụ thể thì chỉ hiện đúng thẻ Tiết đó, tránh rối mắt */}
-      <div className={`grid gap-3 ${filterGameId ? 'grid-cols-1 sm:grid-cols-1 max-w-sm' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'}`}>
-        {visibleGames.map((g) => {
-          const Icon = g.icon;
-          const isActive = activeGame === g.id;
-          return (
-            <button
-              key={g.id}
-              onClick={() => setActiveGame(g.id as any)}
-              className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
-                isActive
-                  ? 'bg-slate-800 border-indigo-500 shadow-lg shadow-indigo-500/10 ring-2 ring-indigo-500/40'
-                  : 'bg-slate-900/90 border-slate-800 hover:bg-slate-850 hover:border-slate-700'
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div
-                    className={`w-8 h-8 rounded-xl bg-gradient-to-br ${g.color} flex items-center justify-center text-white shadow-md`}
-                  >
-                    <Icon className="w-4 h-4" />
+          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+            {visibleGames.map((g) => {
+              const Icon = g.icon;
+              const isActive = activeGame === g.id;
+              return (
+                <button
+                  key={g.id}
+                  onClick={() => setActiveGame(g.id as any)}
+                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                    isActive
+                      ? 'bg-slate-800 border-indigo-500 shadow-lg shadow-indigo-500/10 ring-2 ring-indigo-500/40'
+                      : 'bg-slate-900/90 border-slate-800 hover:bg-slate-850 hover:border-slate-700'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <div
+                        className={`w-8 h-8 rounded-xl bg-gradient-to-br ${g.color} flex items-center justify-center text-white shadow-md`}
+                      >
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${g.tagColor}`}
+                      >
+                        {g.period}
+                      </span>
+                    </div>
+                    <h3 className="text-xs sm:text-sm font-bold text-white leading-tight">
+                      {g.title}
+                    </h3>
                   </div>
-                  <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${g.tagColor}`}
-                  >
-                    {g.period}
-                  </span>
-                </div>
-                <h3 className="text-xs sm:text-sm font-bold text-white leading-tight">
-                  {g.title}
-                </h3>
-              </div>
-              <p className="text-[11px] text-slate-400 line-clamp-2 mt-1">
-                {g.subtitle}
-              </p>
-            </button>
-          );
-        })}
-      </div>
+                  <p className="text-[11px] text-slate-400 line-clamp-2 mt-1">
+                    {g.subtitle}
+                  </p>
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
 
       {/* Active Game Canvas */}
       <div>

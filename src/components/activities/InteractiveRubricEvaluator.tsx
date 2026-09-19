@@ -171,7 +171,7 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
                       <div>
                         <div className="flex items-center justify-between mb-1">
                           <span
-                            className={`text-xs font-bold ${
+                            className={`text-sm font-bold ${
                               isSelected ? 'text-indigo-300' : 'text-slate-300'
                             }`}
                           >
@@ -181,7 +181,7 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
                             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                           )}
                         </div>
-                        <p className="text-[11px] text-slate-300 leading-relaxed">
+                        <p className="text-xs text-slate-300 leading-relaxed">
                           {item.info.desc}
                         </p>
                       </div>
