@@ -465,10 +465,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               <img
                 src={`${import.meta.env.BASE_URL}${slide.illustration.imageUrl}`}
                 alt={slide.illustration.caption || 'Ảnh minh hoạ'}
-                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-[19rem] sm:h-[24rem]' : 'h-48 sm:h-64'}`}
+                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-[clamp(7rem,24vh,22rem)]' : 'h-[clamp(6rem,20vh,16rem)]'}`}
               />
               {slide.illustration.caption && (
-                <p className={`text-center font-extrabold text-amber-200 max-w-4xl mx-auto leading-snug ${fullscreen ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'}`}>
+                <p className={`text-center font-extrabold text-amber-200 max-w-4xl mx-auto leading-snug ${fullscreen ? 'text-[clamp(1.1rem,2.4vh,1.875rem)]' : 'text-[clamp(0.9rem,2vh,1.25rem)]'}`}>
                   {slide.illustration.caption}
                 </p>
               )}
