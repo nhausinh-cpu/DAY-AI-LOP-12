@@ -209,9 +209,14 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
         </div>
       </div>
 
-      {/* Bottom Hint */}
-      <div className="text-center text-[10px] text-slate-500 py-1">
-        Nhấp chuột hoặc phím Mũi tên trái / phải / Phím cách để chuyển tiếp · Icon 💬 dưới slide để xem tình huống/câu hỏi · Phím R bật/tắt hiện từng bước · Esc để thoát
+      {/* Bottom Bar: Credit (trái) + Hint (giữa, chữ vàng) */}
+      <div className="relative text-center text-[10px] text-yellow-300 font-medium py-1 min-h-[1.5rem] flex items-center justify-center">
+        <span className="absolute left-1 top-1/2 -translate-y-1/2 text-violet-300 font-bold text-[10px] hidden sm:inline">
+          Design by: Nguyễn Phước Hậu
+        </span>
+        <span>
+          Nhấp chuột hoặc phím Mũi tên trái / phải / Phím cách để chuyển tiếp · Icon 💬 dưới slide để xem tình huống/câu hỏi · Phím R bật/tắt hiện từng bước · Esc để thoát
+        </span>
       </div>
     </div>
   );
