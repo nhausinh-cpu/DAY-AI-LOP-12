@@ -9,8 +9,7 @@ import {
   AlertTriangle,
   Award,
   HelpCircle,
-  ChevronUp,
-  ChevronDown,
+  GripVertical,
 } from 'lucide-react';
 
 interface AILifecycleGameProps {
@@ -28,28 +27,65 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
   const [score, setScore] = useState<number>(0);
   const [activeStepInfo, setActiveStepInfo] = useState<LifecycleStep | null>(null);
 
+  // Kéo thả: chỉ số thẻ đang được kéo & chỉ số ô số thứ tự đang rê chuột qua (để tô sáng ô)
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+
   const shuffleSteps = () => {
     const shuffled = [...LIFECYCLE_STEPS].sort(() => Math.random() - 0.5);
     setUserOrder(shuffled);
     setIsSubmitted(false);
     setScore(0);
     setActiveStepInfo(null);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
   };
 
   useEffect(() => {
     shuffleSteps();
   }, []);
 
-  const moveItem = (index: number, direction: 'up' | 'down') => {
-    if (isSubmitted) return;
-    const targetIndex = direction === 'up' ? index - 1 : index + 1;
-    if (targetIndex < 0 || targetIndex >= userOrder.length) return;
+  // Kéo thẻ ở vị trí fromIndex và thả vào đúng ô số thứ tự toIndex: chèn thẻ vào ô đó,
+  // các thẻ còn lại tự dồn lên/xuống để nhường chỗ (giống thao tác kéo thả thực tế)
+  const moveCardToSlot = (fromIndex: number, toIndex: number) => {
+    if (isSubmitted || fromIndex === toIndex) return;
+    setUserOrder((prev) => {
+      const newOrder = [...prev];
+      const [moved] = newOrder.splice(fromIndex, 1);
+      newOrder.splice(toIndex, 0, moved);
+      return newOrder;
+    });
+  };
 
-    const newOrder = [...userOrder];
-    const temp = newOrder[index];
-    newOrder[index] = newOrder[targetIndex];
-    newOrder[targetIndex] = temp;
-    setUserOrder(newOrder);
+  const handleDragStart = (index: number) => (e: React.DragEvent) => {
+    if (isSubmitted) return;
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+    try {
+      e.dataTransfer.setData('text/plain', String(index));
+    } catch {
+      // một số trình duyệt cũ có thể không hỗ trợ, bỏ qua an toàn
+    }
+  };
+
+  const handleDragOver = (index: number) => (e: React.DragEvent) => {
+    if (isSubmitted || draggedIndex === null) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if (dragOverIndex !== index) setDragOverIndex(index);
+  };
+
+  const handleDrop = (index: number) => (e: React.DragEvent) => {
+    e.preventDefault();
+    if (isSubmitted || draggedIndex === null) return;
+    moveCardToSlot(draggedIndex, index);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
   };
 
   const handleCheckOrder = () => {
@@ -87,7 +123,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
             Thử Thách: Xếp Vòng Đời AI & Trạm Kiểm Soát Con Người
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            Dùng nút mũi tên lên/xuống để sắp xếp đúng 7 bước trong vòng đời hệ thống AI theo chuẩn Bộ GD&ĐT.
+            Kéo và thả từng thẻ vào đúng ô số thứ tự (1-7) bên trái để sắp xếp đúng vòng đời hệ thống AI theo chuẩn Bộ GD&ĐT.
           </p>
         </div>
 
@@ -107,7 +143,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
         {/* Left column: List of steps to reorder */}
         <div className="lg:col-span-7 space-y-2.5">
           <div className="flex items-center justify-between text-sm text-slate-400 font-semibold px-2">
-            <span>Vị trí hiện tại (Kéo hoặc bấm mũi tên)</span>
+            <span>🖐️ Kéo thẻ và thả vào đúng ô số thứ tự</span>
             <span>Bấm vào thẻ để xem trạm kiểm soát</span>
           </div>
 
@@ -115,13 +151,24 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
             const isCorrect = isSubmitted && step.stepNumber === idx + 1;
             const isWrong = isSubmitted && step.stepNumber !== idx + 1;
             const isSelected = activeStepInfo?.id === step.id;
+            const isDragging = draggedIndex === idx;
+            const isDragOver = !isSubmitted && dragOverIndex === idx && draggedIndex !== null && draggedIndex !== idx;
 
             return (
               <div
                 key={step.id}
+                draggable={!isSubmitted}
+                onDragStart={handleDragStart(idx)}
+                onDragOver={handleDragOver(idx)}
+                onDrop={handleDrop(idx)}
+                onDragEnd={handleDragEnd}
                 onClick={() => setActiveStepInfo(step)}
-                className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
-                  isSelected
+                className={`p-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${
+                  !isSubmitted ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer'
+                } ${isDragging ? 'opacity-40 scale-[0.98]' : ''} ${
+                  isDragOver
+                    ? 'ring-2 ring-dashed ring-amber-400 bg-amber-500/10'
+                    : isSelected
                     ? 'ring-2 ring-sky-500 bg-slate-800/90'
                     : 'bg-slate-800/60 hover:bg-slate-800'
                 } ${
@@ -133,14 +180,18 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
+                  {!isSubmitted && (
+                    <GripVertical className="w-4 h-4 text-slate-500 shrink-0" />
+                  )}
                   <div
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold text-base shrink-0 ${
+                    className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold text-base shrink-0 border-2 border-dashed ${
                       isSubmitted
                         ? isCorrect
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-rose-600 text-white'
-                        : 'bg-slate-700 text-slate-200'
+                          ? 'bg-emerald-600 text-white border-transparent'
+                          : 'bg-rose-600 text-white border-transparent'
+                        : 'bg-slate-700 text-slate-200 border-slate-600'
                     }`}
+                    title={`Ô số thứ tự ${idx + 1}`}
                   >
                     {idx + 1}
                   </div>
@@ -166,33 +217,6 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                         </span>
                       )}
                     </span>
-                  )}
-
-                  {!isSubmitted && (
-                    <div className="flex flex-col gap-0.5">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          moveItem(idx, 'up');
-                        }}
-                        disabled={idx === 0}
-                        className="p-1 rounded bg-slate-700 hover:bg-slate-600 disabled:opacity-20 text-slate-300"
-                        title="Di chuyển lên"
-                      >
-                        <ChevronUp className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          moveItem(idx, 'down');
-                        }}
-                        disabled={idx === userOrder.length - 1}
-                        className="p-1 rounded bg-slate-700 hover:bg-slate-600 disabled:opacity-20 text-slate-300"
-                        title="Di chuyển xuống"
-                      >
-                        <ChevronDown className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
                   )}
                 </div>
               </div>
