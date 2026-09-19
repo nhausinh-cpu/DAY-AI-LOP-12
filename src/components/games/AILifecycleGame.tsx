@@ -106,7 +106,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left column: List of steps to reorder */}
         <div className="lg:col-span-7 space-y-2.5">
-          <div className="flex items-center justify-between text-xs text-slate-400 font-semibold px-2">
+          <div className="flex items-center justify-between text-sm text-slate-400 font-semibold px-2">
             <span>Vị trí hiện tại (Kéo hoặc bấm mũi tên)</span>
             <span>Bấm vào thẻ để xem trạm kiểm soát</span>
           </div>
@@ -134,7 +134,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 ${
+                    className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold text-base shrink-0 ${
                       isSubmitted
                         ? isCorrect
                           ? 'bg-emerald-600 text-white'
@@ -146,10 +146,10 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                   </div>
 
                   <div className="min-w-0">
-                    <h4 className="text-xs sm:text-sm font-semibold text-white truncate">
+                    <h4 className="text-base sm:text-lg font-semibold text-white truncate">
                       {step.name}
                     </h4>
-                    <p className="text-[11px] text-slate-400 truncate">
+                    <p className="text-sm sm:text-base text-slate-400 truncate">
                       {step.shortDesc}
                     </p>
                   </div>
@@ -161,7 +161,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                       {isCorrect ? (
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                       ) : (
-                        <span className="text-[10px] text-rose-400 font-bold">
+                        <span className="text-sm text-rose-400 font-bold">
                           Đúng là bước {step.stepNumber}
                         </span>
                       )}
@@ -218,14 +218,14 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                     {score}%
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white">
+                    <h4 className="text-base font-bold text-white">
                       {score === 100
                         ? '🎉 Xuất Sắc! Bạn đã sắp xếp chuẩn xác 100% vòng đời AI!'
                         : score >= 70
                         ? '👏 Rất Tốt! Bạn đã nắm vững thứ tự cơ bản!'
                         : '💡 Chưa hoàn chỉnh, hãy quan sát các vị trí sai màu đỏ và xếp lại nhé!'}
                     </h4>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-sm text-slate-400">
                       Chuẩn 12.A1.1: Con người phải có mặt kiểm soát ở mọi bước quan trọng.
                     </p>
                   </div>
@@ -255,30 +255,30 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                 <span className="text-[10px] font-bold text-sky-400 block mb-0.5">
                   BƯỚC CHUẨN {activeStepInfo.stepNumber}/7
                 </span>
-                <h3 className="text-sm sm:text-base font-bold text-white">
+                <h3 className="text-lg sm:text-xl font-bold text-white">
                   {activeStepInfo.name}
                 </h3>
-                <p className="text-base text-slate-300 mt-1">
+                <p className="text-base sm:text-lg text-slate-300 mt-1">
                   {activeStepInfo.shortDesc}
                 </p>
               </div>
 
               <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/30 space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300">
+                <div className="flex items-center gap-1.5 text-sm font-bold text-emerald-300">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span>Trạm Kiểm Soát Con Người (Human Checkpoint):</span>
                 </div>
-                <p className="text-base text-emerald-100 leading-relaxed">
+                <p className="text-base sm:text-lg text-emerald-100 leading-relaxed">
                   {activeStepInfo.humanControlCheckpoint}
                 </p>
               </div>
 
               <div className="p-3 rounded-lg bg-rose-950/40 border border-rose-500/30 space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-rose-300">
+                <div className="flex items-center gap-1.5 text-sm font-bold text-rose-300">
                   <AlertTriangle className="w-4 h-4 text-rose-400" />
                   <span>Nguy Hiểm Nếu Thiếu Con Người Giám Sát:</span>
                 </div>
-                <p className="text-base text-rose-100 leading-relaxed">
+                <p className="text-base sm:text-lg text-rose-100 leading-relaxed">
                   {activeStepInfo.dangerIfHumanMissing}
                 </p>
               </div>

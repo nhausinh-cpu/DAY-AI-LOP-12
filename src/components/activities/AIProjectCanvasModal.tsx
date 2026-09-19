@@ -96,47 +96,47 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Block 1: Mục tiêu & Bài toán */}
         <div className="p-4 rounded-2xl bg-slate-850 border border-slate-700/80 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-base font-bold text-blue-400 uppercase tracking-wider">
             <Sparkles className="w-4 h-4" />
             <span>1. Bài Toán & Đối Tượng</span>
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Tên sản phẩm dự án:</label>
+            <label className="text-sm text-slate-400 block mb-1">Tên sản phẩm dự án:</label>
             <input
               type="text"
               value={canvasData.name}
               onChange={(e) => setCanvasData({ ...canvasData, name: e.target.value })}
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs font-bold text-white focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base font-bold text-white focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Đối tượng thụ hưởng:</label>
+            <label className="text-sm text-slate-400 block mb-1">Đối tượng thụ hưởng:</label>
             <input
               type="text"
               value={canvasData.targetAudience}
               onChange={(e) => setCanvasData({ ...canvasData, targetAudience: e.target.value })}
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Vấn đề thực tế cần giải quyết:</label>
+            <label className="text-sm text-slate-400 block mb-1">Vấn đề thực tế cần giải quyết:</label>
             <textarea
               rows={3}
               value={canvasData.problemStatement}
               onChange={(e) => setCanvasData({ ...canvasData, problemStatement: e.target.value })}
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-300 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Block 2: Dữ liệu & Đạo đức */}
         <div className="p-4 rounded-2xl bg-slate-850 border border-slate-700/80 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-base font-bold text-amber-400 uppercase tracking-wider">
             <Database className="w-4 h-4" />
             <span>2. Chiến Lược Dữ Liệu</span>
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Nguồn thu thập mẫu:</label>
+            <label className="text-sm text-slate-400 block mb-1">Nguồn thu thập mẫu:</label>
             <textarea
               rows={2}
               value={canvasData.dataStrategy.trainSource}
@@ -146,11 +146,11 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   dataStrategy: { ...canvasData.dataStrategy, trainSource: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-300 focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Số lượng mẫu & Phân loại:</label>
+            <label className="text-sm text-slate-400 block mb-1">Số lượng mẫu & Phân loại:</label>
             <input
               type="text"
               value={canvasData.dataStrategy.sampleCount}
@@ -160,11 +160,11 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   dataStrategy: { ...canvasData.dataStrategy, sampleCount: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Phòng chống thiên kiến & Bảo mật:</label>
+            <label className="text-sm text-slate-400 block mb-1">Phòng chống thiên kiến & Bảo mật:</label>
             <textarea
               rows={2}
               value={canvasData.dataStrategy.biasMitigation}
@@ -174,19 +174,19 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   dataStrategy: { ...canvasData.dataStrategy, biasMitigation: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-300 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Block 3: Công cụ & Kỹ thuật */}
         <div className="p-4 rounded-2xl bg-slate-850 border border-slate-700/80 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-base font-bold text-purple-400 uppercase tracking-wider">
             <Cpu className="w-4 h-4" />
             <span>3. Công Nghệ & Mô Hình</span>
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Công cụ thực hành:</label>
+            <label className="text-sm text-slate-400 block mb-1">Công cụ thực hành:</label>
             <input
               type="text"
               value={canvasData.technicalStack.tool}
@@ -196,11 +196,11 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   technicalStack: { ...canvasData.technicalStack, tool: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Loại mô hình AI:</label>
+            <label className="text-sm text-slate-400 block mb-1">Loại mô hình AI:</label>
             <input
               type="text"
               value={canvasData.technicalStack.modelType}
@@ -210,11 +210,11 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   technicalStack: { ...canvasData.technicalStack, modelType: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Đầu vào (Inputs) & Đầu ra (Outputs):</label>
+            <label className="text-sm text-slate-400 block mb-1">Đầu vào (Inputs) & Đầu ra (Outputs):</label>
             <textarea
               rows={2}
               value={canvasData.technicalStack.outputs}
@@ -224,19 +224,19 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   technicalStack: { ...canvasData.technicalStack, outputs: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-300 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Block 4: Con người làm chủ & Tắt khẩn cấp */}
         <div className="p-4 rounded-2xl bg-slate-850 border border-emerald-500/40 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-base font-bold text-emerald-400 uppercase tracking-wider">
             <ShieldCheck className="w-4 h-4" />
             <span>4. Trạm Kiểm Soát Con Người (Human-in-the-loop)</span>
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Điểm dừng kiểm duyệt của con người:</label>
+            <label className="text-sm text-slate-400 block mb-1">Điểm dừng kiểm duyệt của con người:</label>
             <textarea
               rows={2}
               value={canvasData.humanInTheLoop.checkpoint}
@@ -246,11 +246,11 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   humanInTheLoop: { ...canvasData.humanInTheLoop, checkpoint: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-300 focus:outline-none"
             />
           </div>
           <div>
-            <label className="text-[11px] text-slate-400 block mb-1">Cơ chế tắt khẩn cấp (Emergency Stop / Fallback):</label>
+            <label className="text-sm text-slate-400 block mb-1">Cơ chế tắt khẩn cấp (Emergency Stop / Fallback):</label>
             <textarea
               rows={2}
               value={canvasData.humanInTheLoop.emergencyFallback}
@@ -260,21 +260,21 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                   humanInTheLoop: { ...canvasData.humanInTheLoop, emergencyFallback: e.target.value },
                 })
               }
-              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300 focus:outline-none"
+              className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-300 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Block 5: Phân vai 4 thành viên */}
         <div className="p-4 rounded-2xl bg-slate-850 border border-indigo-500/40 space-y-2 lg:col-span-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-indigo-400 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-base font-bold text-indigo-400 uppercase tracking-wider">
             <Users className="w-4 h-4" />
             <span>5. Phân Vai 4 Thành Viên Nhóm (Tiết 10 Chuẩn 12.D2.1)</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             <div>
-              <label className="text-[11px] font-semibold text-amber-300 block mb-1">
+              <label className="text-sm font-semibold text-amber-300 block mb-1">
                 Vai 1: Trưởng nhóm / Ý tưởng (Product Lead)
               </label>
               <input
@@ -286,12 +286,12 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                     teamRoles: { ...canvasData.teamRoles, leaderName: e.target.value },
                   })
                 }
-                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-sky-300 block mb-1">
+              <label className="text-sm font-semibold text-sky-300 block mb-1">
                 Vai 2: Kỹ thuật / Lập trình (Dev / Configurator)
               </label>
               <input
@@ -303,12 +303,12 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                     teamRoles: { ...canvasData.teamRoles, developerName: e.target.value },
                   })
                 }
-                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-emerald-300 block mb-1">
+              <label className="text-sm font-semibold text-emerald-300 block mb-1">
                 Vai 3: Huấn luyện dữ liệu (Data Trainer)
               </label>
               <input
@@ -320,12 +320,12 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                     teamRoles: { ...canvasData.teamRoles, dataTrainerName: e.target.value },
                   })
                 }
-                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-rose-300 block mb-1">
+              <label className="text-sm font-semibold text-rose-300 block mb-1">
                 Vai 4: Kiểm thử chất lượng (QA / Test Reviewer)
               </label>
               <input
@@ -337,7 +337,7 @@ export const AIProjectCanvasModal: React.FC<AIProjectCanvasModalProps> = ({
                     teamRoles: { ...canvasData.teamRoles, qaTesterName: e.target.value },
                   })
                 }
-                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-200 focus:outline-none"
+                className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base text-slate-200 focus:outline-none"
               />
             </div>
           </div>

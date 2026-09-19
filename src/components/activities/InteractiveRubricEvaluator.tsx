@@ -90,21 +90,21 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
       {/* Target Team & Evaluator selection */}
       <div className="p-4 rounded-xl bg-slate-850 border border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex-1 w-full sm:w-auto">
-          <label className="text-[11px] text-slate-400 block mb-1">Tên nhóm / Sản phẩm được chấm:</label>
+          <label className="text-sm text-slate-400 block mb-1">Tên nhóm / Sản phẩm được chấm:</label>
           <input
             type="text"
             value={projectTeamName}
             onChange={(e) => setProjectTeamName(e.target.value)}
-            className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs font-bold text-white focus:outline-none"
+            className="w-full px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-base font-bold text-white focus:outline-none"
           />
         </div>
 
         <div className="w-full sm:w-auto">
-          <label className="text-[11px] text-slate-400 block mb-1">Tư cách người đánh giá:</label>
+          <label className="text-sm text-slate-400 block mb-1">Tư cách người đánh giá:</label>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setEvaluatorRole('peer')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-base font-semibold border transition-all cursor-pointer ${
                 evaluatorRole === 'peer'
                   ? 'bg-indigo-600 text-white border-indigo-500'
                   : 'bg-slate-800 border-slate-700 text-slate-300'
@@ -114,7 +114,7 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
             </button>
             <button
               onClick={() => setEvaluatorRole('teacher')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-base font-semibold border transition-all cursor-pointer ${
                 evaluatorRole === 'teacher'
                   ? 'bg-indigo-600 text-white border-indigo-500'
                   : 'bg-slate-800 border-slate-700 text-slate-300'
@@ -137,14 +137,14 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <div>
-                  <span className="text-[10px] font-bold text-indigo-400 tracking-wider uppercase">
+                  <span className="text-sm font-bold text-indigo-400 tracking-wider uppercase">
                     {crit.strandName}
                   </span>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-lg font-bold text-white">
                     {crit.criterionTitle}
                   </h4>
                 </div>
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-semibold w-fit">
+                <span className="text-sm font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-semibold w-fit">
                   Trọng số: {crit.weight}%
                 </span>
               </div>
@@ -171,7 +171,7 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
                       <div>
                         <div className="flex items-center justify-between mb-1">
                           <span
-                            className={`text-base font-bold ${
+                            className={`text-lg font-bold ${
                               isSelected ? 'text-indigo-300' : 'text-slate-300'
                             }`}
                           >
@@ -181,7 +181,7 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
                             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                           )}
                         </div>
-                        <p className="text-sm text-slate-300 leading-relaxed">
+                        <p className="text-base text-slate-300 leading-relaxed">
                           {item.info.desc}
                         </p>
                       </div>
@@ -196,7 +196,7 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
 
       {/* Evaluation Feedback & Action Footer */}
       <div className="p-4 rounded-xl bg-slate-850 border border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-xs text-slate-300 space-y-0.5">
+        <div className="text-base text-slate-300 space-y-0.5">
           <p>
             Xếp loại dự án:{' '}
             <strong className="text-emerald-400">
@@ -209,7 +209,7 @@ export const InteractiveRubricEvaluator: React.FC<InteractiveRubricEvaluatorProp
                 : 'Cần Hướng Dẫn Thêm'}
             </strong>
           </p>
-          <p className="text-slate-400 text-[11px]">
+          <p className="text-slate-400 text-sm">
             Được thiết kế dựa trên Phụ lục đánh giá năng lực tin học theo Thông tư 22 & GDPT 2018.
           </p>
         </div>
