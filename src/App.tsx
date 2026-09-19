@@ -3,7 +3,6 @@ import { ALL_SLIDES, TOTAL_SLIDES_COUNT } from './data/allSlides';
 import type { Slide } from './types';
 import { SlideCanvas } from './components/SlideCanvas';
 import { SlideThumbnailList } from './components/SlideThumbnailList';
-import { TeacherNotesDrawer } from './components/TeacherNotesDrawer';
 import { PresentationModeModal } from './components/PresentationModeModal';
 import { InteractiveGamesHub } from './components/InteractiveGamesHub';
 import { InteractiveActivitiesHub } from './components/InteractiveActivitiesHub';
@@ -360,21 +359,6 @@ export default function App() {
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
-
-                {/* Game/Activity Shortcut */}
-                <div className="mt-1">
-                  <TeacherNotesDrawer
-                    slide={currentSlide}
-                    onLaunchGame={(period) => {
-                      setGameFilterPeriod(period);
-                      setActiveTab('games');
-                    }}
-                    onLaunchActivity={(period) => {
-                      setActivityFilterPeriod(period);
-                      setActiveTab('activities');
-                    }}
-                  />
                 </div>
               </div>
             </div>
