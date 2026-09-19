@@ -468,7 +468,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
                 className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-[19rem] sm:h-[24rem]' : 'h-48 sm:h-64'}`}
               />
               {slide.illustration.caption && (
-                <p className={`text-center font-extrabold text-amber-200 max-w-2xl mx-auto leading-snug ${fullscreen ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'}`}>
+                <p className={`text-center font-extrabold text-amber-200 max-w-4xl mx-auto leading-snug ${fullscreen ? 'text-2xl sm:text-3xl' : 'text-base sm:text-xl'}`}>
                   {slide.illustration.caption}
                 </p>
               )}

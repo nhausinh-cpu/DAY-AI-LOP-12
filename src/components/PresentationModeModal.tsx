@@ -96,7 +96,7 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-black flex flex-col justify-between p-4 select-none">
       {/* Thanh điều khiển: Tiết + tiêu đề slide, Hiện Từng Bước / Hiện Tất Cả / Cỡ chữ / Trò Chơi-Hoạt Động */}
-      <div className="flex items-center gap-2 flex-wrap pb-2">
+      <div className="relative flex items-center gap-2 flex-wrap pb-2 min-h-[2.25rem]">
         <span className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold shrink-0">
           Tiết {currentSlide.period}
         </span>
@@ -104,7 +104,8 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
           {currentSlide.title}
         </span>
 
-        <div className="flex items-center gap-2 ml-auto flex-wrap justify-end">
+        {/* Cụm nút điều khiển: đặt canh giữa màn hình (không dính theo lề trái/phải) */}
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 flex items-center gap-2 flex-wrap justify-center">
         <button
           onClick={() => setIsClickToReveal(!isClickToReveal)}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
@@ -168,6 +169,20 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
             <span>{isGameSlide ? 'Trò Chơi Tiết' : 'Hoạt Động Tiết'} {currentSlide.period}</span>
           </button>
         )}
+
+        {/* Chỉ báo tiến trình hiện từng bước: đặt chung 1 hàng với cụm nút phía trên, không tách dòng riêng */}
+        {isClickToReveal && (
+          <div className="bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-indigo-500/40 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-xl">
+            <MousePointerClick className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+            {revealStep < maxSteps - 1 ? (
+              <span>
+                Đối tượng <span className="text-amber-300 font-extrabold">{revealStep + 1}</span>/{maxSteps} · Nhấp để hiện tiếp
+              </span>
+            ) : (
+              <span className="text-emerald-300 font-bold">Đã hiện đủ · Nhấp để sang slide sau</span>
+            )}
+          </div>
+        )}
         </div>
       </div>
 
@@ -192,22 +207,6 @@ export const PresentationModeModal: React.FC<PresentationModeModalProps> = ({
             onOpenActivity={onOpenActivity}
           />
         </div>
-
-        {/* Chỉ báo tiến trình hiện từng bước */}
-        {isClickToReveal && (
-          <div className="absolute top-2 right-4 z-20 flex items-center gap-2 pointer-events-none">
-            <div className="bg-slate-900/90 backdrop-blur-md px-3 py-1 rounded-full border border-indigo-500/40 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-xl">
-              <MousePointerClick className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-              {revealStep < maxSteps - 1 ? (
-                <span>
-                  Đối tượng <span className="text-amber-300 font-extrabold">{revealStep + 1}</span>/{maxSteps} · Nhấp để hiện tiếp
-                </span>
-              ) : (
-                <span className="text-emerald-300 font-bold">Đã hiện đủ · Nhấp để sang slide sau</span>
-              )}
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Bottom Hint */}
