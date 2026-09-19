@@ -120,7 +120,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
   return (
     <div
       id={`slide-canvas-${slide.id}`}
-      className={`relative w-full aspect-[16/9] ${maxWidthClass} mx-auto bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden flex flex-col justify-between p-6 sm:p-8 select-none`}
+      className={`relative w-full aspect-[16/9] ${maxWidthClass} mx-auto bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden flex flex-col justify-between p-6 sm:p-8 select-none [container-type:inline-size]`}
       style={{ zoom: fontScale } as React.CSSProperties}
     >
       {/* Background Subtle Gradient & Accents */}
@@ -128,41 +128,43 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
       <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Top Bar: Period & Competency Standard Header */}
-      <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-800/80 text-xs sm:text-sm">
-        <div className="flex items-center gap-2">
-          <span className="px-2.5 py-1 rounded-full bg-indigo-600/30 text-indigo-300 font-semibold border border-indigo-500/40 text-[11px] sm:text-xs">
-            {slide.periodTitle}
-          </span>
-          <span className="hidden sm:inline text-slate-400 font-medium truncate max-w-xs">
-            {slide.topic}
-          </span>
-        </div>
+      {/* Top Bar: Period & Competency Standard Header (ẩn khi trình chiếu toàn màn hình vì đã có thanh Tiết/tiêu đề riêng bên ngoài, tránh lỗi chồng chữ khi phóng cỡ chữ lớn) */}
+      {!fullscreen && (
+        <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-800/80 text-xs sm:text-sm">
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-1 rounded-full bg-indigo-600/30 text-indigo-300 font-semibold border border-indigo-500/40 text-[11px] sm:text-xs">
+              {slide.periodTitle}
+            </span>
+            <span className="hidden sm:inline text-slate-400 font-medium truncate max-w-xs">
+              {slide.topic}
+            </span>
+          </div>
 
-        <div className="flex items-center gap-2">
-          {(isGameSlide || isActivitySlide) && (
-            <button
-              onClick={() => (isGameSlide ? onOpenGame?.(slide.period) : onOpenActivity?.(slide.period))}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border shadow-lg animate-pulse cursor-pointer transition-all hover:animate-none ${
-                isGameSlide
-                  ? 'bg-indigo-600 border-indigo-400 text-white hover:bg-indigo-500'
-                  : 'bg-teal-600 border-teal-400 text-white hover:bg-teal-500'
-              }`}
-              title={
-                isGameSlide
-                  ? `Mở Trò Chơi của Tiết ${slide.period} · Phiếu học tập số ${slide.worksheetNumber}`
-                  : `Mở Hoạt Động của Tiết ${slide.period} · Phiếu học tập số ${slide.worksheetNumber}`
-              }
-            >
-              {isGameSlide ? <Gamepad2 className="w-3.5 h-3.5" /> : <FileText className="w-3.5 h-3.5" />}
-              <span>{isGameSlide ? 'Trò Chơi Tiết' : 'Hoạt Động Tiết'} {slide.period}</span>
-            </button>
-          )}
-          <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[11px] font-mono border border-slate-700">
-            Slide {slide.id} / {totalSlides}
-          </span>
+          <div className="flex items-center gap-2">
+            {(isGameSlide || isActivitySlide) && (
+              <button
+                onClick={() => (isGameSlide ? onOpenGame?.(slide.period) : onOpenActivity?.(slide.period))}
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border shadow-lg animate-pulse cursor-pointer transition-all hover:animate-none ${
+                  isGameSlide
+                    ? 'bg-indigo-600 border-indigo-400 text-white hover:bg-indigo-500'
+                    : 'bg-teal-600 border-teal-400 text-white hover:bg-teal-500'
+                }`}
+                title={
+                  isGameSlide
+                    ? `Mở Trò Chơi của Tiết ${slide.period} · Phiếu học tập số ${slide.worksheetNumber}`
+                    : `Mở Hoạt Động của Tiết ${slide.period} · Phiếu học tập số ${slide.worksheetNumber}`
+                }
+              >
+                {isGameSlide ? <Gamepad2 className="w-3.5 h-3.5" /> : <FileText className="w-3.5 h-3.5" />}
+                <span>{isGameSlide ? 'Trò Chơi Tiết' : 'Hoạt Động Tiết'} {slide.period}</span>
+              </button>
+            )}
+            <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[11px] font-mono border border-slate-700">
+              Slide {slide.id} / {totalSlides}
+            </span>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Main Slide Content Area */}
       <AnimatePresence mode="wait">
@@ -465,10 +467,10 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({
               <img
                 src={`${import.meta.env.BASE_URL}${slide.illustration.imageUrl}`}
                 alt={slide.illustration.caption || 'Ảnh minh hoạ'}
-                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-[clamp(9rem,30vh,27rem)]' : 'h-[clamp(7rem,25vh,19rem)]'}`}
+                className={`object-contain drop-shadow-2xl ${fullscreen ? 'h-[clamp(10rem,34vh,32rem)]' : 'h-[clamp(8rem,28vh,23rem)]'}`}
               />
               {slide.illustration.caption && (
-                <p className={`text-center font-extrabold text-amber-200 max-w-4xl mx-auto leading-snug ${fullscreen ? 'text-[clamp(1.1rem,2.4vh,1.875rem)]' : 'text-[clamp(0.9rem,2vh,1.25rem)]'}`}>
+                <p className={`text-center font-extrabold text-amber-200 whitespace-nowrap leading-snug ${fullscreen ? 'text-[clamp(0.7rem,2cqw,1.75rem)]' : 'text-[clamp(0.55rem,2cqw,1.15rem)]'}`}>
                   {slide.illustration.caption}
                 </p>
               )}
