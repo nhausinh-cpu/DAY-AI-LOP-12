@@ -17,6 +17,18 @@ interface AILifecycleGameProps {
   onAddScore: (points: number) => void;
 }
 
+// Mỗi bước (theo đúng số thứ tự chuẩn 1-7, không đổi theo vị trí kéo thả) có 1 bảng màu
+// riêng để học sinh dễ phân biệt và ghi nhớ, thay vì tất cả cùng 1 màu xám đơn điệu.
+const STEP_COLOR_PALETTE: Record<number, { card: string; badge: string; icon: string }> = {
+  1: { card: 'border-sky-500/40 bg-sky-950/20 hover:bg-sky-950/30', badge: 'bg-sky-600 text-white', icon: 'text-sky-400' },
+  2: { card: 'border-indigo-500/40 bg-indigo-950/20 hover:bg-indigo-950/30', badge: 'bg-indigo-600 text-white', icon: 'text-indigo-400' },
+  3: { card: 'border-violet-500/40 bg-violet-950/20 hover:bg-violet-950/30', badge: 'bg-violet-600 text-white', icon: 'text-violet-400' },
+  4: { card: 'border-fuchsia-500/40 bg-fuchsia-950/20 hover:bg-fuchsia-950/30', badge: 'bg-fuchsia-600 text-white', icon: 'text-fuchsia-400' },
+  5: { card: 'border-amber-500/40 bg-amber-950/20 hover:bg-amber-950/30', badge: 'bg-amber-500 text-slate-950', icon: 'text-amber-400' },
+  6: { card: 'border-teal-500/40 bg-teal-950/20 hover:bg-teal-950/30', badge: 'bg-teal-600 text-white', icon: 'text-teal-400' },
+  7: { card: 'border-orange-500/40 bg-orange-950/20 hover:bg-orange-950/30', badge: 'bg-orange-600 text-white', icon: 'text-orange-400' },
+};
+
 export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
   onUnlockBadge,
   onAddScore,
@@ -153,6 +165,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
             const isSelected = activeStepInfo?.id === step.id;
             const isDragging = draggedIndex === idx;
             const isDragOver = !isSubmitted && dragOverIndex === idx && draggedIndex !== null && draggedIndex !== idx;
+            const palette = STEP_COLOR_PALETTE[step.stepNumber] ?? STEP_COLOR_PALETTE[1];
 
             return (
               <div
@@ -163,25 +176,27 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                 onDrop={handleDrop(idx)}
                 onDragEnd={handleDragEnd}
                 onClick={() => setActiveStepInfo(step)}
-                className={`p-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${
+                className={`p-3 rounded-xl border-2 transition-all flex items-center justify-between gap-3 ${
                   !isSubmitted ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer'
                 } ${isDragging ? 'opacity-40 scale-[0.98]' : ''} ${
                   isDragOver
                     ? 'ring-2 ring-dashed ring-amber-400 bg-amber-500/10'
                     : isSelected
-                    ? 'ring-2 ring-sky-500 bg-slate-800/90'
-                    : 'bg-slate-800/60 hover:bg-slate-800'
+                    ? 'ring-2 ring-sky-400'
+                    : ''
                 } ${
                   isSubmitted
                     ? isCorrect
                       ? 'border-emerald-500 bg-emerald-950/20'
                       : 'border-rose-500 bg-rose-950/20'
+                    : !isDragOver
+                    ? palette.card
                     : 'border-slate-700/60'
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   {!isSubmitted && (
-                    <GripVertical className="w-4 h-4 text-slate-500 shrink-0" />
+                    <GripVertical className={`w-4 h-4 shrink-0 ${palette.icon}`} />
                   )}
                   <div
                     className={`w-9 h-9 rounded-lg flex items-center justify-center font-bold text-base shrink-0 border-2 border-dashed ${
@@ -189,7 +204,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                         ? isCorrect
                           ? 'bg-emerald-600 text-white border-transparent'
                           : 'bg-rose-600 text-white border-transparent'
-                        : 'bg-slate-700 text-slate-200 border-slate-600'
+                        : `${palette.badge} border-white/30`
                     }`}
                     title={`Ô số thứ tự ${idx + 1}`}
                   >
