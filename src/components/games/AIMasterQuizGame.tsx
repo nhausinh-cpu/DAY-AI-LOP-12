@@ -202,7 +202,7 @@ export const AIMasterQuizGame: React.FC<AIMasterQuizGameProps> = ({
                   key={idx}
                   onClick={() => handleSelectOption(idx)}
                   disabled={hasAnswered || isDisabled}
-                  className={`p-4 rounded-xl border text-left text-sm sm:text-base font-medium transition-all cursor-pointer flex items-start justify-between gap-3 ${btnStyle}`}
+                  className={`p-4 rounded-xl border text-left text-base sm:text-lg font-medium transition-all cursor-pointer flex items-start justify-between gap-3 ${btnStyle}`}
                 >
                   <span className="leading-relaxed">{opt}</span>
                   {hasAnswered && isCorrect && (
@@ -240,7 +240,7 @@ export const AIMasterQuizGame: React.FC<AIMasterQuizGameProps> = ({
                 </button>
               </div>
 
-              <p className="text-sm text-slate-200 leading-relaxed">
+              <p className="text-base text-slate-200 leading-relaxed">
                 {question.explanation}
               </p>
             </div>

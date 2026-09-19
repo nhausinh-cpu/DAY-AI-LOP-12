@@ -258,7 +258,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                 <h3 className="text-sm sm:text-base font-bold text-white">
                   {activeStepInfo.name}
                 </h3>
-                <p className="text-sm text-slate-300 mt-1">
+                <p className="text-base text-slate-300 mt-1">
                   {activeStepInfo.shortDesc}
                 </p>
               </div>
@@ -268,7 +268,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span>Trạm Kiểm Soát Con Người (Human Checkpoint):</span>
                 </div>
-                <p className="text-sm text-emerald-100 leading-relaxed">
+                <p className="text-base text-emerald-100 leading-relaxed">
                   {activeStepInfo.humanControlCheckpoint}
                 </p>
               </div>
@@ -278,7 +278,7 @@ export const AILifecycleGame: React.FC<AILifecycleGameProps> = ({
                   <AlertTriangle className="w-4 h-4 text-rose-400" />
                   <span>Nguy Hiểm Nếu Thiếu Con Người Giám Sát:</span>
                 </div>
-                <p className="text-sm text-rose-100 leading-relaxed">
+                <p className="text-base text-rose-100 leading-relaxed">
                   {activeStepInfo.dangerIfHumanMissing}
                 </p>
               </div>

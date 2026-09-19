@@ -156,10 +156,10 @@ export const SchoolAIPolicyBuilder: React.FC<SchoolAIPolicyBuilderProps> = ({
                         </span>
                       )}
                     </div>
-                    <h4 className="text-sm sm:text-base font-semibold text-white">
+                    <h4 className="text-base sm:text-lg font-semibold text-white">
                       {clause.title}
                     </h4>
-                    <p className="text-sm text-slate-300 mt-1 leading-relaxed">
+                    <p className="text-base text-slate-300 mt-1 leading-relaxed">
                       {clause.statement}
                     </p>
                     <p className="text-xs text-teal-400/80 italic mt-1">

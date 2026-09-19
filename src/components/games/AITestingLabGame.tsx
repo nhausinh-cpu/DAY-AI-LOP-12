@@ -237,7 +237,7 @@ export const AITestingLabGame: React.FC<AITestingLabGameProps> = ({
             <span>Phòng Tinh Chỉnh Dữ Liệu Huấn Luyện</span>
           </div>
 
-          <p className="text-sm text-slate-300 leading-relaxed">
+          <p className="text-base text-slate-300 leading-relaxed">
             Chuẩn 12.C3.2: Khi phát hiện các lỗi nhận nhầm, kỹ sư AI không đổ lỗi cho thuật toán mà phải tìm hiểu nguyên nhân gốc rễ và bổ sung dữ liệu huấn luyện còn thiếu!
           </p>
 
@@ -255,11 +255,11 @@ export const AITestingLabGame: React.FC<AITestingLabGameProps> = ({
                 }
                 className="mt-0.5 accent-purple-600 rounded"
               />
-              <div className="text-sm">
+              <div className="text-base">
                 <span className="font-semibold text-white block">
                   Bổ sung 100 ảnh túi nilon xanh lục & túi nilon các màu
                 </span>
-                <span className="text-slate-400 text-xs">
+                <span className="text-slate-400 text-sm">
                   Khắc phục lỗi nhầm túi nilon xanh với rau củ quả.
                 </span>
               </div>
@@ -274,11 +274,11 @@ export const AITestingLabGame: React.FC<AITestingLabGameProps> = ({
                 }
                 className="mt-0.5 accent-purple-600 rounded"
               />
-              <div className="text-sm">
+              <div className="text-base">
                 <span className="font-semibold text-white block">
                   Thu thập 80 ảnh bát xốp, hộp nhựa dính dầu mỡ thực tế
                 </span>
-                <span className="text-slate-400 text-xs">
+                <span className="text-slate-400 text-sm">
                   Giúp AI nhận diện hình dáng hộp xốp thay vì chỉ nhìn vào vết dầu mỡ.
                 </span>
               </div>
@@ -293,11 +293,11 @@ export const AITestingLabGame: React.FC<AITestingLabGameProps> = ({
                 }
                 className="mt-0.5 accent-purple-600 rounded"
               />
-              <div className="text-sm">
+              <div className="text-base">
                 <span className="font-semibold text-white block">
                   Chụp 60 góc nghiêng thìa dĩa nhựa trắng đục
                 </span>
-                <span className="text-slate-400 text-xs">
+                <span className="text-slate-400 text-sm">
                   Khắc phục nhầm thìa nhựa với mảnh xương gà.
                 </span>
               </div>

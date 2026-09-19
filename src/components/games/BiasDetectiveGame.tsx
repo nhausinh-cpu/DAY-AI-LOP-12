@@ -114,7 +114,7 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
               {biasCase.title}
             </h3>
 
-            <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 text-sm sm:text-base text-slate-200 leading-relaxed">
+            <div className="p-3.5 rounded-xl bg-slate-800/90 border border-slate-700 text-base sm:text-lg text-slate-200 leading-relaxed">
               <p className="font-semibold text-amber-300 mb-1">Mô tả vụ việc:</p>
               {biasCase.scenario}
             </div>
@@ -129,7 +129,7 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
                 {biasCase.clues.map((clue, idx) => (
                   <div
                     key={idx}
-                    className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-sm text-slate-300 flex items-start gap-2"
+                    className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-base text-slate-300 flex items-start gap-2"
                   >
                     <span className="w-4 h-4 rounded-full bg-slate-700 text-slate-300 text-[10px] font-mono flex items-center justify-center shrink-0 mt-0.5">
                       {idx + 1}
@@ -147,7 +147,7 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
           <div className="bg-slate-850 border border-slate-800 rounded-2xl p-5 space-y-5">
             {/* Question 1: Flaw Type */}
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-200 uppercase tracking-wider block">
+              <label className="text-base font-bold text-slate-200 uppercase tracking-wider block">
                 1. Đây là loại sai phạm / rủi ro AI nào?
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -162,7 +162,7 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
                     <button
                       key={item.id}
                       onClick={() => !isRevealed && setSelectedFlaw(item.id as any)}
-                      className={`p-2.5 rounded-xl border text-sm font-semibold text-left transition-all cursor-pointer flex items-center gap-2 ${
+                      className={`p-2.5 rounded-xl border text-base font-semibold text-left transition-all cursor-pointer flex items-center gap-2 ${
                         isSelected
                           ? 'bg-amber-500/20 border-amber-500 text-amber-300 ring-1 ring-amber-500'
                           : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750'
@@ -178,7 +178,7 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
 
             {/* Question 2: Risk Level */}
             <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-200 uppercase tracking-wider block">
+              <label className="text-base font-bold text-slate-200 uppercase tracking-wider block">
                 2. Xếp hạng cấp độ rủi ro (Theo chuẩn An toàn):
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -192,7 +192,7 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
                     <button
                       key={item.id}
                       onClick={() => !isRevealed && setSelectedRisk(item.id as any)}
-                      className={`p-2.5 rounded-xl border text-sm font-bold text-center transition-all cursor-pointer ${
+                      className={`p-2.5 rounded-xl border text-base font-bold text-center transition-all cursor-pointer ${
                         isSelected
                           ? `bg-slate-700 ring-2 ${item.color}`
                           : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750'
@@ -219,7 +219,7 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
               /* Solved Feedback */
               <div className="space-y-3 pt-2 border-t border-slate-700">
                 <div
-                  className={`p-3.5 rounded-xl border text-sm ${
+                  className={`p-3.5 rounded-xl border text-base ${
                     selectedFlaw === biasCase.flawType && selectedRisk === biasCase.riskLevel
                       ? 'bg-emerald-950/40 border-emerald-500/60 text-emerald-200'
                       : 'bg-rose-950/40 border-rose-500/60 text-rose-200'
@@ -229,12 +229,12 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
                     {selectedFlaw === biasCase.flawType && selectedRisk === biasCase.riskLevel ? (
                       <>
                         <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                        <span>Phá án chuẩn xác! Bạn xứng danh Thám tử AI!</span>
+                        <span className="text-base">Phá án chuẩn xác! Bạn xứng danh Thám tử AI!</span>
                       </>
                     ) : (
                       <>
                         <XCircle className="w-4 h-4 text-rose-400" />
-                        <span>Chưa chính xác! Hãy quan sát kỹ bằng chứng nhé!</span>
+                        <span className="text-base">Chưa chính xác! Hãy quan sát kỹ bằng chứng nhé!</span>
                       </>
                     )}
                   </div>
@@ -244,12 +244,12 @@ export const BiasDetectiveGame: React.FC<BiasDetectiveGameProps> = ({
                 </div>
 
                 {/* Remediation Guide */}
-                <div className="p-3.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-sm text-indigo-200 space-y-1">
+                <div className="p-3.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-base text-indigo-200 space-y-1">
                   <div className="font-bold flex items-center gap-1.5 text-indigo-300">
                     <Lightbulb className="w-4 h-4 text-indigo-400" />
                     <span>Giải Pháp Khắc Phục (Chuẩn GDPT 2018):</span>
                   </div>
-                  <p className="text-xs leading-relaxed text-indigo-100">
+                  <p className="text-sm leading-relaxed text-indigo-100">
                     {biasCase.remediation}
                   </p>
                 </div>
